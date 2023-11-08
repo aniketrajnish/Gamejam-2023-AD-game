@@ -104,6 +104,12 @@ public class Helpers : MonoBehaviour
         //verticalcapsule
         dimensions[31] = new vector12(VerticalCapsuleDimensions.h, VerticalCapsuleDimensions.r,0,0,0,0,0,0,0,0,0, 0);
 
+        //fivecell
+        dimensions[32] = new vector12(FiveCellDimensions.a.x, FiveCellDimensions.a.y, FiveCellDimensions.a.z, FiveCellDimensions.a.w,0,0,0,0,0,0,0,0);
+
+        //sixteencell
+        dimensions[33] = new vector12(SixteenCellDimensions.s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
         return dimensions[i];
     }
     //discard

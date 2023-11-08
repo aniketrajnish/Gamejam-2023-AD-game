@@ -249,7 +249,17 @@ public class PropertiesEditor : Editor
                 EditorPrefs.SetFloat("VCH", VerticalCapsuleDimensions.h);
                 EditorPrefs.SetFloat("VCR", VerticalCapsuleDimensions.r);
                 break;
-
+            case 32:
+                FiveCellDimensions.a = EditorGUILayout.Vector4Field("A", FiveCellDimensions.a);
+                EditorPrefs.SetFloat("5CAX", FiveCellDimensions.a.x);
+                EditorPrefs.SetFloat("5CAY", FiveCellDimensions.a.y);
+                EditorPrefs.SetFloat("5CAZ", FiveCellDimensions.a.z);
+                EditorPrefs.SetFloat("5CAW", FiveCellDimensions.a.w);
+                break;
+            case 33:
+                SixteenCellDimensions.s = EditorGUILayout.FloatField("S", SixteenCellDimensions.s);
+                EditorPrefs.SetFloat("16CS", SixteenCellDimensions.s);
+                break;
         } 
         
         EditorUtility.SetDirty(rr);

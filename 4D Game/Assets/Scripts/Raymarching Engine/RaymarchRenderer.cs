@@ -37,7 +37,9 @@ public class RaymarchRenderer : MonoBehaviour
         Tesseract,
         HyperSphere,
         DuoCylinder,
-        VerticalCapsule
+        VerticalCapsule,
+        FiveCell,
+        SixteenCell
     };
     public enum Interpolation
     {
@@ -216,3 +218,11 @@ public struct VerticalCapsuleDimensions
     public static float h = EditorPrefs.GetFloat("VCH", .5f);
     public static float r = EditorPrefs.GetFloat("VCR", .5f);
 };
+public struct FiveCellDimensions
+{
+    public static Vector4 a = new Vector4(EditorPrefs.GetFloat("5CAX", .5f), EditorPrefs.GetFloat("5CAY", .5f), EditorPrefs.GetFloat("5CAZ", .5f), EditorPrefs.GetFloat("5CAW", .5f));
+}
+public struct SixteenCellDimensions
+{
+    public static float s = EditorPrefs.GetFloat("16CS", .5f);
+}
