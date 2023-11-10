@@ -12,70 +12,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
   m_Name: New ShapeDimensions 2
   m_EditorClassIdentifier: 
-  sphereRadius: 0
-  torusThickness: {x: 0, y: 0}
-  cappedTorusRo: 0
-  cappedTorusRi: 0
-  cappedTorusThickness: {x: 0, y: 0}
-  linkSeparation: 0
-  linkRadius: 0
-  linkThickness: 0
-  coneTan: {x: 0, y: 0}
-  coneHeight: 0
-  infConeTan: {x: 0, y: 0}
-  planeNormal: {x: 0, y: 0, z: 0}
-  planeDistance: 0
-  hexPrismH: {x: 0, y: 0}
-  triPrismH: {x: 0, y: 0}
-  capsuleA: {x: 0, y: 0, z: 0}
-  capsuleB: {x: 0, y: 0, z: 0}
-  capsuleR: 0
-  infCylC: {x: 0, y: 0, z: 0}
-  boxSize: 0
-  roundBoxSize: 0
-  roundBoxRoundFactor: 0
-  roundCylRa: 0
-  roundCylRb: 0
-  roundCylH: 0
-  capConeH: 0
-  capConeR1: 0
-  capConeR2: 0
-  boxFrameSize: {x: 0, y: 0, z: 0}
-  boxFrameCavity: 0
-  solidAngleC: {x: 0, y: 0}
-  solidAngleRa: 0
-  cutSphereR: 0
-  cutSphereH: 0
-  hollowSphereR: 0
-  hollowSphereH: 0
-  hollowSphereT: 0
-  deathStarRa: 0
-  deathStarRb: 0
-  deathStarD: 0
-  roundConeR1: 0
-  roundConeR2: 0
-  roundConeH: 0
-  ellipsoidRadius: {x: 0, y: 0, z: 0}
-  rhombusLa: 0
-  rhombusLb: 0
-  rhombusH: 0
-  rhombusRa: 0
-  octahedronSize: 0
-  pyramidSize: 0
-  triangleSideA: {x: 0, y: 0, z: 0}
-  triangleSideB: {x: 0, y: 0, z: 0}
-  triangleSideC: {x: 0, y: 0, z: 0}
-  quadSideA: {x: 0, y: 0, z: 0}
-  quadSideB: {x: 0, y: 0, z: 0}
-  quadSideC: {x: 0, y: 0, z: 0}
-  quadSideD: {x: 0, y: 0, z: 0}
-  fractalI: 0
-  fractalS: 0
-  fractalO: 0
-  tesseractSize: {x: 0, y: 0, z: 0, w: 0}
-  hyperSphereRadius: 0
-  duoCylR1R2: {x: 0, y: 0}
-  vertCapsuleH: 0
-  vertCapsuleR: 0
-  fiveCellA: {x: 0, y: 0, z: 0, w: 0}
-  sixteenCellS: 0
+  sphereRadius: 0.5
+  torusThickness: {x: 0.4, y: 0.1}
+  cappedTorusRo: 0.25
+  cappedTorusRi: 0.1
+  cappedTorusThickness: {x: 0.1, y: 0.1}
+  linkSeparation: 0.13
+  linkRadius: 0.2
+  linkThickness: 0.09
+  coneTan: {x: 1, y: 2}
+  coneHeight: 1
+  infConeTan: {x: 0.1, y: 0.1}
+  planeNormal: {x: 0, y: 0.5, z: 0.5}
+  planeDistance: 1
+  hexPrismH: {x: 0.25, y: 0.25}
+  triPrismH: {x: 0.25, y: 0.25}
+  capsuleA: {x: 0.25, y: 0.1, z: 0.25}
+  capsuleB: {x: 0.1, y: 0.25, z: 0.25}
+  capsuleR: 0.25
+  infCylC: {x: 0, y: 0.25, z: 0.25}
+  boxSize: 0.25
+  roundBoxSize: 0.3
+  roundBoxRoundFactor: 0.1
+  roundCylRa: 0.25
+  roundCylRb: 0.1
+  roundCylH: 0.25
+  capConeH: 0.5
+  capConeR1: 0.5
+  capConeR2: 0.2
+  boxFrameSize: {x: 0.5, y: 0.3, z: 0.2}
+  boxFrameCavity: 0.1
+  solidAngleC: {x: 0.25, y: 0.25}
+  solidAngleRa: 0.5
+  cutSphereR: 0.25
+  cutSphereH: 0.1
+  hollowSphereR: 0.35
+  hollowSphereH: 0.05
+  hollowSphereT: 0.05
+  deathStarRa: 0.5
+  deathStarRb: 0.35
+  deathStarD: 0.5
+  roundConeR1: 0.1
+  roundConeR2: 0.25
+  roundConeH: 0.4
+  ellipsoidRadius: {x: 0.18, y: 0.3, z: 0.1}
+  rhombusLa: 0.6
+  rhombusLb: 0.2
+  rhombusH: 0.02
+  rhombusRa: 0.02
+  octahedronSize: 0.5
+  pyramidSize: 0.5
+  triangleSideA: {x: 0.3, y: 0.5, z: 0.15}
+  triangleSideB: {x: 0.8, y: 0.2, z: 0.1}
+  triangleSideC: {x: 0.7, y: 0.3, z: 0.5}
+  quadSideA: {x: 0.3, y: 0.5, z: 0.15}
+  quadSideB: {x: 0.8, y: 0.2, z: 0}
+  quadSideC: {x: 0.9, y: 0.3, z: 0.5}
+  quadSideD: {x: 0.1, y: 0.2, z: 0.5}
+  fractalI: 10
+  fractalS: 1.25
+  fractalO: 2
+  tesseractSize: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
+  hyperSphereRadius: 0.5
+  duoCylR1R2: {x: 0.5, y: 0.5}
+  vertCapsuleH: 0.5
+  vertCapsuleR: 0.5
+  fiveCellA: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  sixteenCellS: 0.5
