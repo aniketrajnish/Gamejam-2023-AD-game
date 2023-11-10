@@ -105,7 +105,7 @@ public class Raymarcher : SceneViewFilter
                     blendFactor = s.blendFactor * 100,
                     shapeIndex = (int)s.shape,
                     opIndex = (int)s.interpolation,
-                    dimensions = Helpers.GetDimensionVectors((int)s.shape)
+                    dimensions = Helpers.GetDimensionVectors((int)s.shape, s.dimensions)
                 };
                 properties[i] = p;
 

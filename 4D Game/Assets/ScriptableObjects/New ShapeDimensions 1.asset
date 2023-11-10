@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
+  m_Name: New ShapeDimensions 1
+  m_EditorClassIdentifier: 
+  sphereRadius: 0
+  torusThickness: {x: 0, y: 0}
+  cappedTorusRo: 0
+  cappedTorusRi: 0
+  cappedTorusThickness: {x: 0, y: 0}
+  linkSeparation: 0
+  linkRadius: 0
+  linkThickness: 0
+  coneTan: {x: 0, y: 0}
+  coneHeight: 0
+  infConeTan: {x: 0, y: 0}
+  planeNormal: {x: 0, y: 0, z: 0}
+  planeDistance: 0
+  hexPrismH: {x: 0, y: 0}
+  triPrismH: {x: 0, y: 0}
+  capsuleA: {x: 0, y: 0, z: 0}
+  capsuleB: {x: 0, y: 0, z: 0}
+  capsuleR: 0
+  infCylC: {x: 0, y: 0, z: 0}
+  boxSize: 0
+  roundBoxSize: 0
+  roundBoxRoundFactor: 0
+  roundCylRa: 0
+  roundCylRb: 0
+  roundCylH: 0
+  capConeH: 0
+  capConeR1: 0
+  capConeR2: 0
+  boxFrameSize: {x: 0, y: 0, z: 0}
+  boxFrameCavity: 0
+  solidAngleC: {x: 0, y: 0}
+  solidAngleRa: 0
+  cutSphereR: 0
+  cutSphereH: 0
+  hollowSphereR: 0
+  hollowSphereH: 0
+  hollowSphereT: 0
+  deathStarRa: 0
+  deathStarRb: 0
+  deathStarD: 0
+  roundConeR1: 0
+  roundConeR2: 0
+  roundConeH: 0
+  ellipsoidRadius: {x: 0, y: 0, z: 0}
+  rhombusLa: 0
+  rhombusLb: 0
+  rhombusH: 0
+  rhombusRa: 0
+  octahedronSize: 0
+  pyramidSize: 0
+  triangleSideA: {x: 0, y: 0, z: 0}
+  triangleSideB: {x: 0, y: 0, z: 0}
+  triangleSideC: {x: 0, y: 0, z: 0}
+  quadSideA: {x: 0, y: 0, z: 0}
+  quadSideB: {x: 0, y: 0, z: 0}
+  quadSideC: {x: 0, y: 0, z: 0}
+  quadSideD: {x: 0, y: 0, z: 0}
+  fractalI: 0
+  fractalS: 0
+  fractalO: 0
+  tesseractSize: {x: 0, y: 0, z: 0, w: 0}
+  hyperSphereRadius: 0
+  duoCylR1R2: {x: 0, y: 0}
+  vertCapsuleH: 0
+  vertCapsuleR: 0
+  fiveCellA: {x: 0, y: 0, z: 0, w: 0}
+  sixteenCellS: 0

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+
+[ExecuteInEditMode]
 public class RaymarchRenderer : MonoBehaviour
 {    
     public enum Shape
@@ -50,11 +52,64 @@ public class RaymarchRenderer : MonoBehaviour
 
     public Shape shape;
     public Interpolation interpolation;
-    public Color color;
+    public Color color = Color.red;
 
     [Range(.1f, 100)]
     public float blendFactor;
-    
+
+    public ShapeDimensions dimensions;
+
+    void OnValidate()
+    {
+#if UNITY_EDITOR
+        // Delay the execution of the asset check and creation to avoid issues during OnValidate.
+        EditorApplication.delayCall += CheckAndCreateAsset;
+#endif
+    }
+#if UNITY_EDITOR
+    void CheckAndCreateAsset()
+    {
+        if (dimensions == null)        
+            dimensions = CreateShapeDimensionsAsset();
+        
+        else
+        {
+            var allRenderers = FindObjectsOfType<RaymarchRenderer>();
+            int sharedCount = 0;
+            foreach (var renderer in allRenderers)
+            {
+                if (renderer != this && renderer.dimensions == dimensions)                
+                    sharedCount++;                
+            }
+
+            if (sharedCount > 0)
+            {
+                dimensions = CreateShapeDimensionsAsset();
+            }
+        }
+    }
+#endif
+    ShapeDimensions CreateShapeDimensionsAsset()
+    {
+        ShapeDimensions asset = ScriptableObject.CreateInstance<ShapeDimensions>();
+
+        string folderPath = "Assets/ScriptableObjects";
+
+        if (!System.IO.Directory.Exists(folderPath))
+        {
+            AssetDatabase.CreateFolder("Assets", "ScriptableObjects");
+        }
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(folderPath + "/New " + typeof(ShapeDimensions).ToString() + ".asset");
+
+        AssetDatabase.CreateAsset(asset, assetPathAndName);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = asset;
+
+        return asset;
+    }
+
 }
 public struct SphereDimensions
 {

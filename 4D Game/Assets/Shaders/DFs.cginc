@@ -61,8 +61,8 @@ float sdSphere(float3 p, float r, float wPos, float3 wRot)
 float sdTorus(float3 p, float2 s, float wPos, float3 wRot)
 {
     float4 p4 = rotWposW(p, wPos, wRot);
-    float2 q = float2(length(p4.xz) - s.x, p4.y);
-    return length(q) - s.y;
+    float3 q = float3(length(p4.xz) - s.x, p4.y, p4.w); // Use p4.w to affect the distance calculation
+    return length(q) - s.y; // The distance calculation now includes the 4th dimension
 }
 
 			//capped torus
@@ -78,8 +78,11 @@ float sdCappedTorus(float3 p, float ro, float ri, float2 t, float wPos, float3 w
 float sdLink(float3 p, float s, float ro, float ri, float wPos, float3 wRot)
 {
     float4 p4 = rotWposW(p, wPos, wRot);
+    // Adjust q to consider the separation in 4D by including the w component.
     float4 q = float4(p4.x, max(abs(p4.y) - s, 0), p4.z, p4.w);
-    return length(float2(length(q.xy) - ro, q.z)) - ri;
+    // Calculate the distance including the w component, which affects the final distance.
+    float2 q_xyw = float2(length(q.xy) - ro, length(float2(q.z, q.w)));
+    return length(q_xyw) - ri;
 }
 
 
@@ -87,7 +90,7 @@ float sdLink(float3 p, float s, float ro, float ri, float wPos, float3 wRot)
 float sdCone(float3 p, float2 c, float h, float wPos, float3 wRot)
 {
     float4 p4 = rotWposW(p, wPos, wRot);
-    p4 -= float4(0, h / 2, 0, 0);
+    p4 -= float4(0, h / 2, 0, wPos);
     float2 q = h * float2(c.x / c.y, -1.0);
     float2 w = float2(length(p4.xz), p4.y);
     float2 a = w - q * clamp(dot(w, q) / dot(q, q), 0.0, 1.0);

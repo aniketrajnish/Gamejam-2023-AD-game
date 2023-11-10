@@ -364,6 +364,7 @@
 "Assets/Scripts/Raymarching Engine/Raymarcher.cs"
 "Assets/Scripts/Raymarching Engine/RaymarchRenderer.cs"
 "Assets/Scripts/Raymarching Engine/SceneViewFilter.cs"
+"Assets/Scripts/ShapeDimensions.cs"
 -langversion:9.0
 
 /deterministic

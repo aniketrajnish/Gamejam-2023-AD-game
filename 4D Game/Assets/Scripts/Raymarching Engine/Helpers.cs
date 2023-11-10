@@ -1,119 +1,121 @@
 using System;
-using UnityEngine;
-public class Helpers : MonoBehaviour
+public class Helpers 
 {
-    public static vector12 GetDimensionVectors(int i)
+    public static vector12 GetDimensionVectors(int i, ShapeDimensions shapeDimensions)
     {
         int len = Enum.GetNames(typeof(RaymarchRenderer.Shape)).Length;
 
         vector12[] dimensions = new vector12[len];
 
+        if (shapeDimensions == null)
+            return new vector12(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); ;
+
         //sphere
-        dimensions[0] = new vector12(SphereDimensions.radius, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[0] = new vector12(shapeDimensions.sphereRadius, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //torus
-        dimensions[1] = new vector12(TorusDimensions.thickness.x, TorusDimensions.thickness.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[1] = new vector12(shapeDimensions.torusThickness.x, shapeDimensions.torusThickness.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //capped torus
-        dimensions[2] = new vector12(CappedTorusDimensions.ro, CappedTorusDimensions.ri, CappedTorusDimensions.thickness.x, CappedTorusDimensions.thickness.y, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[2] = new vector12(shapeDimensions.cappedTorusRo, shapeDimensions.cappedTorusRi, shapeDimensions.cappedTorusThickness.x, shapeDimensions.cappedTorusThickness.y, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //link
-        dimensions[3] = new vector12(LinkDimensions.separation, LinkDimensions.radius, LinkDimensions.thickness, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[3] = new vector12(shapeDimensions.linkSeparation, shapeDimensions.linkRadius, shapeDimensions.linkThickness, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //cone
-        dimensions[4] = new vector12(ConeDimensions.tan.x, ConeDimensions.tan.y, ConeDimensions.height, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[4] = new vector12(shapeDimensions.coneTan.x, shapeDimensions.coneTan.y, shapeDimensions.coneHeight, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //infinite cone
-        dimensions[5] = new vector12(InfiniteConeDimensions.tan.x, InfiniteConeDimensions.tan.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[5] = new vector12(shapeDimensions.infConeTan.x, shapeDimensions.infConeTan.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //plane
-        dimensions[6] = new vector12(PlaneDimensions.normal.x, PlaneDimensions.normal.y, PlaneDimensions.normal.z, PlaneDimensions.distance, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[6] = new vector12(shapeDimensions.planeNormal.x, shapeDimensions.planeNormal.y, shapeDimensions.planeNormal.z, shapeDimensions.planeDistance, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //hexagonal prism
-        dimensions[7] = new vector12(HexagonalPrismDimensions.h.x, HexagonalPrismDimensions.h.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[7] = new vector12(shapeDimensions.hexPrismH.x, shapeDimensions.hexPrismH.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //triangular prism
-        dimensions[8] = new vector12(TriangularPrismDimensions.h.x, TriangularPrismDimensions.h.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[8] = new vector12(shapeDimensions.triPrismH.x, shapeDimensions.triPrismH.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //capsule
-        dimensions[9] = new vector12(CapsuleDimensions.a.x, CapsuleDimensions.a.y, CapsuleDimensions.a.z, CapsuleDimensions.b.x, CapsuleDimensions.b.y, CapsuleDimensions.b.z, CapsuleDimensions.r, 0, 0, 0, 0, 0);
+        dimensions[9] = new vector12(shapeDimensions.capsuleA.x, shapeDimensions.capsuleA.y, shapeDimensions.capsuleA.z, shapeDimensions.capsuleB.x, shapeDimensions.capsuleB.y, shapeDimensions.capsuleB.z, shapeDimensions.capsuleR, 0, 0, 0, 0, 0);
 
         //infinite cylinder
-        dimensions[10] = new vector12(InfiniteCylinderDimensions.c.x, InfiniteCylinderDimensions.c.y, InfiniteCylinderDimensions.c.z, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[10] = new vector12(shapeDimensions.infCylC.x, shapeDimensions.infCylC.y, shapeDimensions.infCylC.z, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //box
-        dimensions[11] = new vector12(BoxDimensions.size, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[11] = new vector12(shapeDimensions.boxSize, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //round box
-        dimensions[12] = new vector12(RoundBoxDimensions.size, RoundBoxDimensions.roundFactor, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[12] = new vector12(shapeDimensions.roundBoxSize, shapeDimensions.roundBoxRoundFactor, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //rounded cylinder
-        dimensions[13] = new vector12(RoundedCylinderDimensions.ra, RoundedCylinderDimensions.rb, RoundedCylinderDimensions.h, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[13] = new vector12(shapeDimensions.roundCylRa, shapeDimensions.roundCylRb, shapeDimensions.roundCylH, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //capped cone
-        dimensions[14] = new vector12(CappedConeDimensions.h, CappedConeDimensions.r1, CappedConeDimensions.r2, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[14] = new vector12(shapeDimensions.capConeH, shapeDimensions.capConeR1, shapeDimensions.capConeR2, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //box frame
-        dimensions[15] = new vector12(BoxFrameDimensions.size.x, BoxFrameDimensions.size.y, BoxFrameDimensions.size.z, BoxFrameDimensions.cavity, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[15] = new vector12(shapeDimensions.boxFrameSize.x, shapeDimensions.boxFrameSize.y, shapeDimensions.boxFrameSize.z, shapeDimensions.boxFrameCavity, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //solid angle
-        dimensions[16] = new vector12(SolidAngleDimensions.c.x, SolidAngleDimensions.c.y, SolidAngleDimensions.ra, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[16] = new vector12(shapeDimensions.solidAngleC.x, shapeDimensions.solidAngleC.y, shapeDimensions.solidAngleRa, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //cut sphere
-        dimensions[17] = new vector12(CutSphereDimensions.r, CutSphereDimensions.h, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[17] = new vector12(shapeDimensions.cutSphereR, shapeDimensions.cutSphereH, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //hollow sphere
-        dimensions[18] = new vector12(HollowSphereDimensions.r, HollowSphereDimensions.h, HollowSphereDimensions.t, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[18] = new vector12(shapeDimensions.hollowSphereR, shapeDimensions.hollowSphereH, shapeDimensions.hollowSphereT, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //death star
-        dimensions[19] = new vector12(DeathStarDimensions.ra, DeathStarDimensions.rb, DeathStarDimensions.d, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[19] = new vector12(shapeDimensions.deathStarRa, shapeDimensions.deathStarRb, shapeDimensions.deathStarD, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //round cone
-        dimensions[20] = new vector12(RoundConeDimensions.r1, RoundConeDimensions.r2, RoundConeDimensions.h, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[20] = new vector12(shapeDimensions.roundConeR1, shapeDimensions.roundConeR2, shapeDimensions.roundConeH, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //ellipsoid
-        dimensions[21] = new vector12(EllipsoidDimensions.Radius.x, EllipsoidDimensions.Radius.y, EllipsoidDimensions.Radius.z, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[21] = new vector12(shapeDimensions.ellipsoidRadius.x, shapeDimensions.ellipsoidRadius.y, shapeDimensions.ellipsoidRadius.z, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //rhombus
-        dimensions[22] = new vector12(RhombusDimensions.la, RhombusDimensions.lb, RhombusDimensions.h, RhombusDimensions.ra, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[22] = new vector12(shapeDimensions.rhombusLa, shapeDimensions.rhombusLb, shapeDimensions.rhombusH, shapeDimensions.rhombusRa, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //octahedron
-        dimensions[23] = new vector12(OctahedronDimensions.size, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[23] = new vector12(shapeDimensions.octahedronSize, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //pyramid
-        dimensions[24] = new vector12(PyramidDimensions.size, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[24] = new vector12(shapeDimensions.pyramidSize, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //triangle
-        dimensions[25] = new vector12(TriangleDimensions.sideA.x, TriangleDimensions.sideA.y, TriangleDimensions.sideA.z, TriangleDimensions.sideB.x, TriangleDimensions.sideB.y, TriangleDimensions.sideB.z, TriangleDimensions.sideC.x, TriangleDimensions.sideC.y, TriangleDimensions.sideC.z, 0, 0, 0);
+        dimensions[25] = new vector12(shapeDimensions.triangleSideA.x, shapeDimensions.triangleSideA.y, shapeDimensions.triangleSideA.z, shapeDimensions.triangleSideB.x, shapeDimensions.triangleSideB.y, shapeDimensions.triangleSideB.z, shapeDimensions.triangleSideC.x, shapeDimensions.triangleSideC.y, shapeDimensions.triangleSideC.z, 0, 0, 0);
 
         //quad
-        dimensions[26] = new vector12(QuadDimensions.sideA.x, QuadDimensions.sideA.y, QuadDimensions.sideA.z, QuadDimensions.sideB.x, QuadDimensions.sideB.y, QuadDimensions.sideB.z, QuadDimensions.sideC.x, QuadDimensions.sideC.y, QuadDimensions.sideC.z, QuadDimensions.sideD.x, QuadDimensions.sideD.y, QuadDimensions.sideD.z);
+        dimensions[26] = new vector12(shapeDimensions.quadSideA.x, shapeDimensions.quadSideA.y, shapeDimensions.quadSideA.z, shapeDimensions.quadSideB.x, shapeDimensions.quadSideB.y, shapeDimensions.quadSideB.z, shapeDimensions.quadSideC.x, shapeDimensions.quadSideC.y, shapeDimensions.quadSideC.z, shapeDimensions.quadSideD.x, shapeDimensions.quadSideD.y, shapeDimensions.quadSideD.z);
 
         //fractals
-        dimensions[27] = new vector12(FractalDimenisons.i, FractalDimenisons.s, FractalDimenisons.o, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[27] = new vector12(shapeDimensions.fractalI, shapeDimensions.fractalS, shapeDimensions.fractalO, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //tesseract
-        dimensions[28] = new vector12(TesseractDimensions.size.x, TesseractDimensions.size.y, TesseractDimensions.size.z, TesseractDimensions.size.w, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[28] = new vector12(shapeDimensions.tesseractSize.x, shapeDimensions.tesseractSize.y, shapeDimensions.tesseractSize.z, shapeDimensions.tesseractSize.w, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //hypersphere
-        dimensions[29] = new vector12(HyperSphereDimensions.radius,0,0,0,0,0,0,0,0,0,0,0);
+        dimensions[29] = new vector12(shapeDimensions.hyperSphereRadius, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //duocylinder
-        dimensions[30] = new vector12(DuoCylinderDimensions.r1r2.x, DuoCylinderDimensions.r1r2.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[30] = new vector12(shapeDimensions.duoCylR1R2.x, shapeDimensions.duoCylR1R2.y, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-        //verticalcapsule
-        dimensions[31] = new vector12(VerticalCapsuleDimensions.h, VerticalCapsuleDimensions.r,0,0,0,0,0,0,0,0,0, 0);
+        //vertical capsule
+        dimensions[31] = new vector12(shapeDimensions.vertCapsuleH, shapeDimensions.vertCapsuleR, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //fivecell
-        dimensions[32] = new vector12(FiveCellDimensions.a.x, FiveCellDimensions.a.y, FiveCellDimensions.a.z, FiveCellDimensions.a.w,0,0,0,0,0,0,0,0);
+        dimensions[32] = new vector12(shapeDimensions.fiveCellA.x, shapeDimensions.fiveCellA.y, shapeDimensions.fiveCellA.z, shapeDimensions.fiveCellA.w, 0, 0, 0, 0, 0, 0, 0, 0);
 
         //sixteencell
-        dimensions[33] = new vector12(SixteenCellDimensions.s, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        dimensions[33] = new vector12(shapeDimensions.sixteenCellS, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
         return dimensions[i];
     }
     //discard
-    public static float[] GetDimensionArray(int i)
+    /*public static float[] GetDimensionArray(int i)
     {
         int len = Enum.GetNames(typeof(RaymarchRenderer.Shape)).Length;
 
@@ -201,5 +203,5 @@ public class Helpers : MonoBehaviour
         dimensions[26] = new float[] { .1f, .1f, .1f, .2f, .2f, .2f, .3f, .3f, .3f, .4f, .4f, .4f };
 
         return dimensions[i];
-    }
+    }*/
 }
