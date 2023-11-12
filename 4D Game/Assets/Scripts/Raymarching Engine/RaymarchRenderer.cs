@@ -43,7 +43,7 @@ public class RaymarchRenderer : MonoBehaviour
         FiveCell,
         SixteenCell
     };
-    public enum Interpolation
+    public enum Operation
     {
         Union,
         Subtract,
@@ -51,7 +51,7 @@ public class RaymarchRenderer : MonoBehaviour
     };
 
     public Shape shape;
-    public Interpolation interpolation;
+    public Operation operation;
     public Color color = Color.red;
 
     [Range(.1f, 100)]

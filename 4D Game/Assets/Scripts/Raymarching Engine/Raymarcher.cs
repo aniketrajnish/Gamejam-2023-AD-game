@@ -8,7 +8,8 @@ using UnityEditor;
 public class Raymarcher : SceneViewFilter
 {
     List<ComputeBuffer> disposable = new List<ComputeBuffer>();
-    List<RaymarchRenderer> renderers;
+    [HideInInspector] public List<RaymarchRenderer> renderers;
+    public Properties shapeProperties;
     ComputeBuffer shapeBuffer;
     Material raymarchMaterial;
     private Camera _cam;
@@ -16,7 +17,7 @@ public class Raymarcher : SceneViewFilter
     [SerializeField] Light sun;
     [SerializeField] public float wPos;
     [SerializeField] public Vector3 wRot;
-    [SerializeField] Vector3 loop;
+    [SerializeField] public Vector3 loop;
     [SerializeField] bool shadow;
     public Material _raymarchMaterial
     {
@@ -104,7 +105,7 @@ public class Raymarcher : SceneViewFilter
                     col = color,
                     blendFactor = s.blendFactor * 100,
                     shapeIndex = (int)s.shape,
-                    opIndex = (int)s.interpolation,
+                    opIndex = (int)s.operation,
                     dimensions = Helpers.GetDimensionVectors((int)s.shape, s.dimensions)
                 };
                 properties[i] = p;
@@ -168,18 +169,18 @@ public struct Properties
 }
 public struct vector12
 {
-    float a;
-    float b;
-    float c;
-    float d;
-    float e;
-    float f;
-    float g;
-    float h;
-    float i;
-    float j;
-    float k;
-    float l;
+    public float a;
+    public float b;
+    public float c;
+    public float d;
+    public float e;
+    public float f;
+    public float g;
+    public float h;
+    public float i;
+    public float j;
+    public float k;
+    public float l;
 
     public vector12(float _a, float _b, float _c, float _d, float _e, float _f, float _g, float _h, float _i, float _j, float _k, float _l)
     {
