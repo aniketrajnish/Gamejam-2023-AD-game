@@ -155,9 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderers:
-  - {fileID: 1723790622}
   - {fileID: 389866196}
   - {fileID: 395357373}
+  - {fileID: 1723790622}
   - {fileID: 2053144275}
   shader: {fileID: 4800000, guid: f0ce1e6dffcb3c14da9dfdc2b0144bfc, type: 3}
   sun: {fileID: 1371672096}
@@ -231,8 +231,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124650880}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0.08153927, y: -0.91043645, z: 0.34444636, w: 0.2140411}
+  m_LocalPosition: {x: 14.980068, y: 18.446608, z: 23.368015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -375,7 +375,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395357371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.19, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99eed1c698dde9040bfd7899717f77aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shape: 0
+  shape: 15
   operation: 0
   color: {r: 1, g: 0, b: 0, a: 1}
   blendFactor: 0
@@ -707,6 +707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1639160958}
   - component: {fileID: 1639160959}
+  - component: {fileID: 1639160960}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -722,7 +723,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639160957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1433418, y: 3.84, z: 3.85}
+  m_LocalPosition: {x: 2.1433418, y: 3.84, z: 10.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -750,6 +751,20 @@ MonoBehaviour:
   - {fileID: 454774400}
   - {fileID: 203699929}
   - {fileID: 1150705716}
+--- !u!114 &1639160960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639160957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8787a02694f2b6469de6549be89349e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: -5
+  DeathDistance: -5
 --- !u!1 &1665178864
 GameObject:
   m_ObjectHideFlags: 0

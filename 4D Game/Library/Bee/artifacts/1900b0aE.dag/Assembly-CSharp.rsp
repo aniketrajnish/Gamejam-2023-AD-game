@@ -361,6 +361,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.0f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/DFs.cs"
 "Assets/Scripts/MakraMathUtils.cs"
+"Assets/Scripts/Player Controller.cs"
 "Assets/Scripts/RaymarchCollision.cs"
 "Assets/Scripts/Raymarching Engine/Helpers.cs"
 "Assets/Scripts/Raymarching Engine/Raymarcher.cs"
