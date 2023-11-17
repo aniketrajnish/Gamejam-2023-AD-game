@@ -213,3 +213,8 @@ Received Import Request.
 Start importing Assets/5. ScriptableObject/New ShapeDimensions 2.asset using Guid(68fdd94c12e212c468e43eec4a5d8c03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a8ed2d8299efedb85d3f8bd649a379b5') in 0.000727 seconds
 Number of updated asset objects reloaded before import = 0
 Number of asset objects unloaded after import = 1
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
