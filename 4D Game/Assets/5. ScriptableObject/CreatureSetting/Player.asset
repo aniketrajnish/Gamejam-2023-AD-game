@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: f6abfdd47876e1943b83d52895db0188, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: Assembly-CSharp::CreatureSettingsSO
   CreatureSettings:
     CreatureType: 0
     DefaultHealth: 10
-    Speed: 5
-    TurnSpeed: 2
+    Speed: 10
+    TurnSpeed: 20

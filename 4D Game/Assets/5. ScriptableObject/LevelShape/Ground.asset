@@ -17,7 +17,7 @@ MonoBehaviour:
   cappedTorusRo: 0.25
   cappedTorusRi: 0.1
   cappedTorusThickness: {x: 0.1, y: 0.1}
-  linkSeparation: 0.13
+  linkSeparation: 3.05
   linkRadius: 0.2
   linkThickness: 0.09
   coneTan: {x: 1, y: 2}
@@ -32,8 +32,8 @@ MonoBehaviour:
   capsuleR: 0.25
   infCylC: {x: 0, y: 0.25, z: 0.25}
   boxSize: 0.25
-  roundBoxSize: 0.3
-  roundBoxRoundFactor: 0.1
+  roundBoxSize: 50
+  roundBoxRoundFactor: 0.16
   roundCylRa: 0.25
   roundCylRb: 0.1
   roundCylH: 0.25
@@ -61,7 +61,7 @@ MonoBehaviour:
   rhombusH: 0.02
   rhombusRa: 0.02
   octahedronSize: 0.5
-  pyramidSize: 0.5
+  pyramidSize: 0.9
   triangleSideA: {x: 0.3, y: 0.5, z: 0.15}
   triangleSideB: {x: 0.8, y: 0.2, z: 0.1}
   triangleSideC: {x: 0.7, y: 0.3, z: 0.5}

@@ -10,12 +10,6 @@ public enum CreatureType
     Boss
 }
 
-[CreateAssetMenu(fileName = "Creature", menuName = "ScriptableObjects/CreatureSettings", order = 1)]
-public class CreatureSettingsSO : ScriptableObject
-{
-    public CreatureSettings CreatureSettings;
-}
-
 [System.Serializable]
 public class CreatureSettings
 {

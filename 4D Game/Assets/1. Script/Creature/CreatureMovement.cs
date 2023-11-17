@@ -17,7 +17,11 @@ public class CreatureMovement
 
     public void Move()
     {
-        target.Rotate(Vector3.up * input.Rotation * settings.TurnSpeed * Time.deltaTime);
+        // Rotate the forward vector towards the target direction by one step
+        Vector3 newDirection = 
+            Vector3.RotateTowards(target.forward, input.Direction, settings.TurnSpeed*Time.deltaTime, 0.0f);
+
+        target.rotation = Quaternion.LookRotation(newDirection);
         target.position += input.Direction * settings.Speed * Time.deltaTime;
     }
 }
