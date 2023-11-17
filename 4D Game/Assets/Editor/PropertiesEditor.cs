@@ -156,7 +156,7 @@ public class PropertiesEditor : Editor
                 break;
         }
         EditorUtility.SetDirty(renderer);
-
+        EditorUtility.SetDirty(renderer.dimensions);
     }
 
     /*ShapeDimensions CreateShapeDimensionsAsset()
