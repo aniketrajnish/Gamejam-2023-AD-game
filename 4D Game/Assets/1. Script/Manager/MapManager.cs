@@ -66,7 +66,14 @@ public class MapManager : SimpleSingleton<MapManager>
         posToCell = tilemapPathLayer.WorldToCell(position);
         posToCell2D = new Vector2Int(posToCell.x, posToCell.y);
 
-        result = map[posToCell2D];
+        if (map.ContainsKey(posToCell2D))
+        {
+            result = map[posToCell2D];
+        }
+        else
+        {
+            result = null;
+        }
 
         return result;
     }

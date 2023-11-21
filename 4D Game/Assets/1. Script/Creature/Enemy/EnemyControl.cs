@@ -13,6 +13,7 @@ public class EnemyControl : ICreatureControl
     private Transform currentTransform;
     private NodeTile currentNode;
     private NodeTile targetNode;
+    private NodeTile preTargetNode;
     private GameObject targetObject;
     private PathFinder pathFinder;
     private List<NodeTile> path;
@@ -69,6 +70,16 @@ public class EnemyControl : ICreatureControl
         if (targetObject != null)
         {
             targetNode = MapManager.Instance.GetNearestNodeTile(targetObject.transform.position);
+
+            if (preTargetNode == targetNode || targetNode == null)
+            {
+                return;
+            }
+            else
+            {
+                preTargetNode = targetNode;
+            }
+
             path = pathFinder.FindPath(currentNode, targetNode, true, true);
         }
     }
