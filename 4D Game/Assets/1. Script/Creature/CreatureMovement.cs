@@ -6,22 +6,22 @@ public class CreatureMovement
 {
     private ICreatureControl input;
     private CreatureSettings settings;
-    private Transform target;
+    private Transform currentTransform;
 
-    public CreatureMovement(ICreatureControl input, CreatureSettings settings, Transform target)
+    public CreatureMovement(ICreatureControl input, CreatureSettings settings, Transform currentTransform)
     {
         this.input = input;
         this.settings = settings;
-        this.target = target;
+        this.currentTransform = currentTransform;
     }
 
     public void Move()
     {
         // Rotate the forward vector towards the target direction by one step
         Vector3 newDirection = 
-            Vector3.RotateTowards(target.forward, input.Direction, settings.TurnSpeed*Time.deltaTime, 0.0f);
+            Vector3.RotateTowards(currentTransform.forward, input.Direction, settings.TurnSpeed*Time.deltaTime, 0.0f);
 
-        target.rotation = Quaternion.LookRotation(newDirection);
-        target.position += input.Direction * settings.Speed * Time.deltaTime;
+        currentTransform.rotation = Quaternion.LookRotation(newDirection);
+        currentTransform.position += input.Direction * settings.Speed * Time.deltaTime;
     }
 }

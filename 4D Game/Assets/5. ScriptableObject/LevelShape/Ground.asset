@@ -32,7 +32,7 @@ MonoBehaviour:
   capsuleR: 0.25
   infCylC: {x: 0, y: 0.25, z: 0.25}
   boxSize: 0.25
-  roundBoxSize: 50
+  roundBoxSize: 20
   roundBoxRoundFactor: 0.16
   roundCylRa: 0.25
   roundCylRb: 0.1

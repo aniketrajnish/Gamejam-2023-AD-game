@@ -20,12 +20,7 @@ public class MapManager : SimpleSingleton<MapManager>
     [SerializeField] private Dictionary<Vector2Int, NodeTile> map;
     public Dictionary<Vector2Int, NodeTile> Map { get { return map; } }
 
-    void Start()
-    {
-        Init();
-    }
-
-    private void Init()
+    public void Init()
     {
         map = new Dictionary<Vector2Int, NodeTile>();
         List<TileInfo> tileInfoList = tilemapPathLayer.GetTileMapInfo();
@@ -62,7 +57,7 @@ public class MapManager : SimpleSingleton<MapManager>
         return cellWorldPos;
     }
 
-    public NodeTile GetNearestOverlayTile(Vector3 position)
+    public NodeTile GetNearestNodeTile(Vector3 position)
     {
         Vector3Int posToCell = new Vector3Int();
         Vector2Int posToCell2D = new Vector2Int();
@@ -70,6 +65,7 @@ public class MapManager : SimpleSingleton<MapManager>
 
         posToCell = tilemapPathLayer.WorldToCell(position);
         posToCell2D = new Vector2Int(posToCell.x, posToCell.y);
+
         result = map[posToCell2D];
 
         return result;
