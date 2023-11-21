@@ -78,15 +78,33 @@ public class RaymarchRenderer : MonoBehaviour
             int sharedCount = 0;
             foreach (var renderer in allRenderers)
             {
-                if (renderer != this && renderer.dimensions == dimensions)                
-                    sharedCount++;                
+                if (renderer != this && renderer.dimensions == dimensions)
+                    sharedCount++;
             }
 
-            if (sharedCount > 0)
-            {
-                dimensions = CreateShapeDimensionsAsset();
-            }
+            if (sharedCount > 0)            
+                CloneShapeDimensionsAsset(dimensions);            
         }
+    }
+
+    void CloneShapeDimensionsAsset(ShapeDimensions originalAsset)
+    {
+        ShapeDimensions clonedAsset = Instantiate(originalAsset);
+        string folderPath = "Assets/ScriptableObjects";
+
+        if (!System.IO.Directory.Exists(folderPath))
+        {
+            AssetDatabase.CreateFolder("Assets", "ScriptableObjects");
+        }
+
+        string clonedAssetPath = AssetDatabase.GenerateUniqueAssetPath(folderPath + "/Cloned " + typeof(ShapeDimensions).ToString() + ".asset");
+        AssetDatabase.CreateAsset(clonedAsset, clonedAssetPath);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = clonedAsset;
+
+        dimensions = clonedAsset;
     }
 #endif
     ShapeDimensions CreateShapeDimensionsAsset()
@@ -111,7 +129,7 @@ public class RaymarchRenderer : MonoBehaviour
     }
 
 }
-public struct SphereDimensions
+/*public struct SphereDimensions
 {
     public static float radius = EditorPrefs.GetFloat("SphereRadius", .5f);
 };
@@ -280,4 +298,4 @@ public struct FiveCellDimensions
 public struct SixteenCellDimensions
 {
     public static float s = EditorPrefs.GetFloat("16CS", .5f);
-}
+}*/

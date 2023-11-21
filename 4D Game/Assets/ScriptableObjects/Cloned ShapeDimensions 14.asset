@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
-  m_Name: New ShapeDimensions
+  m_Name: Cloned ShapeDimensions 14
   m_EditorClassIdentifier: 
   sphereRadius: 1.3
   torusThickness: {x: 0.4, y: 0.1}
@@ -25,13 +25,13 @@ MonoBehaviour:
   infConeTan: {x: 0.1, y: 0.1}
   planeNormal: {x: 0, y: 0.5, z: 0.5}
   planeDistance: 1
-  hexPrismH: {x: 0.25, y: 0.25}
+  hexPrismH: {x: 2.02, y: 0.25}
   triPrismH: {x: 0.25, y: 0.25}
   capsuleA: {x: 0.25, y: 0.1, z: 0.25}
   capsuleB: {x: 0.1, y: 0.25, z: 0.25}
   capsuleR: 0.25
   infCylC: {x: 0, y: 0.25, z: 0.25}
-  boxSize: 0.25
+  boxSize: 0.99
   roundBoxSize: 0.3
   roundBoxRoundFactor: 0.1
   roundCylRa: 0.25
