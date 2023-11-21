@@ -18,6 +18,7 @@ public class MapManager : SimpleSingleton<MapManager>
     [SerializeField] private GameObject nodeContainer;
 
     [SerializeField] private Dictionary<Vector2Int, NodeTile> map;
+
     public Dictionary<Vector2Int, NodeTile> Map { get { return map; } }
 
     public void Init()
@@ -35,7 +36,6 @@ public class MapManager : SimpleSingleton<MapManager>
                     GameObject nodeTile = Instantiate(nodePrefab, nodeContainer.transform);
 
                     nodeTile.transform.position = tileInfo.WorldPoint;
-                    //overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tilemapMiddleLayer.GetComponent<TilemapRenderer>().sortingOrder + 1;
                     nodeTile.gameObject.GetComponent<NodeTile>().GridLocation = tileInfo.Coordinates;
                     nodeTile.gameObject.name = "NodeTile" + index;
 

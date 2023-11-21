@@ -39,12 +39,12 @@ public class EnemyControl : ICreatureControl
         {
             UpdateCurrentNode();
 
-            Vector3 currentPosition = currentNode.transform.position;
+            Vector3 currentPosition = currentTransform.position;
             Vector3 nextNodePosition = path[0].transform.position;
             currentDirection =
                 new Vector3(nextNodePosition.x - currentPosition.x, 0, nextNodePosition.z - currentPosition.z).normalized;
 
-            if (Vector3.Distance(currentPosition, nextNodePosition) < 0.00001f)
+            if (Vector3.Distance(currentPosition, nextNodePosition) <= 0.18f)
             {
                 path.RemoveAt(0);
                 FindTargetNode();

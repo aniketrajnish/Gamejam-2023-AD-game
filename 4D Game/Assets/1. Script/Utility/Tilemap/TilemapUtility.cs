@@ -34,7 +34,7 @@ public static class TileMapUtility
                     tileInfo.Coordinates = coordinates;
                     tileInfo.Coordinates2D = new Vector2Int(coordinates.x, coordinates.y);
 
-                    Vector3 worldPoint = tilemap.CellToWorld(coordinates);
+                    Vector3 worldPoint = tilemap.GetCellCenterWorld(coordinates);
                     tileInfo.WorldPoint = worldPoint;
 
                     tileInfo.Tile = tile;
