@@ -100,7 +100,7 @@ Transform:
   - {fileID: 8506850337891458898}
   - {fileID: 8805291183616549918}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2659330466315441210
 MonoBehaviour:
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 083803d208f721e42a2d0f58df854628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creatureSettingsSO: {fileID: 11400000, guid: c91c2eb5b151bcc439ea7c1c8979193c, type: 2}
+  creatureSettingSO: {fileID: 11400000, guid: c91c2eb5b151bcc439ea7c1c8979193c, type: 2}
 --- !u!1 &3463894066202079626
 GameObject:
   m_ObjectHideFlags: 0

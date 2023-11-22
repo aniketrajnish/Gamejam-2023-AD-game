@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6abfdd47876e1943b83d52895db0188, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: Assembly-CSharp::CreatureSettingsSO
-  CreatureSettings:
+  CreatureSetting:
     CreatureType: 0
     DefaultHealth: 10
-    Speed: 10
+    Speed: 5
     TurnSpeed: 20

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6abfdd47876e1943b83d52895db0188, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: Assembly-CSharp::CreatureSettingsSO
-  CreatureSettings:
+  CreatureSetting:
     CreatureType: 1
     DefaultHealth: 5
-    Speed: 3.5
-    TurnSpeed: 5
+    Speed: 3
+    TurnSpeed: 3

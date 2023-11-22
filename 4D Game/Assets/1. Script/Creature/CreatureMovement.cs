@@ -23,5 +23,7 @@ public class CreatureMovement
 
         currentTransform.rotation = Quaternion.LookRotation(newDirection);
         currentTransform.position += input.Direction * setting.Speed * Time.deltaTime;
+
+        Debug.Log(currentTransform.position);
     }
 }
