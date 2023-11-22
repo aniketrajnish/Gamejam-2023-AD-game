@@ -53,12 +53,26 @@ public class RaymarchRenderer : MonoBehaviour
     public Shape shape;
     public Operation operation;
     public Color color = Color.red;
+    public Vector3 rotW;
+    public float posW;
 
     [Range(.1f, 100)]
     public float blendFactor;
 
     public ShapeDimensions dimensions;
 
+   /* public Vector4 Position()
+    {
+        return new Vector4(transform.position.x, transform.position.y, transform.position.z, posW);
+    }
+    public Vector3 Rotation()
+    {
+        return transform.eulerAngles * Mathf.Deg2Rad;
+    }
+    public Vector3 RotationW()
+    {
+        return rotW * Mathf.Deg2Rad;
+    }*/
     void OnValidate()
     {
 #if UNITY_EDITOR

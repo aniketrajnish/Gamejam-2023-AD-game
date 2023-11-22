@@ -24,8 +24,8 @@ namespace Unity.Mathematics
         }
         public float GetShapeDistance(RaymarchRenderer rend, float3 p)
         {
-            float wPos = raymarcher.wPos;
-            float3 wRot = raymarcher.wRot;
+            float wPos = rend.posW != 0 ? rend.posW : raymarcher.wPos;
+            float3 wRot = rend.rotW != new Vector3(0,0,0) ? rend.rotW : raymarcher.wRot;
             float3 shapePos = rend.transform.position;
             float3 shapeRot = rend.transform.eulerAngles * Mathf.Deg2Rad;
 
