@@ -11,7 +11,7 @@ public enum CreatureType
 }
 
 [System.Serializable]
-public class CreatureSettings
+public class CreatureSetting
 {
     [Header("Control")]
     public CreatureType CreatureType;
@@ -21,9 +21,9 @@ public class CreatureSettings
     public float Speed;
     public float TurnSpeed;
 
-    public CreatureSettings() { }
+    public CreatureSetting() { }
 
-    public CreatureSettings(CreatureType type, float defaultHP, float speed, float turnSpeed)
+    public CreatureSetting(CreatureType type, float defaultHP, float speed, float turnSpeed)
     {
         CreatureType = type;
         DefaultHealth = defaultHP;
@@ -31,9 +31,9 @@ public class CreatureSettings
         TurnSpeed = turnSpeed;
     }
 
-    public CreatureSettings Clone()
+    public CreatureSetting Clone()
     {
-        return new CreatureSettings(CreatureType, DefaultHealth, Speed, TurnSpeed);
+        return new CreatureSetting(CreatureType, DefaultHealth, Speed, TurnSpeed);
     }
     
 }

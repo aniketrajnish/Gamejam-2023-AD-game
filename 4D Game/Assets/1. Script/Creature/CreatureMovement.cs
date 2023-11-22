@@ -5,13 +5,13 @@ using UnityEngine;
 public class CreatureMovement
 {
     private ICreatureControl input;
-    private CreatureSettings settings;
+    private CreatureSetting setting;
     private Transform currentTransform;
 
-    public CreatureMovement(ICreatureControl input, CreatureSettings settings, Transform currentTransform)
+    public CreatureMovement(ICreatureControl input, CreatureSetting setting, Transform currentTransform)
     {
         this.input = input;
-        this.settings = settings;
+        this.setting = setting;
         this.currentTransform = currentTransform;
     }
 
@@ -19,9 +19,9 @@ public class CreatureMovement
     {
         // Rotate the forward vector towards the target direction by one step
         Vector3 newDirection = 
-            Vector3.RotateTowards(currentTransform.forward, input.Direction, settings.TurnSpeed*Time.deltaTime, 0.0f);
+            Vector3.RotateTowards(currentTransform.forward, input.Direction, setting.TurnSpeed*Time.deltaTime, 0.0f);
 
         currentTransform.rotation = Quaternion.LookRotation(newDirection);
-        currentTransform.position += input.Direction * settings.Speed * Time.deltaTime;
+        currentTransform.position += input.Direction * setting.Speed * Time.deltaTime;
     }
 }

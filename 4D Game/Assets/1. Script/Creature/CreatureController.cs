@@ -7,9 +7,9 @@ using UnityEngine.UIElements;
 
 public class CreatureController : MonoBehaviour
 {
-    [SerializeField] private CreatureSettingsSO creatureSettingsSO;
+    [SerializeField] private CreatureSettingSO creatureSettingSO;
 
-    private CreatureSettings creatureSettings;
+    private CreatureSetting creatureSetting;
     private CreatureMovement creatureMovement;
     private ICreatureControl creatureControl;
 
@@ -36,9 +36,9 @@ public class CreatureController : MonoBehaviour
 
     private void Init()
     {
-        creatureSettings = creatureSettingsSO.CreatureSettings.Clone();
+        creatureSetting = creatureSettingSO.CreatureSetting.Clone();
 
-        switch (creatureSettings.CreatureType)
+        switch (creatureSetting.CreatureType)
         {
             case CreatureType.Player:
                 creatureControl = new PlayerControl();
@@ -52,7 +52,7 @@ public class CreatureController : MonoBehaviour
                 break;
         }
 
-        creatureMovement = new CreatureMovement(creatureControl, creatureSettings, transform);
+        creatureMovement = new CreatureMovement(creatureControl, creatureSetting, transform);
     }
 
     private void OnGameStateChange(OnGameStateChange data)

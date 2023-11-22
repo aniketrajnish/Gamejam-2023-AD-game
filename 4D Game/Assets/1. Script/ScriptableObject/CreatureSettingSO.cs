@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Creature", menuName = "ScriptableObjects/CreatureSettings", order = 1)]
-public class CreatureSettingsSO : ScriptableObject
+public class CreatureSettingSO : ScriptableObject
 {
-    public CreatureSettings CreatureSettings;
+    public CreatureSetting CreatureSetting;
 }
