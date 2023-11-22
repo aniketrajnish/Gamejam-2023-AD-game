@@ -19,6 +19,7 @@ public class Raymarcher : SceneViewFilter
     [SerializeField] public Vector3 wRot;
     [SerializeField] public Vector3 loop;
     [SerializeField] bool shadow;
+    [SerializeField] public bool isWOverride;
     public Material _raymarchMaterial
     {
         get
@@ -134,6 +135,11 @@ public class Raymarcher : SceneViewFilter
                 _raymarchMaterial.SetInt("_Shadow", 1);
             else
                 _raymarchMaterial.SetInt("_Shadow", 0);
+
+            if (isWOverride)
+                _raymarchMaterial.SetInt("_isWOverride", 1);
+            else
+                _raymarchMaterial.SetInt("_isWOverride", 0);
 
             disposable.Add(shapeBuffer);
         }

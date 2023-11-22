@@ -163,10 +163,11 @@ MonoBehaviour:
   - {fileID: 1684504796}
   shader: {fileID: 4800000, guid: f0ce1e6dffcb3c14da9dfdc2b0144bfc, type: 3}
   sun: {fileID: 1371672096}
-  wPos: -1.37
-  wRot: {x: 0.7, y: 0, z: 0}
+  wPos: 0.61
+  wRot: {x: 0.87, y: 0, z: 0}
   loop: {x: 0, y: 0, z: 0}
   shadow: 1
+  isWOverride: 0
 --- !u!81 &124650882
 AudioListener:
   m_ObjectHideFlags: 0
@@ -822,7 +823,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 697030635389402139, guid: 15c550a8f42988145b11ba7fd6079565, type: 3}
       propertyPath: posW
-      value: -0.45
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 697030635389402139, guid: 15c550a8f42988145b11ba7fd6079565, type: 3}
       propertyPath: shape
@@ -830,7 +831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 697030635389402139, guid: 15c550a8f42988145b11ba7fd6079565, type: 3}
       propertyPath: rotW.x
-      value: 3.06
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 697030635389402139, guid: 15c550a8f42988145b11ba7fd6079565, type: 3}
       propertyPath: rotW.y
@@ -858,11 +859,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6298903438803057367, guid: 15c550a8f42988145b11ba7fd6079565, type: 3}
       propertyPath: posW
-      value: 1.56
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 6298903438803057367, guid: 15c550a8f42988145b11ba7fd6079565, type: 3}
       propertyPath: rotW.x
-      value: 40
+      value: 19.95
       objectReference: {fileID: 0}
     - target: {fileID: 6298903438803057367, guid: 15c550a8f42988145b11ba7fd6079565, type: 3}
       propertyPath: dimensions
