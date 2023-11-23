@@ -19,6 +19,7 @@ public class Raymarcher : SceneViewFilter
     [SerializeField] public Vector3 wRot;
     [SerializeField] public Vector3 loop;
     [SerializeField] bool shadow;
+    [SerializeField] public bool isWOverride;
     public Material _raymarchMaterial
     {
         get
@@ -101,7 +102,9 @@ public class Raymarcher : SceneViewFilter
                 Properties p = new Properties()
                 {
                     pos = s.transform.position,
+                    posW = s.posW,
                     rot = s.transform.eulerAngles * Mathf.Deg2Rad,
+                    rotW = s.rotW * Mathf.Deg2Rad,
                     col = color,
                     blendFactor = s.blendFactor * 100,
                     shapeIndex = (int)s.shape,
@@ -116,7 +119,7 @@ public class Raymarcher : SceneViewFilter
                     _raymarchMaterial.SetInt("_Rank", i);
             }
 
-            shapeBuffer = new ComputeBuffer(renderers.Count, 96);
+            shapeBuffer = new ComputeBuffer(renderers.Count, 112);
             shapeBuffer.SetData(properties);
             
             _raymarchMaterial.SetInt("_Count", renderers.Count);
@@ -132,6 +135,11 @@ public class Raymarcher : SceneViewFilter
                 _raymarchMaterial.SetInt("_Shadow", 1);
             else
                 _raymarchMaterial.SetInt("_Shadow", 0);
+
+            if (isWOverride)
+                _raymarchMaterial.SetInt("_isWOverride", 1);
+            else
+                _raymarchMaterial.SetInt("_isWOverride", 0);
 
             disposable.Add(shapeBuffer);
         }
@@ -160,7 +168,9 @@ public class Raymarcher : SceneViewFilter
 public struct Properties
 {
     public Vector3 pos;
+    public float posW;
     public Vector3 rot;
+    public Vector3 rotW;
     public Vector3 col;
     public float blendFactor;
     public int shapeIndex;

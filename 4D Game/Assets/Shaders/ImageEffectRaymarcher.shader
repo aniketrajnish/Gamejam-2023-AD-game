@@ -47,7 +47,9 @@ struct vector12
 struct Shape
 {
     float3 pos;
+    float posW;
     float3 rot;
+    float3 rotW;
     float3 col;
     float blendFactor;
     int shapeIndex;
@@ -56,7 +58,7 @@ struct Shape
 };
 
 StructuredBuffer<Shape> shapes;
-int _Rank, _Count, _Shadow;
+int _Rank, _Count, _Shadow, _isWOverride;
 sampler2D _MainTex;
 uniform float4x4 _CamFrustrum, _CamToWorld;
 sampler2D _CameraDepthTexture;
@@ -91,9 +93,20 @@ v2f vert(appdata v)
            
 float GetDist(Shape shape, float3 p)
 {
-
     float d = 0;
+    float wPos = 0;
+    float3 wRot = float3(0, 0, 0);
     
+    if (_isWOverride == 0)
+    {
+        wPos = shape.posW != 0 ? shape.posW : _WPos;
+        wRot = shape.rotW != float3(0, 0, 0) ? shape.rotW : _WRot;
+    }
+    else if (_isWOverride == 1)
+    {
+        wPos = _WPos != 0 ? _WPos: shape.posW;
+        wRot = _WRot != float3(0, 0, 0) ? _WRot : shape.rotW;
+    }       
 
     p -= shape.pos;
 
@@ -104,113 +117,113 @@ float GetDist(Shape shape, float3 p)
     switch (shape.shapeIndex)
     {
         case 0:
-            d = sdSphere(p, shape.dimensions.a, _WPos, _WRot);
+            d = sdSphere(p, shape.dimensions.a, wPos, wRot);
             break;
         case 1:
-            d = sdTorus(p, float2(shape.dimensions.a, shape.dimensions.b), _WPos, _WRot);
+            d = sdTorus(p, float2(shape.dimensions.a, shape.dimensions.b), wPos, wRot);
             break;
         case 2:
-            d = sdCappedTorus(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, _WPos, _WRot);
+            d = sdCappedTorus(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, wPos, wRot);
             break;
         case 3:
-            d = sdLink(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, _WPos, _WRot);
+            d = sdLink(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, wPos, wRot);
             break;
         case 4:
-            d = sdCone(p, float2(shape.dimensions.a, shape.dimensions.b), shape.dimensions.c, _WPos, _WRot);
+            d = sdCone(p, float2(shape.dimensions.a, shape.dimensions.b), shape.dimensions.c, wPos, wRot);
             break;
         case 5:
-            d = sdInfCone(p, float2(shape.dimensions.a, shape.dimensions.b), _WPos, _WRot);
+            d = sdInfCone(p, float2(shape.dimensions.a, shape.dimensions.b), wPos, wRot);
             break;
         case 6:
-            d = sdPlane(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c), shape.dimensions.d, _WPos, _WRot);
+            d = sdPlane(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c), shape.dimensions.d, wPos, wRot);
             break;
         case 7:
-            d = sdHexPrism(p, float2(shape.dimensions.a, shape.dimensions.b), _WPos, _WRot);
+            d = sdHexPrism(p, float2(shape.dimensions.a, shape.dimensions.b), wPos, wRot);
             break;
         case 8:
-            d = sdTriPrism(p, float2(shape.dimensions.a, shape.dimensions.b), _WPos, _WRot);
+            d = sdTriPrism(p, float2(shape.dimensions.a, shape.dimensions.b), wPos, wRot);
             break;
         case 9:
             d = sdCapsule(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c),
 						float3(shape.dimensions.d, shape.dimensions.e, shape.dimensions.f),
-						shape.dimensions.g, _WPos, _WRot);
+						shape.dimensions.g, wPos, wRot);
             break;
         case 10:
-            d = sdInfiniteCylinder(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c), _WPos, _WRot);
+            d = sdInfiniteCylinder(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c), wPos, wRot);
             break;
         case 11:
-            d = sdBox(p, shape.dimensions.a, _WPos, _WRot);
+            d = sdBox(p, shape.dimensions.a, wPos, wRot);
             break;
         case 12:
-            d = sdRoundBox(p, shape.dimensions.a, shape.dimensions.b, _WPos, _WRot);
+            d = sdRoundBox(p, shape.dimensions.a, shape.dimensions.b, wPos, wRot);
             break;
         case 13:
-            d = sdRoundedCylinder(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, _WPos, _WRot);
+            d = sdRoundedCylinder(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, wPos, wRot);
             break;
         case 14:
-            d = sdCappedCone(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, _WPos, _WRot);
+            d = sdCappedCone(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, wPos, wRot);
             break;
         case 15:
-            d = sdBoxFrame(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c), shape.dimensions.d, _WPos, _WRot);
+            d = sdBoxFrame(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c), shape.dimensions.d, wPos, wRot);
             break;
         case 16:
-            d = sdSolidAngle(p, float2(shape.dimensions.a, shape.dimensions.b), shape.dimensions.c, _WPos, _WRot);
+            d = sdSolidAngle(p, float2(shape.dimensions.a, shape.dimensions.b), shape.dimensions.c, wPos, wRot);
             break;
         case 17:
-            d = sdCutSphere(p, shape.dimensions.a, shape.dimensions.b, _WPos, _WRot);
+            d = sdCutSphere(p, shape.dimensions.a, shape.dimensions.b, wPos, wRot);
             break;
         case 18:
-            d = sdCutHollowSphere(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, _WPos, _WRot);
+            d = sdCutHollowSphere(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, wPos, wRot);
             break;
         case 19:
-            d = sdDeathStar(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, _WPos, _WRot);
+            d = sdDeathStar(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, wPos, wRot);
             break;
         case 20:
-            d = sdRoundCone(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, _WPos, _WRot);
+            d = sdRoundCone(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, wPos, wRot);
             break;
         case 21:
-            d = sdEllipsoid(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c), _WPos, _WRot);
+            d = sdEllipsoid(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c), wPos, wRot);
             break;
         case 22:
-            d = sdRhombus(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, shape.dimensions.d, _WPos, _WRot);
+            d = sdRhombus(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, shape.dimensions.d, wPos, wRot);
             break;
         case 23:
-            d = sdOctahedron(p, shape.dimensions.a, _WPos, _WRot);
+            d = sdOctahedron(p, shape.dimensions.a, wPos, wRot);
             break;
         case 24:
-            d = sdPyramid(p, shape.dimensions.a, _WPos, _WRot);
+            d = sdPyramid(p, shape.dimensions.a, wPos, wRot);
             break;
         case 25:
             d = udTriangle(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c),
 						float3(shape.dimensions.d, shape.dimensions.e, shape.dimensions.f),
-						float3(shape.dimensions.g, shape.dimensions.h, shape.dimensions.i), _WPos, _WRot);
+						float3(shape.dimensions.g, shape.dimensions.h, shape.dimensions.i), wPos, wRot);
             break;
         case 26:
             d = udQuad(p, float3(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c),
 						float3(shape.dimensions.d, shape.dimensions.e, shape.dimensions.f),
 						float3(shape.dimensions.g, shape.dimensions.h, shape.dimensions.i),
-						float3(shape.dimensions.j, shape.dimensions.k, shape.dimensions.l), _WPos, _WRot);
+						float3(shape.dimensions.j, shape.dimensions.k, shape.dimensions.l), wPos, wRot);
             break;
         case 27:
-            d = sdFractal(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, _WPos, _WRot);
+            d = sdFractal(p, shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, wPos, wRot);
             break;
         case 28:
-            d = sdTesseract(p, float4(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, shape.dimensions.d), _WPos, _WRot);
+            d = sdTesseract(p, float4(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, shape.dimensions.d), wPos, wRot);
             break;
         case 29:
-            d = sdHyperSphere(p, shape.dimensions.a, _WPos, _WRot);
+            d = sdHyperSphere(p, shape.dimensions.a, wPos, wRot);
             break;
         case 30:
-            d = sdDuoCylinder(p, float2(shape.dimensions.a, shape.dimensions.b), _WPos, _WRot);
+            d = sdDuoCylinder(p, float2(shape.dimensions.a, shape.dimensions.b), wPos, wRot);
             break;
         case 31:
-            d = sdVerticalCapsule(p, shape.dimensions.a, shape.dimensions.b, _WPos, _WRot);
+            d = sdVerticalCapsule(p, shape.dimensions.a, shape.dimensions.b, wPos, wRot);
             break;
         case 32:
-            d = sdFiveCell(p, float4(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, shape.dimensions.d), _WPos, _WRot);
+            d = sdFiveCell(p, float4(shape.dimensions.a, shape.dimensions.b, shape.dimensions.c, shape.dimensions.d), wPos, wRot);
             break;
         case 33:
-            d = sdSixteenCell(p, shape.dimensions.a, _WPos, _WRot);
+            d = sdSixteenCell(p, shape.dimensions.a, wPos, wRot);
             break;
     }
     return d;
