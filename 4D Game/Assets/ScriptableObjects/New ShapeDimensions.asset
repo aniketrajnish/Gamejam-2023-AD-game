@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
   m_Name: New ShapeDimensions
   m_EditorClassIdentifier: 
-  sphereRadius: 1.3
+  sphereRadius: 0.92
   torusThickness: {x: 0.4, y: 0.1}
   cappedTorusRo: 0.25
   cappedTorusRi: 0.1

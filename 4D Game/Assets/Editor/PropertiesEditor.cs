@@ -7,12 +7,12 @@ public class PropertiesEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI(); 
+        base.OnInspectorGUI();
 
         RaymarchRenderer renderer = (RaymarchRenderer)target;
 
-        if (renderer.dimensions == null)        
-            return;        
+        if (renderer.dimensions == null)
+            return;
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Shape Dimensions", EditorStyles.boldLabel);
@@ -155,8 +155,35 @@ public class PropertiesEditor : Editor
                 EditorGUILayout.HelpBox("Select a shape to see properties", MessageType.Info);
                 break;
         }
-        EditorUtility.SetDirty(renderer);
-        EditorUtility.SetDirty(renderer.dimensions);
+
+        if (!PrefabUtility.IsPartOfPrefabAsset(renderer))
+        {
+            EditorUtility.SetDirty(renderer);
+            EditorUtility.SetDirty(renderer.dimensions);
+        }
+    }
+
+    void OnEnable()
+    {
+        EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        EditorApplication.quitting += OnQuitting;
+    }
+
+    void OnDisable()
+    {
+        EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+        EditorApplication.quitting -= OnQuitting;
+    }
+
+    private void OnPlayModeStateChanged(PlayModeStateChange state)
+    {
+        if (state == PlayModeStateChange.ExitingEditMode || state == PlayModeStateChange.ExitingPlayMode)
+            ((RaymarchRenderer)target).editorStateChange = true;
+    }
+
+    private void OnQuitting()
+    {
+        ((RaymarchRenderer)target).editorStateChange = true;
     }
 
     /*ShapeDimensions CreateShapeDimensionsAsset()
