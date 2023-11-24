@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.UIElements;
 
 public class CreatureController : MonoBehaviour
 {
@@ -18,11 +15,13 @@ public class CreatureController : MonoBehaviour
     private void Awake()
     {
         EventCenter.RegisterEvent<OnGameStateChange>(OnGameStateChange);
+        EventCenter.RegisterEvent<OnCollision4D>(OnCollision4D);
     }
 
     private void OnDestroy()
     {
         EventCenter.UnRegisterEvent<OnGameStateChange>(OnGameStateChange);
+        EventCenter.UnRegisterEvent<OnCollision4D>(OnCollision4D);
     }
 
     private void Update()
@@ -67,5 +66,10 @@ public class CreatureController : MonoBehaviour
                 CanMove = false;
                 break;
         }
+    }
+
+    private void OnCollision4D(OnCollision4D data)
+    {
+
     }
 }

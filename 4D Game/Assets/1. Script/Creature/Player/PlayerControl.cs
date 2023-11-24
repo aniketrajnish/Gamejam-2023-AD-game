@@ -10,7 +10,7 @@ public class PlayerControl : ICreatureControl
 
     public void ReadInput()
     { 
-        Direction = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal"));
+        Direction = new Vector3(Input.GetAxis("Vertical"), 0, -Input.GetAxis("Horizontal")).normalized;
         TurnDirection = Direction;
     }
 }

@@ -12,7 +12,7 @@ public class MapManager : SimpleSingleton<MapManager>
 {
     [SerializeField] private Tilemap tilemapPathLayer;
     [SerializeField] private Tilemap tilemapMiddleLayer;
-    [SerializeField] private Tilemap tilemapTopLayer;
+    [SerializeField] private Tilemap tilemapBottomLayer;
 
     [SerializeField] private GameObject nodePrefab;
     [SerializeField] private GameObject nodeContainer;

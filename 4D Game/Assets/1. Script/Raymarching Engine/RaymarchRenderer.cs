@@ -95,7 +95,7 @@ public class RaymarchRenderer : MonoBehaviour
     ShapeDimensions CloneShapeDimensionsAsset(ShapeDimensions originalAsset)
     {
         ShapeDimensions clonedAsset = Instantiate(originalAsset);
-        string folderPath = "Assets/ScriptableObjects";
+        string folderPath = "Assets/5. ScriptableObject/GeneratedShape";
 
         if (!System.IO.Directory.Exists(folderPath))
         {
@@ -116,7 +116,7 @@ public class RaymarchRenderer : MonoBehaviour
     {
         ShapeDimensions asset = ScriptableObject.CreateInstance<ShapeDimensions>();
 
-        string folderPath = "Assets/ScriptableObjects";
+        string folderPath = "Assets/5. ScriptableObject/GeneratedShape";
 
         if (!System.IO.Directory.Exists(folderPath))
         {

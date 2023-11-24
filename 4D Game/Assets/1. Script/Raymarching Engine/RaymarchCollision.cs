@@ -206,8 +206,9 @@ namespace Unity.Mathematics
 
                 if (colliderOut.dist < 0) //hit
                 {
-                    Debug.Log("Hit with: " + colliderOut.collider.name);
+                    //Debug.Log("Hit with: " + colliderOut.collider.name);
                     transform.Translate(ro[i].forward * colliderOut.dist * 1.5f, Space.World);
+                    EventCenter.PostEvent(new OnCollision4D(colliderOut.collider.gameObject));
                 }
             }
         }

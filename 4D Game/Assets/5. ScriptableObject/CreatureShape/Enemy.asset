@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
-  m_Name: New ShapeDimensions
+  m_Name: Enemy
   m_EditorClassIdentifier: 
-  sphereRadius: 2.01
+  sphereRadius: 0.5
   torusThickness: {x: 0.4, y: 0.1}
   cappedTorusRo: 0.25
   cappedTorusRi: 0.1
@@ -38,7 +38,7 @@ MonoBehaviour:
   roundCylRb: 0.1
   roundCylH: 0.25
   capConeH: 0.5
-  capConeR1: 0.5
+  capConeR1: 0.2
   capConeR2: 0.2
   boxFrameSize: {x: 0.5, y: 0.3, z: 0.2}
   boxFrameCavity: 0.1
@@ -49,9 +49,9 @@ MonoBehaviour:
   hollowSphereR: 0.35
   hollowSphereH: 0.05
   hollowSphereT: 0.05
-  deathStarRa: 0.5
-  deathStarRb: 0.35
-  deathStarD: 0.5
+  deathStarRa: 0.57
+  deathStarRb: 1.13
+  deathStarD: 1.44
   roundConeR1: 0.1
   roundConeR2: 0.25
   roundConeH: 0.4
@@ -69,9 +69,9 @@ MonoBehaviour:
   quadSideB: {x: 0.8, y: 0.2, z: 0}
   quadSideC: {x: 0.9, y: 0.3, z: 0.5}
   quadSideD: {x: 0.1, y: 0.2, z: 0.5}
-  fractalI: 10
-  fractalS: 1.25
-  fractalO: 2
+  fractalI: 13.05
+  fractalS: 2.05
+  fractalO: 1.16
   tesseractSize: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
   hyperSphereRadius: 0.5
   duoCylR1R2: {x: 0.5, y: 0.5}

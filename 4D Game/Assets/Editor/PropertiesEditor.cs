@@ -195,7 +195,7 @@ public class PropertiesEditor : Editor
     {
         ShapeDimensions asset = ScriptableObject.CreateInstance<ShapeDimensions>();
 
-        string folderPath = "Assets/ScriptableObjects";
+        string folderPath = "Assets/5. ScriptableObject/GeneratedShape";
 
         if (!System.IO.Directory.Exists(folderPath))
         {
