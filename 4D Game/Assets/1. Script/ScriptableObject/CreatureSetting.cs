@@ -17,13 +17,13 @@ public class CreatureSetting
     public CreatureType CreatureType;
 
     [Header("Stat")]
-    public float DefaultHealth;
+    public int DefaultHealth;
     public float Speed;
     public float TurnSpeed;
 
     public CreatureSetting() { }
 
-    public CreatureSetting(CreatureType type, float defaultHP, float speed, float turnSpeed)
+    public CreatureSetting(CreatureType type, int defaultHP, float speed, float turnSpeed)
     {
         CreatureType = type;
         DefaultHealth = defaultHP;

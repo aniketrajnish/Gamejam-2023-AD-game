@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class CreatureController : MonoBehaviour
 {
+    [SerializeField] private HealthBar healthBar;
     [SerializeField] private CreatureSettingSO creatureSettingSO;
 
     private CreatureSetting creatureSetting;
+    private CreatureStat creatureStat;
     private CreatureMovement creatureMovement;
     private ICreatureControl creatureControl;
+    private Timer invincibleTimer;
 
     public bool CanMove { get; private set; }
 
@@ -26,7 +29,13 @@ public class CreatureController : MonoBehaviour
 
     private void Update()
     {
-       if(CanMove)
+        if(creatureStat.Health <= 0)
+        {
+            CanMove = false;
+            Debug.Log("Dead");
+        }
+
+        if(CanMove)
         {
             creatureControl.ReadInput();
             creatureMovement.Move();
@@ -36,11 +45,13 @@ public class CreatureController : MonoBehaviour
     private void Init()
     {
         creatureSetting = creatureSettingSO.CreatureSetting.Clone();
+        creatureStat = new CreatureStat(creatureSetting.DefaultHealth, creatureSetting.Speed);
 
         switch (creatureSetting.CreatureType)
         {
             case CreatureType.Player:
                 creatureControl = new PlayerControl();
+                creatureStat.OnHealthChanged += healthBar.OnHealthChanged;
                 break;
             case CreatureType.Enemy:
                 EnemyControl enemyControl = new EnemyControl(transform);
@@ -52,6 +63,9 @@ public class CreatureController : MonoBehaviour
         }
 
         creatureMovement = new CreatureMovement(creatureControl, creatureSetting, transform);
+
+        invincibleTimer = TimerManager.Instance.GetTimer();
+        invincibleTimer.gameObject.SetActive(true);
     }
 
     private void OnGameStateChange(OnGameStateChange data)
@@ -70,6 +84,21 @@ public class CreatureController : MonoBehaviour
 
     private void OnCollision4D(OnCollision4D data)
     {
-
+        if (creatureSetting.CreatureType == CreatureType.Player)
+        {
+            if (data.collidedObject.tag == "Enemy" && invincibleTimer.IsFinished())
+            {
+                creatureStat.ModifyHealth(-1);
+                invincibleTimer.StartTimer(1.5f);
+                Debug.Log("Ouch: " + creatureStat.Health);
+            }
+        }
+        else
+        {
+            if(data.collidedObject == gameObject)
+            {
+                
+            }
+        }
     }
 }

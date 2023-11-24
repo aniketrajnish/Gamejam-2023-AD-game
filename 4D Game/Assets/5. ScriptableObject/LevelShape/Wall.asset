@@ -40,8 +40,8 @@ MonoBehaviour:
   capConeH: 0.5
   capConeR1: 0.5
   capConeR2: 0.2
-  boxFrameSize: {x: 0.5, y: 0.3, z: 0.2}
-  boxFrameCavity: 0.1
+  boxFrameSize: {x: 1, y: 1, z: 1}
+  boxFrameCavity: 0.5
   solidAngleC: {x: 0.25, y: 0.25}
   solidAngleRa: 0.5
   cutSphereR: 0.25

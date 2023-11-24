@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private float time = 0;
 
     [SerializeField] private bool isRunning = false;
-    [SerializeField] private bool isFinished = false;
+    [SerializeField] private bool isFinished = true;
 
     private Coroutine timerRoutine;
 
