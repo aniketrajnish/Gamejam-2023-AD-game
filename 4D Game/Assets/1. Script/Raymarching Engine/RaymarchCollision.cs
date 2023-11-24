@@ -147,7 +147,7 @@ namespace Unity.Mathematics
 
             return Camera.main.farClipPlane;
         }
-        public float DistanceField(Vector3 p)
+        public RaymarchCollisionOutput DistanceField(Vector3 p)
         {
             float mod_x, mod_y, mod_z;
 
@@ -159,6 +159,7 @@ namespace Unity.Mathematics
                 mod_z = sdFMod(ref p.z, raymarcher.loop.z);
 
             float sigmaDist = Mathf.Infinity;
+            RaymarchRenderer deltaCollider = null;
 
             foreach (var rend in raymarcher.renderers)
             {
@@ -166,17 +167,32 @@ namespace Unity.Mathematics
                 switch (rend.operation)
                 {
                     case Operation.Union:
-                        sigmaDist = sdUnion(sigmaDist, deltaDist);
+                        //sigmaDist = sdUnion(sigmaDist, deltaDist);
+                        if (deltaDist < sigmaDist)
+                        {
+                            sigmaDist = deltaDist;
+                            deltaCollider = rend;
+                        }
                         break;
                     case Operation.Intersect:
                         sigmaDist = sdIntersection(sigmaDist, deltaDist);
+                        if (deltaDist < sigmaDist)
+                        {
+                            sigmaDist = deltaDist;
+                            deltaCollider = rend;
+                        }
                         break;
                     case Operation.Subtract:
                         sigmaDist = sdSubtraction(sigmaDist, deltaDist);
+                        if (deltaDist < sigmaDist)
+                        {
+                            sigmaDist = deltaDist;
+                            deltaCollider = rend;
+                        }
                         break;
                 }
             }
-            return sigmaDist;
+            return new RaymarchCollisionOutput(sigmaDist, deltaCollider);
         }
         void CheckRaymarchDist(Transform[] ro)
         {
@@ -185,18 +201,14 @@ namespace Unity.Mathematics
             {
                 Vector3 p = ro[i].position;
                 //check hit
-                float d = DistanceField(p);
+                RaymarchCollisionOutput colliderOut = DistanceField(p);
 
 
-                if (d < 0) //hit
+                if (colliderOut.dist < 0) //hit
                 {
-                    Debug.Log("hit" + i);
-                    //collision
-                    transform.Translate(ro[i].forward * d * 1.5f, Space.World);
-
+                    Debug.Log("Hit with: " + colliderOut.collider.name);
+                    transform.Translate(ro[i].forward * colliderOut.dist * 1.5f, Space.World);
                 }
-
-
             }
         }
 
@@ -206,12 +218,26 @@ namespace Unity.Mathematics
             Vector3 p = transform.position;
             //check hit
 
-            float d = DistanceField(p);
+            RaymarchCollisionOutput colliderOut = DistanceField(p);
+
+            float d = colliderOut.dist;
+
             d = Mathf.Min(d, maxMovement);
             //Debug.Log(d);
             transform.Translate(Vector3.down * d, Space.World);
         }
 
+    }
+}
+public class RaymarchCollisionOutput
+{
+    public float dist;
+    public RaymarchRenderer collider;
+
+    public RaymarchCollisionOutput(float _dist, RaymarchRenderer _collider)
+    {
+        this.dist = _dist;
+        this.collider = _collider;
     }
 }
 

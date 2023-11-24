@@ -77,7 +77,7 @@ namespace Unity.Mathematics
         {
             float4 p4 = new float4(p, wPos);
 
-            wRot *= math.radians(1f); // Convert degrees to radians
+            wRot *= math.radians(1f); 
 
             p4.xz = mul(p4.xz, new float2x2(cos(wRot.y), sin(wRot.y), -sin(wRot.y), cos(wRot.y)));
             p4.yz = mul(p4.yz, new float2x2(cos(wRot.x), -sin(wRot.x), sin(wRot.x), cos(wRot.x)));
