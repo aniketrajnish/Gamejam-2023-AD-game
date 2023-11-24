@@ -11,6 +11,11 @@ public class PropertiesEditor : Editor
 
         RaymarchRenderer renderer = (RaymarchRenderer)target;
 
+        /*if (renderer.dimensions == null)
+            return;*/
+        if (GUILayout.Button("Create New Dimensions"))        
+            renderer.dimensions = CreateShapeDimensionsAsset();        
+
         if (renderer.dimensions == null)
             return;
 
@@ -186,21 +191,17 @@ public class PropertiesEditor : Editor
         ((RaymarchRenderer)target).editorStateChange = true;
     }
 
-    /*ShapeDimensions CreateShapeDimensionsAsset()
+    ShapeDimensions CreateShapeDimensionsAsset()
     {
         ShapeDimensions asset = ScriptableObject.CreateInstance<ShapeDimensions>();
-        string path = AssetDatabase.GetAssetPath(Selection.activeObject);
 
-        if (string.IsNullOrEmpty(path))
-        {
-            path = "Assets";
-        }
-        else if (System.IO.Path.GetExtension(path) != "")
-        {
-            path = path.Replace(System.IO.Path.GetFileName(AssetDatabase.GetAssetPath(Selection.activeObject)), "");
-        }
+        string folderPath = "Assets/ScriptableObjects";
 
-        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/New " + typeof(ShapeDimensions).ToString() + ".asset");
+        if (!System.IO.Directory.Exists(folderPath))
+        {
+            AssetDatabase.CreateFolder("Assets", "ScriptableObjects");
+        }
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(folderPath + "/New " + typeof(ShapeDimensions).ToString() + ".asset");
 
         AssetDatabase.CreateAsset(asset, assetPathAndName);
         AssetDatabase.SaveAssets();
@@ -209,6 +210,6 @@ public class PropertiesEditor : Editor
         Selection.activeObject = asset;
 
         return asset;
-    }*/
+    }
 }
 #endif

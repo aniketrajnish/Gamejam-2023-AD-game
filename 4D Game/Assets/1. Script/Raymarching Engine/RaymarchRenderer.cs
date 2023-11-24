@@ -61,13 +61,13 @@ public class RaymarchRenderer : MonoBehaviour
     public float blendFactor;
 
     public ShapeDimensions dimensions;
-    void OnValidate()
+/*    void OnValidate()
     {
 #if UNITY_EDITOR
         // Delay the execution of the asset check and creation to avoid issues during OnValidate.
         EditorApplication.delayCall += CheckAndCreateAsset;
 #endif
-    }
+    }*/
 #if UNITY_EDITOR
     void CheckAndCreateAsset()
     {
