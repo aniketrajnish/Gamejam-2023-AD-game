@@ -46,7 +46,7 @@ public class NodeTile : MonoBehaviour
        
     }
 
-    public bool CheckIsOccupied(GameObject obj)
+    public bool CheckIsOccupiedByOther(GameObject obj)
     {
         if(IsOccupied && Occupier != obj)
         {

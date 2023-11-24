@@ -12,7 +12,7 @@ public class PathFinder
     {
         List<NodeTile> openList = new List<NodeTile>();
         List<NodeTile> closedList = new List<NodeTile>();
-        NodeTile currentOverlayTile = null;
+        NodeTile currentNodeTile = null;
               
         start.G = 0;
         start.H = GetDistance(start, end, diagonal);
@@ -26,13 +26,13 @@ public class PathFinder
             {
                 foreach (NodeTile candidate in openList)
                 {
-                    if (currentOverlayTile != null)
+                    if (currentNodeTile != null)
                     {
-                        NodeTile preTile = currentOverlayTile.Previous;
+                        NodeTile preTile = currentNodeTile.Previous;
                         if (preTile != null)
                         {
-                            Vector3 curDistance = candidate.GridLocation - currentOverlayTile.GridLocation;
-                            Vector3 preDistance = currentOverlayTile.GridLocation - preTile.GridLocation;
+                            Vector3 curDistance = candidate.GridLocation - currentNodeTile.GridLocation;
+                            Vector3 preDistance = currentNodeTile.GridLocation - preTile.GridLocation;
                             Vector3 curDirection = curDistance.normalized;
                             Vector3 preDirection = preDistance.normalized;
 
@@ -45,27 +45,27 @@ public class PathFinder
                 }
             }          
 
-            currentOverlayTile = openList.OrderBy(x => x.F).First();
+            currentNodeTile = openList.OrderBy(x => x.F).First();
 
-            if (currentOverlayTile == end)
+            if (currentNodeTile == end)
             {
                 return GetFinishedList(start, end);
             }
 
-            openList.Remove(currentOverlayTile);
-            closedList.Add(currentOverlayTile);
+            openList.Remove(currentNodeTile);
+            closedList.Add(currentNodeTile);
 
-            foreach (var tile in GetNeightbourOverlayTiles(currentOverlayTile, diagonal))
+            foreach (var tile in GetNeightbourNodeTiles(currentNodeTile, diagonal))
             {
-                if ((blockable && tile.IsBlocked) || closedList.Contains(tile) )
+                if ((blockable && tile.IsBlocked) || tile.IsOccupied || closedList.Contains(tile))
                 {
                     continue;
                 }
 
-                int tentativeGCost = currentOverlayTile.G + GetDistance(currentOverlayTile, tile, diagonal);
+                int tentativeGCost = currentNodeTile.G + GetDistance(currentNodeTile, tile, diagonal);
                 if (tentativeGCost < tile.G || !openList.Contains(tile))
                 {
-                    tile.Previous = currentOverlayTile;
+                    tile.Previous = currentNodeTile;
                     tile.G = GetDistance(start, tile, diagonal);
                     tile.H = GetDistance(end, tile, diagonal);
 
@@ -80,7 +80,7 @@ public class PathFinder
         return new List<NodeTile>();
     }
 
-    public List<NodeTile> GetNeightbourOverlayTiles(NodeTile currentOverlayTile, bool diagonal = false)
+    public List<NodeTile> GetNeightbourNodeTiles(NodeTile currentNodeTile, bool diagonal = false)
     {
         var map = MapManager.Instance.Map;
 
@@ -89,8 +89,8 @@ public class PathFinder
 
         //Top
         Vector2Int locationToCheck = new Vector2Int(
-            currentOverlayTile.GridLocation.x,
-            currentOverlayTile.GridLocation.y + 1
+            currentNodeTile.GridLocation.x,
+            currentNodeTile.GridLocation.y + 1
         );
         if (map.ContainsKey(locationToCheck))
         {
@@ -101,8 +101,8 @@ public class PathFinder
 
         //Right
         locationToCheck = new Vector2Int(
-            currentOverlayTile.GridLocation.x + 1,
-            currentOverlayTile.GridLocation.y
+            currentNodeTile.GridLocation.x + 1,
+            currentNodeTile.GridLocation.y
         );
         if (map.ContainsKey(locationToCheck))
         {
@@ -113,8 +113,8 @@ public class PathFinder
 
         //Bottom
         locationToCheck = new Vector2Int(
-            currentOverlayTile.GridLocation.x,
-            currentOverlayTile.GridLocation.y - 1
+            currentNodeTile.GridLocation.x,
+            currentNodeTile.GridLocation.y - 1
         );
         if (map.ContainsKey(locationToCheck))
         {
@@ -125,8 +125,8 @@ public class PathFinder
 
         //Left
         locationToCheck = new Vector2Int(
-            currentOverlayTile.GridLocation.x - 1,
-            currentOverlayTile.GridLocation.y
+            currentNodeTile.GridLocation.x - 1,
+            currentNodeTile.GridLocation.y
         );
         if (map.ContainsKey(locationToCheck))
         {
@@ -139,8 +139,8 @@ public class PathFinder
         {
             //Top right
             locationToCheck = new Vector2Int(
-                currentOverlayTile.GridLocation.x + 1,
-                currentOverlayTile.GridLocation.y + 1
+                currentNodeTile.GridLocation.x + 1,
+                currentNodeTile.GridLocation.y + 1
             );
             if (map.ContainsKey(locationToCheck))
             {
@@ -154,8 +154,8 @@ public class PathFinder
 
             //Top left
             locationToCheck = new Vector2Int(
-                currentOverlayTile.GridLocation.x - 1,
-                currentOverlayTile.GridLocation.y + 1
+                currentNodeTile.GridLocation.x - 1,
+                currentNodeTile.GridLocation.y + 1
             );
             if (map.ContainsKey(locationToCheck))
             {
@@ -169,8 +169,8 @@ public class PathFinder
 
             //Bottom right
             locationToCheck = new Vector2Int(
-                currentOverlayTile.GridLocation.x + 1,
-                currentOverlayTile.GridLocation.y - 1
+                currentNodeTile.GridLocation.x + 1,
+                currentNodeTile.GridLocation.y - 1
             );
             if (map.ContainsKey(locationToCheck))
             {
@@ -185,8 +185,8 @@ public class PathFinder
 
             //Bottom left
             locationToCheck = new Vector2Int(
-                currentOverlayTile.GridLocation.x - 1,
-                currentOverlayTile.GridLocation.y - 1
+                currentNodeTile.GridLocation.x - 1,
+                currentNodeTile.GridLocation.y - 1
             );
             if (map.ContainsKey(locationToCheck))
             {
