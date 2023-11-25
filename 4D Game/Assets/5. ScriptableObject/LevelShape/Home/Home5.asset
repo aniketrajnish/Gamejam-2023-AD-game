@@ -40,8 +40,8 @@ MonoBehaviour:
   capConeH: 0.5
   capConeR1: 0.5
   capConeR2: 0.2
-  boxFrameSize: {x: 0.5, y: 0.3, z: 0.2}
-  boxFrameCavity: 0.1
+  boxFrameSize: {x: 3.01, y: 2.25, z: 1.62}
+  boxFrameCavity: 0.36
   solidAngleC: {x: 0.25, y: 0.25}
   solidAngleRa: 0.5
   cutSphereR: 0.25
@@ -72,7 +72,7 @@ MonoBehaviour:
   fractalI: 10
   fractalS: 1.25
   fractalO: 2
-  tesseractSize: {x: 1.5, y: 1.1, z: 1.1, w: 1}
+  tesseractSize: {x: 3.91, y: 1.65, z: 1.1, w: 1}
   hyperSphereRadius: 0.5
   duoCylR1R2: {x: 0.5, y: 0.5}
   vertCapsuleH: 0.5

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq.Expressions;
 
 [ExecuteInEditMode]
 public class Raymarcher : SceneViewFilter
@@ -13,13 +14,25 @@ public class Raymarcher : SceneViewFilter
     ComputeBuffer shapeBuffer;
     Material raymarchMaterial;
     private Camera _cam;
+    [Header("General Settings")]
     [SerializeField] Shader shader;
     [SerializeField] Light sun;
+    [SerializeField] public Vector3 loop;
+    [Header("4D Settings")]
     [SerializeField] public float wPos;
     [SerializeField] public Vector3 wRot;
-    [SerializeField] public Vector3 loop;
-    [SerializeField] bool shadow;
     [SerializeField] public bool isWOverride;
+    [Header("Light Settings")]
+    [SerializeField] bool isLit;
+    [SerializeField] bool isShadowHard = true;
+    [SerializeField] bool isAO;
+    [SerializeField] Color lightCol;
+    [SerializeField] public float lightIntensity, shadowIntensity, shadowMin, shadowMax, shadowSmooth, AOStep, AOIntensity;
+    [SerializeField] int AOIteration;
+    [Header("Render Settings")]
+    [SerializeField] float maxSteps = 225;
+    [SerializeField] float maxDist = 1000;
+    [SerializeField] float surfDist = .01f;
     public Material _raymarchMaterial
     {
         get
@@ -130,20 +143,56 @@ public class Raymarcher : SceneViewFilter
             _raymarchMaterial.SetMatrix("_CamToWorld", _camera.cameraToWorldMatrix);
             _raymarchMaterial.SetVector("_Loop", loop);
             _raymarchMaterial.SetVector("_LightDir", sun ? sun.transform.forward : Vector3.down);
+            _raymarchMaterial.SetFloat("max_steps", maxSteps);
+            _raymarchMaterial.SetFloat("max_dist", maxDist);
+            _raymarchMaterial.SetFloat("surf_dist", surfDist);
+            _raymarchMaterial.SetColor("_LightCol", lightCol);
+            _raymarchMaterial.SetFloat("_LightIntensity", lightIntensity);
+            _raymarchMaterial.SetFloat("_ShadowIntensity", shadowIntensity);
+            _raymarchMaterial.SetFloat("_ShadowMin", shadowMin);
+            _raymarchMaterial.SetFloat("_ShadowMax", shadowMax);
+            _raymarchMaterial.SetFloat("_ShadowSmooth", shadowSmooth);
+            _raymarchMaterial.SetFloat("_AOStep", AOStep);
+            _raymarchMaterial.SetFloat("_AOIntensity", AOIntensity);
+            _raymarchMaterial.SetInt("_AOIteration", AOIteration);
 
-            if (shadow)
-                _raymarchMaterial.SetInt("_Shadow", 1);
+            if (isLit)
+                _raymarchMaterial.SetInt("_isLit", 1);
             else
-                _raymarchMaterial.SetInt("_Shadow", 0);
+                _raymarchMaterial.SetInt("_isLit", 0);
 
             if (isWOverride)
                 _raymarchMaterial.SetInt("_isWOverride", 1);
             else
                 _raymarchMaterial.SetInt("_isWOverride", 0);
 
+            if (isShadowHard)
+                _raymarchMaterial.SetInt("_isShadowHard", 1);
+            else
+                _raymarchMaterial.SetInt("_isShadowHard", 0);
+
+            if (isAO)
+                _raymarchMaterial.SetInt("_isAO", 1);
+            else
+                _raymarchMaterial.SetInt("_isAO", 0);
+
+            /* SetShaderBoolean(() => isLit);
+             SetShaderBoolean(() => isWOverride);
+             SetShaderBoolean(() => isShadowHard);*/
+
             disposable.Add(shapeBuffer);
         }
     }
+    void SetShaderBoolean(Expression<Func<bool>> expr)
+    {
+        var body = (MemberExpression)expr.Body;
+        string variableName = body.Member.Name;
+        string propertyName = "_" + variableName;
+
+        bool flag = expr.Compile().Invoke();
+        _raymarchMaterial.SetInt(propertyName, flag ? 1 : 0);
+    }
+
     private Matrix4x4 CamFrustrum(Camera cam)
     {
         Matrix4x4 frustrum = Matrix4x4.identity;

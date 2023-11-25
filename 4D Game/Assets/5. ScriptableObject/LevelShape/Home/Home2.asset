@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
   m_Name: Home2
   m_EditorClassIdentifier: 
-  sphereRadius: 1
+  sphereRadius: 2
   torusThickness: {x: 0.4, y: 0.1}
   cappedTorusRo: 0.25
   cappedTorusRi: 0.1
   cappedTorusThickness: {x: 0.1, y: 0.1}
-  linkSeparation: 0.13
+  linkSeparation: 8.38
   linkRadius: 0.2
   linkThickness: 0.09
   coneTan: {x: 1, y: 2}
@@ -32,8 +32,8 @@ MonoBehaviour:
   capsuleR: 0.25
   infCylC: {x: 0, y: 0.25, z: 0.25}
   boxSize: 0.25
-  roundBoxSize: 0.3
-  roundBoxRoundFactor: 0.1
+  roundBoxSize: 8.09
+  roundBoxRoundFactor: 1.95
   roundCylRa: 0.25
   roundCylRb: 0.1
   roundCylH: 0.25

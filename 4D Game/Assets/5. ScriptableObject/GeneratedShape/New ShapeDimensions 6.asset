@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
-  m_Name: Home4
+  m_Name: New ShapeDimensions 6
   m_EditorClassIdentifier: 
-  sphereRadius: 0.5
-  torusThickness: {x: 3, y: 1}
+  sphereRadius: 1.24
+  torusThickness: {x: 0.4, y: 0.1}
   cappedTorusRo: 0.25
   cappedTorusRi: 0.1
   cappedTorusThickness: {x: 0.1, y: 0.1}
@@ -23,7 +23,7 @@ MonoBehaviour:
   coneTan: {x: 1, y: 2}
   coneHeight: 1
   infConeTan: {x: 0.1, y: 0.1}
-  planeNormal: {x: 0.24, y: 5.55, z: 0.17}
+  planeNormal: {x: 0, y: 0.5, z: 0.5}
   planeDistance: 1
   hexPrismH: {x: 0.25, y: 0.25}
   triPrismH: {x: 0.25, y: 0.25}
@@ -31,7 +31,7 @@ MonoBehaviour:
   capsuleB: {x: 0.1, y: 0.25, z: 0.25}
   capsuleR: 0.25
   infCylC: {x: 0, y: 0.25, z: 0.25}
-  boxSize: 4.09
+  boxSize: 0.25
   roundBoxSize: 0.3
   roundBoxRoundFactor: 0.1
   roundCylRa: 0.25
@@ -72,7 +72,7 @@ MonoBehaviour:
   fractalI: 10
   fractalS: 1.25
   fractalO: 2
-  tesseractSize: {x: 9.22, y: 1, z: 10, w: 4}
+  tesseractSize: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
   hyperSphereRadius: 0.5
   duoCylR1R2: {x: 0.5, y: 0.5}
   vertCapsuleH: 0.5
