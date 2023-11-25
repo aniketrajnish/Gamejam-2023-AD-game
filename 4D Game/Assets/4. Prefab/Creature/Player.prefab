@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 730049183140908583}
   - component: {fileID: 1715728335577494451}
   - component: {fileID: 4115274400009180560}
+  - component: {fileID: 6802950387602119181}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -321,6 +322,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2601584246461839619}
   creatureSettingSO: {fileID: 11400000, guid: 0da85e12323db544fa60882059b668df, type: 2}
+--- !u!114 &6802950387602119181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4521185956813406040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd61f77e909d6ca4f9b8a9e469b22d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5526403453153789726
 GameObject:
   m_ObjectHideFlags: 0

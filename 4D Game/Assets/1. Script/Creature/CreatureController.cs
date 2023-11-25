@@ -63,7 +63,6 @@ public class CreatureController : MonoBehaviour
         }
 
         creatureMovement = new CreatureMovement(creatureControl, creatureSetting, transform);
-
         invincibleTimer = TimerManager.Instance.GetTimer();
         invincibleTimer.gameObject.SetActive(true);
     }
@@ -88,17 +87,15 @@ public class CreatureController : MonoBehaviour
         {
             if (data.collidedObject.tag == "Enemy" && invincibleTimer.IsFinished())
             {
-                creatureStat.ModifyHealth(-1);
-                invincibleTimer.StartTimer(1.5f);
-                Debug.Log("Ouch: " + creatureStat.Health);
+                Hurt();
             }
         }
-        else
-        {
-            if(data.collidedObject == gameObject)
-            {
-                
-            }
-        }
+    }
+
+    private void Hurt()
+    {
+        creatureStat.ModifyHealth(-1);
+        invincibleTimer.StartTimer(1.5f);
+        Debug.Log("Ouch: " + creatureStat.Health);
     }
 }

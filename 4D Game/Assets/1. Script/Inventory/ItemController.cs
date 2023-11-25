@@ -12,27 +12,37 @@ public class ItemController : MonoBehaviour
     [SerializeField] private float rotateSpeed4DModZ = 1f;
     [SerializeField] private float rotateSpeed4DMax = 50f;
     [SerializeField] private ItemSettingSO ItemSettingSO;
+    [SerializeField] private GameObject itemShape;
 
     private ItemSetting itemSetting;
-
-    private void Awake()
-    {
-        EventCenter.RegisterEvent<OnCollision4D>(OnCollision4D);
-    }
+    private Timer respawnTimer;
 
     private void Start()
     {
         itemSetting = ItemSettingSO.ItemSetting.Clone();
-    }
-
-    private void OnDestroy()
-    {
-        EventCenter.UnRegisterEvent<OnCollision4D>(OnCollision4D);
+        respawnTimer = TimerManager.Instance.GetTimer();
+        respawnTimer.gameObject.SetActive(true);
     }
 
     void Update()
     {
         Rotating();
+        Respawn();
+    }
+
+    public ItemSetting PickUpItem()
+    {
+        itemShape.SetActive(false);
+        respawnTimer.StartTimer(itemSetting.RespawnTime);
+        return itemSetting;
+    }
+
+    private void Respawn()
+    {
+        if(respawnTimer.IsFinished())
+        {
+            itemShape.SetActive(true);
+        }
     }
 
     private void Rotating()
@@ -49,7 +59,7 @@ public class ItemController : MonoBehaviour
             case ItemType.Dimension:
                 raymarchRenderer.rotW.x += rotateSpeed4D * rotateSpeed4DModX * Time.deltaTime;
                 //raymarchRenderer.rotW.y += rotateSpeed4D * rotateSpeed4DModY * Time.deltaTime;
-                //raymarchRenderer.rotW.z += -rotateSpeed4D * rotateSpeed4DModZ * Time.deltaTime;
+                raymarchRenderer.rotW.z += rotateSpeed4D * rotateSpeed4DModZ * Time.deltaTime;
                 break;
         }
 
@@ -71,10 +81,5 @@ public class ItemController : MonoBehaviour
             rotateSpeed4DModZ *= -1;
         }
            
-    }
-
-    private void OnCollision4D(OnCollision4D data)
-    {
-
     }
 }

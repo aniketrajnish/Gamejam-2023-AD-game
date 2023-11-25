@@ -16,4 +16,5 @@ MonoBehaviour:
     ID: 0
     Name: Attack
     Type: 0
-    Value: 0
+    Value: 10
+    RespawnTime: 30

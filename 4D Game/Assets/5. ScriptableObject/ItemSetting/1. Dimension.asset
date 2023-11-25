@@ -17,3 +17,4 @@ MonoBehaviour:
     Name: Dimension
     Type: 1
     Value: 0
+    RespawnTime: 15
