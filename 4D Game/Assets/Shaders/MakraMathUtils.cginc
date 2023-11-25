@@ -49,3 +49,8 @@ float4 rotWposW(float3 p, float wPos, float3 wRot)
     p4.yw = mul(p4.yw, float2x2(cos(wRot.y), -sin(wRot.y), sin(wRot.y), cos(wRot.y)));
     return p4;
 }
+
+float3 normalizeF3(float3 f)
+{
+    return (f * 0.5) + 0.5;
+}
