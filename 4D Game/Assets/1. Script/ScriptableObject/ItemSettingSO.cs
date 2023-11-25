@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemSetting", menuName = "ScriptableObjects/ItemSettings", order = 1)]
 public class ItemSettingSO : ScriptableObject
 {
-    public ItemSetting ItemSettingList;
+    public ItemSetting ItemSetting;
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d4642fa48de54142a89d48a15154bdf, type: 3}
   m_Name: 1. Dimension
   m_EditorClassIdentifier: 
-  ItemSettingList:
+  ItemSetting:
     ID: 1
     Name: Dimension
     Type: 1
-    Value: 10
+    Value: 0
