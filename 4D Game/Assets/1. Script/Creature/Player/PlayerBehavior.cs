@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    private CreatureSetting creatureSetting;
+    [SerializeField] private HealthBar healthBar;
+
     private Inventory inventory;
     private Timer attackTimer;
+    private Timer invincibleTimer;
     private bool isAttacking = false;
     private bool canChangeDimension = false;
+    private bool isInit = false;
 
+    private CreatureSetting creatureSetting;
+    private CreatureStat creatureStat;
     private ItemSetting currentAttackItem;
     private ItemSetting currentDimensionItem;
 
@@ -21,23 +26,27 @@ public class PlayerBehavior : MonoBehaviour
     {
         inventory = new Inventory();
         attackTimer = TimerManager.Instance.GetTimer();
+        attackTimer.gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        if (attackTimer.IsFinished() && isAttacking)
+        if (isInit)
         {
-            isAttacking = false;
-            inventory.RemoveItem(currentAttackItem);
-            Debug.Log("Attack Finished");
-        }
+            if (attackTimer.IsFinished() && isAttacking)
+            {
+                isAttacking = false;
+                inventory.RemoveItem(currentAttackItem);
+                Debug.Log("Attack Finished");
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canChangeDimension)
-        {
-            canChangeDimension = false;
-            inventory.RemoveItem(currentDimensionItem);
-            Debug.Log("Change dimension");
-        }
+            if (Input.GetKeyDown(KeyCode.Space) && canChangeDimension)
+            {
+                canChangeDimension = false;
+                inventory.RemoveItem(currentDimensionItem);
+                Debug.Log("Change dimension");
+            }
+        }     
     }
 
     private void OnDestroy()
@@ -45,17 +54,16 @@ public class PlayerBehavior : MonoBehaviour
         EventCenter.UnRegisterEvent<OnCollision4D>(OnCollision4D);
     }
 
-    private void OnCollision4D(OnCollision4D data)
+    public void Init(CreatureSetting setting, CreatureStat stat)
     {
-        if (data.collidedObject.tag == "Item")
-        {
-            ItemController itemController
-                = data.collidedObject.GetComponentInParent<ItemController>();
-            if (itemController != null)
-            {
-                ActivateItem(itemController);
-            }
-        }
+        creatureSetting = setting;
+        creatureStat = stat;
+        creatureStat.OnHealthChanged += healthBar.OnHealthChanged;
+
+        invincibleTimer = TimerManager.Instance.GetTimer();
+        invincibleTimer.gameObject.SetActive(true);
+
+        isInit = true;
     }
 
     private void ActivateItem(ItemController itemController)
@@ -75,5 +83,36 @@ public class PlayerBehavior : MonoBehaviour
         }
 
         Debug.Log("Pick up: " + item.Name);
+    }
+
+    private void OnCollision4D(OnCollision4D data)
+    {
+        if(creatureSetting.CreatureType == CreatureType.Player)
+        {
+            if (data.collidedObject.tag == "Item")
+            {
+                ItemController itemController
+                    = data.collidedObject.GetComponentInParent<ItemController>();
+                if (itemController != null)
+                {
+                    ActivateItem(itemController);
+                }
+            }
+
+            if (data.collidedObject.tag == "Enemy" && invincibleTimer.IsFinished())
+            {
+                if (!isAttacking)
+                {
+                    Hurt();
+                }
+            }
+        }
+    }
+
+    private void Hurt()
+    {
+        creatureStat.ModifyHealth(-1);
+        invincibleTimer.StartTimer(1.5f);
+        Debug.Log("Ouch: " + creatureStat.Health);
     }
 }
