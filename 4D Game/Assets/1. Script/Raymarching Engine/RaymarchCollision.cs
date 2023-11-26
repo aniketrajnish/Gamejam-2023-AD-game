@@ -13,6 +13,19 @@ namespace Unity.Mathematics
         [SerializeField] float maxMovement = 1f;
         [SerializeField] Transform[] bounds;
         Raymarcher raymarcher;
+
+        private bool isDimesionChanging = false;    
+
+        private void Awake()
+        {
+            EventCenter.RegisterEvent<OnDimensionChanging>(OnDimesionChanging);
+        }
+
+        private void OnDestroy()
+        {
+            EventCenter.UnRegisterEvent<OnDimensionChanging>(OnDimesionChanging);
+        }
+
         private void Start()
         {
             raymarcher = Camera.main.GetComponent<Raymarcher>();
@@ -207,8 +220,11 @@ namespace Unity.Mathematics
                 if (colliderOut.dist < 0) //hit
                 {
                     //Debug.Log("Hit with: " + colliderOut.collider.name);
-                    transform.Translate(ro[i].forward * colliderOut.dist * 1.5f, Space.World);
-                    EventCenter.PostEvent(new OnCollision4D(colliderOut.collider.gameObject));
+                    if (!isDimesionChanging)
+                    {
+                        transform.Translate(ro[i].forward * colliderOut.dist * 1.5f, Space.World);
+                        EventCenter.PostEvent(new OnCollision4D(colliderOut.collider.gameObject));
+                    }
                 }
             }
         }
@@ -225,9 +241,15 @@ namespace Unity.Mathematics
 
             d = Mathf.Min(d, maxMovement);
             //Debug.Log(d);
-            transform.Translate(Vector3.down * d, Space.World);
+
+            if(!isDimesionChanging)
+                transform.Translate(Vector3.down * d, Space.World);
         }
 
+        private void OnDimesionChanging(OnDimensionChanging data)
+        {
+            isDimesionChanging = data.isChanging;
+        }
     }
 }
 public class RaymarchCollisionOutput

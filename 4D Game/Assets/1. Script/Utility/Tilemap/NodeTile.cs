@@ -18,7 +18,7 @@ public class NodeTile : MonoBehaviour
     public Vector3Int GridLocation;
 
     public GameObject Occupier { get;  private set; }
-    public bool IsOccupied { get; private set; }
+    public bool IsOccupied;
 
     private void Start()
     {

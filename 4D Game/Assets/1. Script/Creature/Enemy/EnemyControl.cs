@@ -34,6 +34,8 @@ public class EnemyControl : ICreatureControl
         waitTimer = TimerManager.Instance.GetTimer();
         waitTimer.gameObject.SetActive(true);
 
+        EventCenter.RegisterEvent<OnEnemyDeath>(OnEnemyDeath);
+
         UpdateCurrentNode();
         FindTargetNode();
     }
@@ -146,6 +148,16 @@ public class EnemyControl : ICreatureControl
         {
             waitTimer.StartTimer(time);
             isWaiting = true;
+        }
+    }
+
+    private void OnEnemyDeath(OnEnemyDeath data)
+    {
+        if(data.DeadEnemy == currentTransform.gameObject)
+        {
+            previousNode.MarkOccupied(currentTransform.gameObject, false);
+            currentNode.MarkOccupied(currentTransform.gameObject, false);
+            EventCenter.UnRegisterEvent<OnEnemyDeath>(OnEnemyDeath);
         }
     }
 }

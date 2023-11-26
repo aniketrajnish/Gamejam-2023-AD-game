@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &28188111741105455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 467680807797761387}
+  - component: {fileID: 2373205820385986017}
+  m_Layer: 0
+  m_Name: CoreShape
+  m_TagString: Item
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &467680807797761387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28188111741105455}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 592936826611426320}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2373205820385986017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28188111741105455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99eed1c698dde9040bfd7899717f77aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorStateChange: 1
+  shape: 29
+  operation: 0
+  color: {r: 1, g: 0, b: 1, a: 1}
+  rotW: {x: 0, y: 0, z: 0}
+  posW: 0
+  blendFactor: 0
+  dimensions: {fileID: 11400000, guid: 79489b4a0e45edd47a0c1049908efd0e, type: 2}
 --- !u!1 &647311599523330661
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorStateChange: 1
-  shape: 23
+  shape: 33
   operation: 0
   color: {r: 1, g: 0, b: 1, a: 1}
   rotW: {x: 0, y: 0, z: 0}
@@ -135,6 +187,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4199709966295228443}
+  - {fileID: 467680807797761387}
   - {fileID: 6679041802297815532}
   m_Father: {fileID: 3982069433183188550}
   m_RootOrder: -1

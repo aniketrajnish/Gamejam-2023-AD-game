@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorStateChange: 1
-  shape: 20
+  shape: 29
   operation: 0
   color: {r: 1, g: 1, b: 0, a: 1}
   rotW: {x: 0, y: 0, z: 0}

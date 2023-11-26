@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private HealthBar healthBar;
-
     private Inventory inventory;
     private Timer attackTimer;
     private Timer invincibleTimer;
     private bool isAttacking = false;
+    private bool isChangingDimension = false;
     private bool canChangeDimension = false;
     private bool isInit = false;
 
@@ -17,6 +17,10 @@ public class PlayerBehavior : MonoBehaviour
     private CreatureStat creatureStat;
     private ItemSetting currentAttackItem;
     private ItemSetting currentDimensionItem;
+
+    [SerializeField] private float wOffset = 0.25f;
+    private Raymarcher raymarcher;
+    private float currentWPos = 0;
 
     private void Awake()
     {
@@ -27,6 +31,9 @@ public class PlayerBehavior : MonoBehaviour
         inventory = new Inventory();
         attackTimer = TimerManager.Instance.GetTimer();
         attackTimer.gameObject.SetActive(true);
+        raymarcher = Camera.main.GetComponent<Raymarcher>();
+
+        currentWPos = raymarcher.wPos;
     }
 
     private void Update()
@@ -40,10 +47,27 @@ public class PlayerBehavior : MonoBehaviour
                 Debug.Log("Attack Finished");
             }
 
+            if (isChangingDimension)
+            {
+                //raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, currentWPos+ wOffset, 0.1f);
+                raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, 3.14f, 0.1f);
+                if (Mathf.Abs(raymarcher.wRot.y - 3.14f) < 0.1f)
+                {
+                    raymarcher.wRot.y = 0;
+                    isChangingDimension = false;
+                    EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(false));
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.Space) && canChangeDimension)
             {
                 canChangeDimension = false;
+                isChangingDimension = true;
                 inventory.RemoveItem(currentDimensionItem);
+                
+                //LevelManager.Instance.ChangeLevel(1);
+                EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true));
+
                 Debug.Log("Change dimension");
             }
         }     
@@ -104,6 +128,11 @@ public class PlayerBehavior : MonoBehaviour
                 if (!isAttacking)
                 {
                     Hurt();
+                }
+                else 
+                {
+                    data.collidedObject.SetActive(false);
+                    EventCenter.PostEvent<OnEnemyDeath>(new OnEnemyDeath(data.collidedObject));
                 }
             }
         }

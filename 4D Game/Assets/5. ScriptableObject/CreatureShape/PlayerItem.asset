@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
   m_Name: PlayerItem
   m_EditorClassIdentifier: 
-  sphereRadius: 0.5
-  torusThickness: {x: 1.14, y: 0.24}
+  sphereRadius: 0.25
+  torusThickness: {x: 1.35, y: 0.24}
   cappedTorusRo: 0.25
   cappedTorusRi: 0.1
   cappedTorusThickness: {x: 0.1, y: 0.1}
-  linkSeparation: 0
+  linkSeparation: 0.35
   linkRadius: 0.2
   linkThickness: 0.09
   coneTan: {x: 1, y: 2}
@@ -73,9 +73,9 @@ MonoBehaviour:
   fractalS: 1.9
   fractalO: 0.44
   tesseractSize: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
-  hyperSphereRadius: 0.41
+  hyperSphereRadius: 0.6
   duoCylR1R2: {x: 0.79, y: 1.37}
   vertCapsuleH: 0.5
   vertCapsuleR: 0.5
   fiveCellA: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  sixteenCellS: 0.5
+  sixteenCellS: 0.94
