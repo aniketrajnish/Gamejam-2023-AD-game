@@ -57,7 +57,7 @@ public class RaymarchRenderer : MonoBehaviour
     public Vector3 rotW;
     public float posW;
 
-    [Range(.1f, 100)]
+    [Range(0f, 100)]
     public float blendFactor;
 
     public ShapeDimensions dimensions;

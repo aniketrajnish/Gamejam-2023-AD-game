@@ -21,7 +21,6 @@ public class Raymarcher : SceneViewFilter
     [Header("4D Settings")]
     [SerializeField] public float wPos;
     [SerializeField] public Vector3 wRot;
-    [SerializeField] public bool isWOverride;
     [Header("Light Settings")]
     [SerializeField] bool isLit;
     [SerializeField] bool isShadowHard = true;
@@ -115,9 +114,9 @@ public class Raymarcher : SceneViewFilter
                 Properties p = new Properties()
                 {
                     pos = s.transform.position,
-                    posW = s.posW,
+                    posW = s.posW - wPos,
                     rot = s.transform.eulerAngles * Mathf.Deg2Rad,
-                    rotW = s.rotW * Mathf.Deg2Rad,
+                    rotW = (s.rotW - wRot) * Mathf.Deg2Rad,
                     col = color,
                     blendFactor = s.blendFactor * 100,
                     shapeIndex = (int)s.shape,
@@ -159,12 +158,7 @@ public class Raymarcher : SceneViewFilter
             if (isLit)
                 _raymarchMaterial.SetInt("_isLit", 1);
             else
-                _raymarchMaterial.SetInt("_isLit", 0);
-
-            if (isWOverride)
-                _raymarchMaterial.SetInt("_isWOverride", 1);
-            else
-                _raymarchMaterial.SetInt("_isWOverride", 0);
+                _raymarchMaterial.SetInt("_isLit", 0);            
 
             if (isShadowHard)
                 _raymarchMaterial.SetInt("_isShadowHard", 1);

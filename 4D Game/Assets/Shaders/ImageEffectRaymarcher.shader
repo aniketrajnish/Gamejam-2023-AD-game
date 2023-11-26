@@ -60,7 +60,7 @@ struct Shape
 float max_steps, max_dist, surf_dist;
 
 StructuredBuffer<Shape> shapes;
-int _Rank, _Count, _isLit, _isWOverride, _isAO, _isShadowHard, _AOIteration;
+int _Rank, _Count, _isLit, _isAO, _isShadowHard, _AOIteration;
 sampler2D _MainTex;
 uniform float4x4 _CamFrustrum, _CamToWorld;
 sampler2D _CameraDepthTexture;
@@ -96,20 +96,9 @@ v2f vert(appdata v)
 float GetDist(Shape shape, float3 p)
 {
     float d = 0;
-    float wPos = 0;
-    float3 wRot = float3(0, 0, 0);
+    float wPos = shape.posW;
+    float3 wRot = shape.rotW;   
     
-    if (_isWOverride == 0)
-    {
-        wPos = shape.posW != 0 ? shape.posW : _WPos;
-        wRot = shape.rotW != float3(0, 0, 0) ? shape.rotW : _WRot;
-    }
-    else if (_isWOverride == 1)
-    {
-        wPos = _WPos != 0 ? _WPos: shape.posW;
-        wRot = _WRot != float3(0, 0, 0) ? _WRot : shape.rotW;
-    }       
-
     p -= shape.pos;
 
     p.xz = mul(p.xz, float2x2(cos(shape.rot.y), sin(shape.rot.y), -sin(shape.rot.y), cos(shape.rot.y)));

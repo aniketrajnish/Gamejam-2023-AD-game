@@ -163,7 +163,6 @@ MonoBehaviour:
   loop: {x: 0, y: 0, z: 0}
   wPos: 0
   wRot: {x: 0, y: 0, z: 0}
-  isWOverride: 0
   isLit: 1
   isShadowHard: 0
   isAO: 1
