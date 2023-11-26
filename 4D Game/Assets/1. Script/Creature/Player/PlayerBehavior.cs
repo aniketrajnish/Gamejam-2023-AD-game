@@ -18,7 +18,7 @@ public class PlayerBehavior : MonoBehaviour
     private ItemSetting currentAttackItem;
     private ItemSetting currentDimensionItem;
 
-    [SerializeField] private float wOffset = 0.25f;
+    [SerializeField] private float wOffset = 1f;
     private Raymarcher raymarcher;
     private float currentWPos = 0;
 
@@ -49,12 +49,22 @@ public class PlayerBehavior : MonoBehaviour
 
             if (isChangingDimension)
             {
-                //raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, currentWPos+ wOffset, 0.1f);
-                raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, 3.14f, 0.1f);
-                if (Mathf.Abs(raymarcher.wRot.y - 3.14f) < 0.1f)
+                raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, currentWPos+ wOffset, 0.1f);
+                raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, 180f, 0.1f);
+                if (Mathf.Abs(raymarcher.wRot.y - 180f) < 0.1f)
                 {
                     raymarcher.wRot.y = 0;
+                    raymarcher.wPos = currentWPos + wOffset;
+
+                    if ((int)raymarcher.wPos >= LevelManager.Instance.LevelCount)
+                    {
+                        raymarcher.wPos = 0;
+                    }
+                    currentWPos = raymarcher.wPos;
+
+                    int levelIndex = (int)currentWPos;
                     isChangingDimension = false;
+                    LevelManager.Instance.ChangeLevel(levelIndex);
                     EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(false));
                 }
             }
@@ -67,7 +77,6 @@ public class PlayerBehavior : MonoBehaviour
                 
                 //LevelManager.Instance.ChangeLevel(1);
                 EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true));
-
                 Debug.Log("Change dimension");
             }
         }     
@@ -131,7 +140,7 @@ public class PlayerBehavior : MonoBehaviour
                 }
                 else 
                 {
-                    data.collidedObject.SetActive(false);
+                    data.collidedObject.GetComponentInParent<EnemyBehavior>().gameObject.SetActive(false);
                     EventCenter.PostEvent<OnEnemyDeath>(new OnEnemyDeath(data.collidedObject));
                 }
             }

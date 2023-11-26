@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   sphereRadius: 0.5
-  torusThickness: {x: 0.4, y: 0.1}
-  cappedTorusRo: 0.25
-  cappedTorusRi: 0.1
-  cappedTorusThickness: {x: 0.1, y: 0.1}
-  linkSeparation: 0.13
+  torusThickness: {x: 0.16, y: 0.1}
+  cappedTorusRo: 0.28
+  cappedTorusRi: 0.34
+  cappedTorusThickness: {x: 0.15, y: 0}
+  linkSeparation: 0.15
   linkRadius: 0.2
   linkThickness: 0.09
   coneTan: {x: 1, y: 2}
@@ -73,9 +73,9 @@ MonoBehaviour:
   fractalS: 2.05
   fractalO: 1.16
   tesseractSize: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
-  hyperSphereRadius: 0.5
-  duoCylR1R2: {x: 0.5, y: 0.5}
-  vertCapsuleH: 0.5
-  vertCapsuleR: 0.5
-  fiveCellA: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  sixteenCellS: 0.5
+  hyperSphereRadius: 0.2
+  duoCylR1R2: {x: 0.36, y: 0.17}
+  vertCapsuleH: 0.7
+  vertCapsuleR: 0.08
+  fiveCellA: {x: 0.09, y: 0, z: 0, w: 0.5}
+  sixteenCellS: 0.2

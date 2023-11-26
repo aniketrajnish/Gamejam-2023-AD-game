@@ -25,16 +25,16 @@ public class CreatureController : MonoBehaviour
 
     private void Update()
     {
-        if(creatureStat.Health <= 0)
-        {
-            CanMove = false;
-            Debug.Log("Dead");
-        }
-
         if(CanMove)
         {
             creatureControl.ReadInput();
             creatureMovement.Move();
+
+            if (creatureStat.Health <= 0)
+            {
+                CanMove = false;
+                Debug.Log("Dead");
+            }
         }
     }
 
