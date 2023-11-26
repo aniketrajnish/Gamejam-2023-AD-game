@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private int currentScore = 0;
     private Inventory inventory;
     private Timer attackTimer;
     private Timer invincibleTimer;
@@ -18,6 +19,7 @@ public class PlayerBehavior : MonoBehaviour
     private ItemSetting currentAttackItem;
     private ItemSetting currentDimensionItem;
 
+    [SerializeField] private RaymarchRenderer playerShadow;
     [SerializeField] private float wOffset = 1f;
     [SerializeField] private float maxWRot = 181f;
     private Raymarcher raymarcher;
@@ -41,46 +43,59 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isInit)
         {
-            if (attackTimer.IsFinished() && isAttacking)
-            {
-                isAttacking = false;
-                inventory.RemoveItem(currentAttackItem);
-                Debug.Log("Attack Finished");
-            }
-
-            if (isChangingDimension)
-            {
-                raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, currentWPos+ wOffset, 0.1f);
-                raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, maxWRot, 0.1f);
-                if (Mathf.Abs(raymarcher.wRot.y - maxWRot) < 0.1f)
-                {
-                    raymarcher.wRot.y = 0;
-                    raymarcher.wPos = currentWPos + wOffset;
-
-                    if ((int)raymarcher.wPos >= LevelManager.Instance.LevelCount)
-                    {
-                        raymarcher.wPos = 0;
-                    }
-                    currentWPos = raymarcher.wPos;
-
-                    int levelIndex = (int)currentWPos;
-                    isChangingDimension = false;
-                    LevelManager.Instance.ChangeLevel(levelIndex);
-                    EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(false));
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space) && canChangeDimension)
-            {
-                canChangeDimension = false;
-                isChangingDimension = true;
-                inventory.RemoveItem(currentDimensionItem);
-                
-                //LevelManager.Instance.ChangeLevel(1);
-                EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true));
-                Debug.Log("Change dimension");
-            }
+            CheckAttackMode();
+            ChangingDimension();
         }     
+    }
+
+    private void CheckAttackMode()
+    {
+        if (attackTimer.IsFinished() && isAttacking)
+        {
+            isAttacking = false;
+            inventory.RemoveItem(currentAttackItem);
+            Debug.Log("Attack Finished");
+        }
+    }
+
+    private void StartChangingDimension()
+    {
+        if (canChangeDimension)
+        {
+            canChangeDimension = false;
+            isChangingDimension = true;
+            inventory.RemoveItem(currentDimensionItem);
+
+            //LevelManager.Instance.ChangeLevel(1);
+            EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true));
+            Debug.Log("Change dimension");
+        }
+    }
+
+    private void ChangingDimension()
+    {
+        if (isChangingDimension)
+        {
+            raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, currentWPos + wOffset, 0.1f);
+            raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, maxWRot, 0.1f);
+            if (Mathf.Abs(raymarcher.wRot.y - maxWRot) < 0.1f)
+            {
+                raymarcher.wRot.y = 0;
+                raymarcher.wPos = currentWPos + wOffset;
+
+                if ((int)raymarcher.wPos >= LevelManager.Instance.LevelCount)
+                {
+                    raymarcher.wPos = 0;
+                }
+                currentWPos = raymarcher.wPos;
+                playerShadow.posW = raymarcher.wPos;
+
+                int levelIndex = (int)currentWPos;
+                isChangingDimension = false;
+                LevelManager.Instance.ChangeLevel(levelIndex);
+                EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(false));
+            }
+        }
     }
 
     private void OnDestroy()
@@ -113,6 +128,10 @@ public class PlayerBehavior : MonoBehaviour
                 break;
             case ItemType.Dimension:
                 canChangeDimension = true;
+                StartChangingDimension();
+                break;
+            case ItemType.Score:
+                currentScore += item.Value;
                 break;
         }
 

@@ -130,7 +130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599565289090448253}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -151,58 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   editorStateChange: 1
   shape: 29
-  operation: 0
-  color: {r: 1, g: 1, b: 0, a: 1}
-  rotW: {x: 0, y: 0, z: 0}
-  posW: 0
-  blendFactor: 0
-  dimensions: {fileID: 11400000, guid: 79489b4a0e45edd47a0c1049908efd0e, type: 2}
---- !u!1 &647311599523330661
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4199709966295228443}
-  - component: {fileID: 6633022824807185436}
-  m_Layer: 0
-  m_Name: Shape
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4199709966295228443
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 647311599523330661}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 812522209427688984}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6633022824807185436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 647311599523330661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99eed1c698dde9040bfd7899717f77aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  editorStateChange: 1
-  shape: 1
   operation: 0
   color: {r: 1, g: 1, b: 0, a: 1}
   rotW: {x: 0, y: 0, z: 0}
@@ -237,7 +185,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4199709966295228443}
   - {fileID: 305708703424588327}
   - {fileID: 5741622608356711362}
   m_Father: {fileID: 3982069433183188550}
@@ -254,7 +201,7 @@ GameObject:
   - component: {fileID: 3982069433183188550}
   - component: {fileID: 2103641604066946962}
   m_Layer: 0
-  m_Name: DimensionItem
+  m_Name: ScorePoint
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,12 +235,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffa87a56142b109469d65e43158c178f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raymarchRenderer: {fileID: 6633022824807185436}
+  raymarchRenderer: {fileID: 2936172053573881492}
   rotateSpeed: 20
   rotateSpeed4D: 20
   rotateSpeed4DModX: 1
   rotateSpeed4DModY: 1
   rotateSpeed4DModZ: 1
   rotateSpeed4DMax: 50
-  ItemSettingSO: {fileID: 11400000, guid: 7d4dc2af467551341a1c37e6d4b1cbeb, type: 2}
+  ItemSettingSO: {fileID: 11400000, guid: 23ede461d9cfa6e4eb0f8efc9f64db9f, type: 2}
   itemShape: {fileID: 1686708461378881866}

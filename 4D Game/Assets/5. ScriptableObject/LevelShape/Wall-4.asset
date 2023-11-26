@@ -72,7 +72,7 @@ MonoBehaviour:
   fractalI: 10
   fractalS: 1.25
   fractalO: 2
-  tesseractSize: {x: 4, y: 1.5, z: 0.5, w: 0.25}
+  tesseractSize: {x: 4, y: 1.6, z: 0.5, w: 0.25}
   hyperSphereRadius: 0.5
   duoCylR1R2: {x: 0.5, y: 0.5}
   vertCapsuleH: 0.5

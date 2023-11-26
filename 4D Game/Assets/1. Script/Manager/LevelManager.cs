@@ -23,7 +23,10 @@ public class LevelManager : SimpleSingleton<LevelManager>
         {
             return;
         }
+
+        levelList[currentLevelIndex].gameObject.SetActive(false);
         currentLevelIndex = index;
+        levelList[currentLevelIndex].gameObject.SetActive(true);
         MapManager.Instance.ChangePathMap(index);
     }
 

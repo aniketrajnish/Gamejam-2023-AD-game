@@ -30,7 +30,7 @@ namespace Unity.Mathematics
         {
             raymarcher = Camera.main.GetComponent<Raymarcher>();
         }
-        private void Update()
+        private void FixedUpdate()
         {
             MoveToGround();
             CheckRaymarchDist(bounds);
@@ -212,7 +212,7 @@ namespace Unity.Mathematics
                     //Debug.Log("Hit with: " + colliderOut.collider.name);
                     if (!isDimesionChanging)
                     {
-                        transform.Translate(ro[i].forward * colliderOut.dist * 1.5f, Space.World);
+                        //transform.Translate(ro[i].forward * colliderOut.dist * Time.fixedDeltaTime, Space.World);
                         EventCenter.PostEvent(new OnCollision4D(colliderOut.collider.gameObject));
                     }
                 }

@@ -33,13 +33,17 @@ public class ItemController : MonoBehaviour
     public ItemSetting PickUpItem()
     {
         itemShape.SetActive(false);
-        respawnTimer.StartTimer(itemSetting.RespawnTime);
+
+        if(itemSetting.RespawnTime > 0)
+        {
+            respawnTimer.StartTimer(itemSetting.RespawnTime);
+        }
         return itemSetting;
     }
 
     private void Respawn()
     {
-        if(respawnTimer.IsFinished())
+        if(respawnTimer.IsFinished() && itemSetting.RespawnTime > 0)
         {
             itemShape.SetActive(true);
         }
@@ -47,19 +51,19 @@ public class ItemController : MonoBehaviour
 
     private void Rotating()
     {
-        transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
-
         switch (itemSetting.Type)
         {
             case ItemType.Attack:
                 raymarchRenderer.rotW.x += rotateSpeed4D * rotateSpeed4DModX * Time.deltaTime;
                 raymarchRenderer.rotW.y += rotateSpeed4D * rotateSpeed4DModY * Time.deltaTime;
                 raymarchRenderer.rotW.z += rotateSpeed4D * rotateSpeed4DModZ * Time.deltaTime;
+                transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
                 break;
             case ItemType.Dimension:
                 raymarchRenderer.rotW.x += rotateSpeed4D * rotateSpeed4DModX * Time.deltaTime;
                 //raymarchRenderer.rotW.y += rotateSpeed4D * rotateSpeed4DModY * Time.deltaTime;
                 raymarchRenderer.rotW.z += rotateSpeed4D * rotateSpeed4DModZ * Time.deltaTime;
+                transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
                 break;
         }
 

@@ -20,6 +20,7 @@ public class EnemyControl : ICreatureControl
     private List<NodeTile> path;
     private Timer waitTimer;
     private bool isWaiting = false;
+    private bool isChangingDimension = false;
 
     public EnemyControl(Transform transform)
     {
@@ -35,6 +36,7 @@ public class EnemyControl : ICreatureControl
         waitTimer.gameObject.SetActive(true);
 
         EventCenter.RegisterEvent<OnEnemyDeath>(OnEnemyDeath);
+        EventCenter.RegisterEvent<OnDimensionChanging>(OnDimensionChanging);
 
         UpdateCurrentNode();
         FindTargetNode();
@@ -42,6 +44,13 @@ public class EnemyControl : ICreatureControl
 
     public void ReadInput()
     {
+        if (isChangingDimension)
+        {
+            Direction = Vector3.zero;
+            TurnDirection = Direction;
+            return;
+        }
+
         if(path.Count > 0 && !isWaiting)
         {
             UpdateCurrentNode();
@@ -158,6 +167,12 @@ public class EnemyControl : ICreatureControl
             previousNode.MarkOccupied(currentTransform.gameObject, false);
             currentNode.MarkOccupied(currentTransform.gameObject, false);
             EventCenter.UnRegisterEvent<OnEnemyDeath>(OnEnemyDeath);
+            EventCenter.UnRegisterEvent<OnDimensionChanging>(OnDimensionChanging);
         }
+    }
+
+    private void OnDimensionChanging(OnDimensionChanging data)
+    {
+        isChangingDimension = data.isChanging;
     }
 }

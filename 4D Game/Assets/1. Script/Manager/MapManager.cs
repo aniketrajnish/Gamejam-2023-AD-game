@@ -13,7 +13,9 @@ public class MapManager : SimpleSingleton<MapManager>
     [SerializeField] private List<Tilemap> tilemapPathLayers;
 
     [SerializeField] private GameObject nodePrefab;
+    [SerializeField] private List<GameObject> scroePointPrefabList; 
     [SerializeField] private GameObject nodeContainer;
+    [SerializeField] private GameObject scorePointContainer;
 
     [SerializeField] private List<Dictionary<Vector2Int, NodeTile>> mapList;
 
@@ -96,6 +98,7 @@ public class MapManager : SimpleSingleton<MapManager>
             List<TileInfo> tileInfoList = tilemapPathLayers[i].GetTileMapInfo();
             
             int index = 0;
+            int addPointCount = 0;
             foreach (TileInfo tileInfo in tileInfoList)
             {
                 if (tilemapPathLayers[i].HasTile(tileInfo.Coordinates))
@@ -103,13 +106,21 @@ public class MapManager : SimpleSingleton<MapManager>
                     if (!map.ContainsKey(tileInfo.Coordinates2D))
                     {
                         GameObject nodeTile = Instantiate(nodePrefab, nodeContainer.transform);
-
                         nodeTile.transform.position = tileInfo.WorldPoint;
                         nodeTile.gameObject.GetComponent<NodeTile>().GridLocation = tileInfo.Coordinates;
-                        nodeTile.gameObject.name = "NodeTile" + index;
+                        nodeTile.gameObject.name = "NodeTile W" + i + "-" + index;
+
+                        if(tileInfo.Coordinates2D.x % 5 == 0 && tileInfo.Coordinates2D.y % 5 == 0)
+                        {
+                            GameObject scorePoint = Instantiate(scroePointPrefabList[i], scorePointContainer.transform);
+                            scorePoint.transform.position = tileInfo.WorldPoint;
+                            scorePoint.gameObject.name = "ScorePoint W" + i + "-" + index;
+                            addPointCount = 0;
+                        }
 
                         map.Add(tileInfo.Coordinates2D, nodeTile.gameObject.GetComponent<NodeTile>());
                         index++;
+                        addPointCount++;
                     }
                 }
             }

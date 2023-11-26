@@ -16,11 +16,13 @@ public class CreatureController : MonoBehaviour
     private void Awake()
     {
         EventCenter.RegisterEvent<OnGameStateChange>(OnGameStateChange);
+        EventCenter.RegisterEvent<OnDimensionChanging>(OnDimensionChanging);
     }
 
     private void OnDestroy()
     {
         EventCenter.UnRegisterEvent<OnGameStateChange>(OnGameStateChange);
+        EventCenter.UnRegisterEvent<OnDimensionChanging>(OnDimensionChanging);
     }
 
     private void Update()
@@ -73,5 +75,10 @@ public class CreatureController : MonoBehaviour
                 CanMove = false;
                 break;
         }
+    }
+
+    private void OnDimensionChanging(OnDimensionChanging data)
+    {
+        CanMove = !data.isChanging;
     }
 }

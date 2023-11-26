@@ -5,7 +5,8 @@ using UnityEngine;
 public enum ItemType
 {
     Attack,
-    Dimension
+    Dimension,
+    Score
 }
 
 [System.Serializable]
