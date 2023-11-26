@@ -19,6 +19,7 @@ public class PlayerBehavior : MonoBehaviour
     private ItemSetting currentDimensionItem;
 
     [SerializeField] private float wOffset = 1f;
+    [SerializeField] private float maxWRot = 181f;
     private Raymarcher raymarcher;
     private float currentWPos = 0;
 
@@ -50,8 +51,8 @@ public class PlayerBehavior : MonoBehaviour
             if (isChangingDimension)
             {
                 raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, currentWPos+ wOffset, 0.1f);
-                raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, 180f, 0.1f);
-                if (Mathf.Abs(raymarcher.wRot.y - 180f) < 0.1f)
+                raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, maxWRot, 0.1f);
+                if (Mathf.Abs(raymarcher.wRot.y - maxWRot) < 0.1f)
                 {
                     raymarcher.wRot.y = 0;
                     raymarcher.wPos = currentWPos + wOffset;

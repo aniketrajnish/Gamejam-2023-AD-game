@@ -335,6 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2601584246461839619}
   wOffset: 1
+  maxWRot: 180.2
 --- !u!1 &5526403453153789726
 GameObject:
   m_ObjectHideFlags: 0
