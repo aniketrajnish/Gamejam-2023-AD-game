@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4065621798817427757}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: Wall-4-R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,14 +59,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5339418935515673033}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.5, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4065621798817427757}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &1261851029153688723
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -157,4 +157,4 @@ MonoBehaviour:
   rotW: {x: 0, y: 0, z: 0}
   posW: 0
   blendFactor: 0
-  dimensions: {fileID: 11400000, guid: 704a75ca21d9a2541ad46490e7060d60, type: 2}
+  dimensions: {fileID: 11400000, guid: 865fe3aa779bffa4f8aef717a55807ca, type: 2}
