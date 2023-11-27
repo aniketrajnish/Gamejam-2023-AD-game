@@ -46,6 +46,7 @@ public class ItemController : MonoBehaviour
         if(respawnTimer.IsFinished() && itemSetting.RespawnTime > 0)
         {
             itemShape.SetActive(true);
+            EventCenter.PostEvent<OnScorePointRespawn>(new OnScorePointRespawn(itemSetting));
         }
     }
 

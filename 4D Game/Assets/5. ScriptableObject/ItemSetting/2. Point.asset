@@ -17,4 +17,4 @@ MonoBehaviour:
     Name: Point
     Type: 2
     Value: 2
-    RespawnTime: -1
+    RespawnTime: 30

@@ -81,11 +81,12 @@ public class EnemyBehavior : MonoBehaviour
         if (invincibleTimer.IsFinished())
         {
             //Debug.Log("Hit Enemy " + gameObject.name + ": " + creatureStat.Health);
+            AudioManager.Instance.PlaySound("Hit");
             creatureStat.ModifyHealth(-1);
   
             if (!CheckDeath())
             {
-                invincibleTimer.StartTimer(1f);
+                invincibleTimer.StartTimer(0.25f);
             }  
             else 
             {

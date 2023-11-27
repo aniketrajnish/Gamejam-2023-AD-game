@@ -28,6 +28,7 @@ public class PlayerBehavior : MonoBehaviour
     private void Awake()
     {
         EventCenter.RegisterEvent<OnCollision4D>(OnCollision4D);
+        EventCenter.RegisterEvent<OnScorePointRespawn>(OnScorePointRespawn);
     }
     private void Start()
     {
@@ -39,6 +40,12 @@ public class PlayerBehavior : MonoBehaviour
         currentWPos = raymarcher.wPos;
     }
 
+    private void OnDestroy()
+    {
+        EventCenter.UnRegisterEvent<OnCollision4D>(OnCollision4D);
+        EventCenter.UnRegisterEvent<OnScorePointRespawn>(OnScorePointRespawn);
+    }
+
     private void Update()
     {
         if (isInit)
@@ -48,6 +55,18 @@ public class PlayerBehavior : MonoBehaviour
         }     
     }
 
+    public void Init(CreatureSetting setting, CreatureStat stat)
+    {
+        creatureSetting = setting;
+        creatureStat = stat;
+        creatureStat.OnHealthChanged += healthBar.OnHealthChanged;
+
+        invincibleTimer = TimerManager.Instance.GetTimer();
+        invincibleTimer.gameObject.SetActive(true);
+
+        isInit = true;
+    }
+
     private void CheckAttackMode()
     {
         if (attackTimer.IsFinished() && isAttacking)
@@ -55,7 +74,8 @@ public class PlayerBehavior : MonoBehaviour
             isAttacking = false;
             inventory.RemoveItem(currentAttackItem);
             EventCenter.PostEvent<OnPlayerAttackMode>(new OnPlayerAttackMode(currentAttackItem.Value - (int)attackTimer.currentTime));
-            Debug.Log("Attack Finished");
+            AudioManager.Instance.PlaySound("Alarm");
+            //Debug.Log("Attack Finished");
         }
         else if (isAttacking)
         {
@@ -73,7 +93,7 @@ public class PlayerBehavior : MonoBehaviour
 
             //LevelManager.Instance.ChangeLevel(1);
             EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true, (int)(currentWPos+ wOffset)));
-            Debug.Log("Change dimension");
+            //Debug.Log("Change dimension");
         }
     }
 
@@ -103,23 +123,6 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        EventCenter.UnRegisterEvent<OnCollision4D>(OnCollision4D);
-    }
-
-    public void Init(CreatureSetting setting, CreatureStat stat)
-    {
-        creatureSetting = setting;
-        creatureStat = stat;
-        creatureStat.OnHealthChanged += healthBar.OnHealthChanged;
-
-        invincibleTimer = TimerManager.Instance.GetTimer();
-        invincibleTimer.gameObject.SetActive(true);
-
-        isInit = true;
-    }
-
     private void ActivateItem(ItemController itemController)
     {
         ItemSetting item = itemController.PickUpItem();
@@ -136,18 +139,30 @@ public class PlayerBehavior : MonoBehaviour
                 attackTimer.StartTimer(item.Value);
                 currentAttackItem = item;
                 isAttacking = true;
+                AudioManager.Instance.PlaySound("Attack");
                 break;
             case ItemType.Dimension:
                 canChangeDimension = true;
                 currentDimensionItem = item;
                 StartChangingDimension();
+                AudioManager.Instance.PlaySound("Dimension");
                 break;
             case ItemType.Score:
                 currentScore += item.Value;
+                EventCenter.PostEvent<OnGainScore>(new OnGainScore(currentScore));
+                AudioManager.Instance.PlaySound("Score");
                 break;
         }
 
         Debug.Log("Pick up: " + item.Name);
+    }
+
+    private void Hurt()
+    {
+        AudioManager.Instance.PlaySound("Hit");
+        creatureStat.ModifyHealth(-1);
+        invincibleTimer.StartTimer(1.5f);
+        Debug.Log("Ouch: " + creatureStat.Health);
     }
 
     private void OnCollision4D(OnCollision4D data)
@@ -179,10 +194,8 @@ public class PlayerBehavior : MonoBehaviour
         }
     }
 
-    private void Hurt()
+    private void OnScorePointRespawn(OnScorePointRespawn data)
     {
-        creatureStat.ModifyHealth(-1);
-        invincibleTimer.StartTimer(1.5f);
-        Debug.Log("Ouch: " + creatureStat.Health);
+        inventory.RemoveItem(data.RespawnedItem);
     }
 }

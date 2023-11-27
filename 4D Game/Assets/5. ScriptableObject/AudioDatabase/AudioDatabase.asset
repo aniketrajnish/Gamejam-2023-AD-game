@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2c2c9e806b0d243a3d1a52720ea0e9, type: 3}
+  m_Name: AudioDatabase
+  m_EditorClassIdentifier: 
+  MusicList:
+  - name: BGM
+    clip: {fileID: 8300000, guid: 6a42b27f7090e1042bee678ba2e8fe55, type: 3}
+    volume: 0.75
+  SoundList:
+  - name: Dimension
+    clip: {fileID: 8300000, guid: ee587f90b38d44347bfce6f3f9fe97e4, type: 3}
+    volume: 0.5
+  - name: Attack
+    clip: {fileID: 8300000, guid: 565f1168614e22a47b4698c318db4f93, type: 3}
+    volume: 0.5
+  - name: Hit
+    clip: {fileID: 8300000, guid: d8ca9af9fbac997448f5a3f4a5027f44, type: 3}
+    volume: 0.55
+  - name: Score
+    clip: {fileID: 8300000, guid: f1e410044e194a94b9f13b451edf983f, type: 3}
+    volume: 0.5
+  - name: Alarm
+    clip: {fileID: 8300000, guid: 82fb0d5cd3fd6404d9dc744f2ee42226, type: 3}
+    volume: 0.55
