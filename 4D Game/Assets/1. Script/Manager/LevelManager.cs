@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : SimpleSingleton<LevelManager>
@@ -7,6 +8,7 @@ public class LevelManager : SimpleSingleton<LevelManager>
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject levelParent;
     [SerializeField] private List<GameObject> levelList;
+    [SerializeField] private List<EnemySpawner> spawnerList;
 
     private int currentLevelIndex = 0;
 
@@ -15,6 +17,12 @@ public class LevelManager : SimpleSingleton<LevelManager>
     public void Init()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        EventCenter.RegisterEvent<OnDimensionChanging>(OnDimensionChanging);
+    }
+
+    private void OnDestroy()
+    {
+        EventCenter.UnRegisterEvent<OnDimensionChanging>(OnDimensionChanging);
     }
 
     public void ChangeLevel(int index)
@@ -26,7 +34,6 @@ public class LevelManager : SimpleSingleton<LevelManager>
 
         levelList[currentLevelIndex].gameObject.SetActive(false);
         currentLevelIndex = index;
-        levelList[currentLevelIndex].gameObject.SetActive(true);
         MapManager.Instance.ChangePathMap(index);
     }
 
@@ -35,4 +42,26 @@ public class LevelManager : SimpleSingleton<LevelManager>
         return player;
     }
 
+    public void SpawnEnemies()
+    {
+        foreach(var spawner in spawnerList)
+        {
+            spawner.SpawnEnemyDefulat();
+        }
+    }
+
+    private void OnDimensionChanging(OnDimensionChanging data)
+    {
+        if(data.isChanging)
+        {
+            if (data.NextLevelIndex < levelList.Count)
+            {
+                levelList[data.NextLevelIndex].gameObject.SetActive(true);
+            }
+            else
+            {
+                levelList[0].gameObject.SetActive(true);
+            }
+        }
+    }
 }

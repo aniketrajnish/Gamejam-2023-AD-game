@@ -19,8 +19,8 @@ public class MapManager : SimpleSingleton<MapManager>
 
     [SerializeField] private List<Dictionary<Vector2Int, NodeTile>> mapList;
 
-    private Tilemap currentPathTilemap;
-    private Dictionary<Vector2Int, NodeTile> currentMap;
+    [SerializeField] private Tilemap currentPathTilemap;
+    [SerializeField] private Dictionary<Vector2Int, NodeTile> currentMap;
 
     public Dictionary<Vector2Int, NodeTile> Map { get { return currentMap; } }
 

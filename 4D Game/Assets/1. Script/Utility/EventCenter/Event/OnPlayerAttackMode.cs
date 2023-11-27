@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class OnPlayerAttackMode : IEventWithData
 {
-    public bool IsAttackMode;
+    public int TimeLeft;
 
-    public OnPlayerAttackMode(bool isAttackMode)
+    public OnPlayerAttackMode(int timeLeft)
     {
-        IsAttackMode = isAttackMode;
+        TimeLeft = timeLeft;
     }
 }

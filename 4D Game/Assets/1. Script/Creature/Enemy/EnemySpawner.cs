@@ -18,6 +18,10 @@ public class EnemySpawner : MonoBehaviour
         maxEnemyCount = spawnEnemyCount * 2;
 
         enemyList = new List<CreatureController>();
+    }
+
+    public void SpawnEnemyDefulat()
+    {
         SpawnEnemy(spawnEnemyCount);
     }
 
@@ -76,6 +80,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             var enemy = enemyPool.GetPooledObject().GetComponent<CreatureController>();
+            enemy.Init();
             enemy.transform.position = transform.position;
             enemyList.Add(enemy);
             enemy.gameObject.SetActive(true);

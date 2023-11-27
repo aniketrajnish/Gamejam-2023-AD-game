@@ -17,6 +17,7 @@ public class CreatureController : MonoBehaviour
     {
         EventCenter.RegisterEvent<OnGameStateChange>(OnGameStateChange);
         EventCenter.RegisterEvent<OnDimensionChanging>(OnDimensionChanging);
+        CanMove = false;
     }
 
     private void OnDestroy()
@@ -35,12 +36,12 @@ public class CreatureController : MonoBehaviour
             if (creatureStat.Health <= 0)
             {
                 CanMove = false;
-                Debug.Log("Dead");
+                //Debug.Log("Dead");
             }
         }
     }
 
-    private void Init()
+    public void Init()
     {
         creatureSetting = creatureSettingSO.CreatureSetting.Clone();
         creatureStat = new CreatureStat(creatureSetting.DefaultHealth, creatureSetting.Speed);
@@ -55,11 +56,25 @@ public class CreatureController : MonoBehaviour
                 EnemyControl enemyControl = new EnemyControl(transform);
                 enemyControl.Init();
                 creatureControl = enemyControl;
+                GetComponent<EnemyBehavior>().Init(creatureSetting, creatureStat);  
+                break;
+            case CreatureType.Elite:
+                EnemyControl eliteControl = new EnemyControl(transform);
+                eliteControl.Init();
+                creatureControl = eliteControl;
+                GetComponent<EnemyBehavior>().Init(creatureSetting, creatureStat);
+                break;
+            case CreatureType.Boss:
+                EnemyControl bossControl = new EnemyControl(transform);
+                bossControl.Init();
+                creatureControl = bossControl;
+                GetComponent<EnemyBehavior>().Init(creatureSetting, creatureStat);
                 break;
             default:
                 break;
         }
 
+        CanMove = true;
         creatureMovement = new CreatureMovement(creatureControl, creatureSetting, transform);
     }
 

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereRadius: 0.5
   torusThickness: {x: 0.16, y: 0.1}
-  cappedTorusRo: 0.28
-  cappedTorusRi: 0.34
-  cappedTorusThickness: {x: 0.15, y: 0}
+  cappedTorusRo: -0.68
+  cappedTorusRi: 0.75
+  cappedTorusThickness: {x: -0.14, y: 0}
   linkSeparation: 0.15
   linkRadius: 0.2
   linkThickness: 0.09

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
@@ -13,9 +14,28 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private float rotateSpeed4DModZ = 1f;
     [SerializeField] private float rotateSpeed4DMax = 50f;
 
+    [SerializeField] private Timer invincibleTimer;
+    private CreatureSetting creatureSetting;
+    private CreatureStat creatureStat;
+    private bool isInit = false;
+
     private void Update()
     {
-        Rotating();
+        if (isInit)
+        {
+            Rotating();
+        }
+    }
+
+    public void Init(CreatureSetting setting, CreatureStat stat)
+    {
+        creatureSetting = setting;
+        creatureStat = stat;
+
+        invincibleTimer = TimerManager.Instance.GetTimer();
+        invincibleTimer.gameObject.SetActive(true);
+
+        isInit = true;
     }
 
     private void Rotating()
@@ -44,5 +64,34 @@ public class EnemyBehavior : MonoBehaviour
             rotateSpeed4DModZ *= -1;
         }
 
+    }
+
+    private bool CheckDeath()
+    {
+        if (creatureStat.Health <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void Hurt()
+    {
+        //Debug.Log(invincibleTimer.gameObject.name);
+        if (invincibleTimer.IsFinished())
+        {
+            //Debug.Log("Hit Enemy " + gameObject.name + ": " + creatureStat.Health);
+            creatureStat.ModifyHealth(-1);
+  
+            if (!CheckDeath())
+            {
+                invincibleTimer.StartTimer(1f);
+            }  
+            else 
+            {
+                gameObject.SetActive(false);
+                EventCenter.PostEvent<OnEnemyDeath>(new OnEnemyDeath(gameObject));
+            }
+        }
     }
 }

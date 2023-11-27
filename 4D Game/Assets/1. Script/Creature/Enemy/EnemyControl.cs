@@ -162,7 +162,7 @@ public class EnemyControl : ICreatureControl
 
     private void OnEnemyDeath(OnEnemyDeath data)
     {
-        if(data.DeadEnemy == currentTransform.gameObject)
+        if(data.DeadEnemy == currentTransform.gameObject && currentTransform.gameObject.activeInHierarchy)
         {
             previousNode.MarkOccupied(currentTransform.gameObject, false);
             currentNode.MarkOccupied(currentTransform.gameObject, false);
@@ -173,6 +173,11 @@ public class EnemyControl : ICreatureControl
 
     private void OnDimensionChanging(OnDimensionChanging data)
     {
+        if (isChangingDimension & !data.isChanging)
+        {
+            FindTargetNode();
+        }
+
         isChangingDimension = data.isChanging;
     }
 }

@@ -54,7 +54,12 @@ public class PlayerBehavior : MonoBehaviour
         {
             isAttacking = false;
             inventory.RemoveItem(currentAttackItem);
+            EventCenter.PostEvent<OnPlayerAttackMode>(new OnPlayerAttackMode(currentAttackItem.Value - (int)attackTimer.currentTime));
             Debug.Log("Attack Finished");
+        }
+        else if (isAttacking)
+        {
+            EventCenter.PostEvent<OnPlayerAttackMode>(new OnPlayerAttackMode(currentAttackItem.Value - (int)attackTimer.currentTime));
         }
     }
 
@@ -67,7 +72,7 @@ public class PlayerBehavior : MonoBehaviour
             inventory.RemoveItem(currentDimensionItem);
 
             //LevelManager.Instance.ChangeLevel(1);
-            EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true));
+            EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true, (int)(currentWPos+ wOffset)));
             Debug.Log("Change dimension");
         }
     }
@@ -93,7 +98,7 @@ public class PlayerBehavior : MonoBehaviour
                 int levelIndex = (int)currentWPos;
                 isChangingDimension = false;
                 LevelManager.Instance.ChangeLevel(levelIndex);
-                EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(false));
+                EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(false, levelIndex));
             }
         }
     }
@@ -118,16 +123,23 @@ public class PlayerBehavior : MonoBehaviour
     private void ActivateItem(ItemController itemController)
     {
         ItemSetting item = itemController.PickUpItem();
+
+        if (inventory.HasItem(item))
+        {
+            return;
+        }
         inventory.AddItem(item);
 
         switch (item.Type)
         {
             case ItemType.Attack:
                 attackTimer.StartTimer(item.Value);
+                currentAttackItem = item;
                 isAttacking = true;
                 break;
             case ItemType.Dimension:
                 canChangeDimension = true;
+                currentDimensionItem = item;
                 StartChangingDimension();
                 break;
             case ItemType.Score:
@@ -146,22 +158,22 @@ public class PlayerBehavior : MonoBehaviour
             {
                 ItemController itemController
                     = data.collidedObject.GetComponentInParent<ItemController>();
-                if (itemController != null)
+                if (itemController != null && itemController.gameObject.activeInHierarchy)
                 {
                     ActivateItem(itemController);
                 }
             }
 
-            if (data.collidedObject.tag == "Enemy" && invincibleTimer.IsFinished())
+            if (data.collidedObject.tag == "Enemy")
             {
-                if (!isAttacking)
+                if (!isAttacking && invincibleTimer.IsFinished())
                 {
                     Hurt();
                 }
-                else 
-                {
-                    data.collidedObject.GetComponentInParent<EnemyBehavior>().gameObject.SetActive(false);
-                    EventCenter.PostEvent<OnEnemyDeath>(new OnEnemyDeath(data.collidedObject));
+                else if(isAttacking)
+                { 
+                    if(data.collidedObject.activeInHierarchy)
+                        data.collidedObject.GetComponentInParent<EnemyBehavior>().Hurt();
                 }
             }
         }

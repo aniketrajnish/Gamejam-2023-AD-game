@@ -38,6 +38,7 @@ public class GameManager : PersistantSingleton<GameManager>
                 LevelManager.Instance.Init();
                 break;
             case GameState.Play:
+                LevelManager.Instance.SpawnEnemies();
                 break;
             case GameState.Pause:
                 break;

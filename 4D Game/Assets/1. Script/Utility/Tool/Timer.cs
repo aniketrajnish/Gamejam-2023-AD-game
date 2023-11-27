@@ -15,6 +15,11 @@ public class Timer : MonoBehaviour
 
     private Coroutine timerRoutine;
 
+    public float currentTime
+    {
+        get { return time; }
+    }
+
     public bool IsFinished()
     {
         return isFinished;
@@ -29,7 +34,7 @@ public class Timer : MonoBehaviour
     {
         if (timerRoutine != null)
             StopCoroutine(timerRoutine);
-
+        
         SetDuration(duration);
         isRunning = true;
         timerRoutine = StartCoroutine(TimerCoroutine());
@@ -43,6 +48,7 @@ public class Timer : MonoBehaviour
 
     private IEnumerator TimerCoroutine()
     {
+        //Debug.Log("Timer Start " + gameObject.name);
         time = 0;
         while (time <= duration)
         {

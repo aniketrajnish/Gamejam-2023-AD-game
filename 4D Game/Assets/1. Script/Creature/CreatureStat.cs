@@ -22,6 +22,12 @@ public class CreatureStat
         speed = maxSpeed;
     }
 
+    public void Reset()
+    {
+        health = maxHealth;
+        speed = maxSpeed;
+    }
+
     public void ModifyHealth(int num)
     {
         health += num;
@@ -34,7 +40,9 @@ public class CreatureStat
         {
             health = maxHealth;
         }
-        OnHealthChanged(this, new HealthChangeEvent(health, maxHealth));
+
+        if(OnHealthChanged != null)
+            OnHealthChanged(this, new HealthChangeEvent(health, maxHealth));
     }
 
     public void ModifySpeed(float num)

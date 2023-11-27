@@ -8,12 +8,19 @@ public class Inventory
 
     public void AddItem(ItemSetting item)
     {
-        ItemBag.Add(item);
+        if (!ItemBag.Contains(item))
+            ItemBag.Add(item);
     }   
 
     public void RemoveItem(ItemSetting item) 
-    {  
-        ItemBag.Remove(item); 
+    {
+        if (ItemBag.Contains(item))
+            ItemBag.Remove(item); 
+    }
+
+    public bool HasItem(ItemSetting item)
+    {
+        return ItemBag.Contains(item);
     }
 
     public ItemSetting GetItem(int id)
