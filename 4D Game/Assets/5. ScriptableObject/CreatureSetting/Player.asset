@@ -15,5 +15,5 @@ MonoBehaviour:
   CreatureSetting:
     CreatureType: 0
     DefaultHealth: 3
-    Speed: 7
+    Speed: 6.5
     TurnSpeed: 30

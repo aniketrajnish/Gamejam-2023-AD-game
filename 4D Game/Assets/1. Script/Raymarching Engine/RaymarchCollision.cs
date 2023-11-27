@@ -30,7 +30,7 @@ namespace Unity.Mathematics
         {
             raymarcher = Camera.main.GetComponent<Raymarcher>();
         }
-        private void FixedUpdate()
+        private void Update()
         {
             MoveToGround();
             CheckRaymarchDist(bounds);
