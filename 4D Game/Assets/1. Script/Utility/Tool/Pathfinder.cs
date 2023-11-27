@@ -13,6 +13,11 @@ public class PathFinder
         List<NodeTile> openList = new List<NodeTile>();
         List<NodeTile> closedList = new List<NodeTile>();
         NodeTile currentNodeTile = null;
+
+        if(start == null || end == null)
+        {
+            return new List<NodeTile>();
+        }
               
         start.G = 0;
         start.H = GetDistance(start, end, diagonal);

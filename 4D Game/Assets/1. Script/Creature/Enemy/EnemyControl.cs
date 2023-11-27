@@ -137,7 +137,8 @@ public class EnemyControl : ICreatureControl
 
         foreach (var nb in targetNbs)
         {
-            if (!nb.IsBlocked && !nb.CheckIsOccupiedByOther(currentTransform.gameObject))
+            if (nb!= null && currentNode != null && !nb.IsBlocked 
+                && !nb.CheckIsOccupiedByOther(currentTransform.gameObject))
             {
                 preDistance = distance;
                 distance = Vector3Int.Distance(nb.GridLocation, currentNode.GridLocation);

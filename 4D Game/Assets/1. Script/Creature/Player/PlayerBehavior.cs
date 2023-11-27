@@ -24,6 +24,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float maxWRot = 181f;
     private Raymarcher raymarcher;
     private float currentWPos = 0;
+    private bool isLastLevel = false;
 
     private void Awake()
     {
@@ -91,6 +92,15 @@ public class PlayerBehavior : MonoBehaviour
             isChangingDimension = true;
             inventory.RemoveItem(currentDimensionItem);
 
+            if ((int)raymarcher.wPos + wOffset >= LevelManager.Instance.LevelCount)
+            {
+                isLastLevel = true;
+            }
+            else
+            {
+                isLastLevel = false;
+            }
+
             //LevelManager.Instance.ChangeLevel(1);
             EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true, (int)(currentWPos+ wOffset)));
             //Debug.Log("Change dimension");
@@ -101,17 +111,29 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (isChangingDimension)
         {
-            raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, currentWPos + wOffset, 0.1f);
+            if (isLastLevel)
+            {
+                raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, 0, 0.1f);
+            }
+            else
+            {
+                raymarcher.wPos = Mathf.Lerp(raymarcher.wPos, currentWPos + wOffset, 1f);
+            }
+
             raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, maxWRot, 0.1f);
-            if (Mathf.Abs(raymarcher.wRot.y - maxWRot) < 0.1f)
+            if (Mathf.Abs(raymarcher.wRot.y - maxWRot) < 4f)
             {
                 raymarcher.wRot.y = 0;
-                raymarcher.wPos = currentWPos + wOffset;
 
-                if ((int)raymarcher.wPos >= LevelManager.Instance.LevelCount)
+                if (isLastLevel)
                 {
                     raymarcher.wPos = 0;
                 }
+                else
+                {
+                    raymarcher.wPos = currentWPos + wOffset;
+                }
+
                 currentWPos = raymarcher.wPos;
                 playerShadow.posW = raymarcher.wPos;
 
@@ -119,6 +141,7 @@ public class PlayerBehavior : MonoBehaviour
                 isChangingDimension = false;
                 LevelManager.Instance.ChangeLevel(levelIndex);
                 EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(false, levelIndex));
+                isLastLevel = false;
             }
         }
     }
