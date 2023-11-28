@@ -32,12 +32,14 @@ public class ItemController : MonoBehaviour
 
     public ItemSetting PickUpItem()
     {
-        itemShape.SetActive(false);
+        if(itemSetting == null)
+            return null;
 
         if(itemSetting.RespawnTime > 0)
         {
             respawnTimer.StartTimer(itemSetting.RespawnTime);
         }
+        itemShape.SetActive(false);
         return itemSetting;
     }
 

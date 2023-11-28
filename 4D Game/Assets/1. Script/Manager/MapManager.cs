@@ -13,9 +13,9 @@ public class MapManager : SimpleSingleton<MapManager>
     [SerializeField] private List<Tilemap> tilemapPathLayers;
 
     [SerializeField] private GameObject nodePrefab;
-    [SerializeField] private List<GameObject> scroePointPrefabList; 
+    [SerializeField] private List<GameObject> scroePointPrefabList;
+    [SerializeField] private List<GameObject> scorePointContainers;
     [SerializeField] private GameObject nodeContainer;
-    [SerializeField] private GameObject scorePointContainer;
 
     [SerializeField] private List<Dictionary<Vector2Int, NodeTile>> mapList;
 
@@ -86,6 +86,12 @@ public class MapManager : SimpleSingleton<MapManager>
 
     public void ChangePathMap(int index)
     {
+        foreach (GameObject scorePoint in scorePointContainers)
+        {
+            scorePoint.SetActive(false);
+        }
+
+        scorePointContainers[index].SetActive(true);
         currentMap = mapList[index];
         currentPathTilemap = tilemapPathLayers[index];
     }
@@ -112,10 +118,12 @@ public class MapManager : SimpleSingleton<MapManager>
 
                         if(tileInfo.Coordinates2D.x % 5 == 0 && tileInfo.Coordinates2D.y % 5 == 0)
                         {
-                            GameObject scorePoint = Instantiate(scroePointPrefabList[i], scorePointContainer.transform);
+                            GameObject scorePoint = Instantiate(scroePointPrefabList[i], scorePointContainers[i].transform);
                             scorePoint.transform.position = tileInfo.WorldPoint;
                             scorePoint.gameObject.name = "ScorePoint W" + i + "-" + index;
                             addPointCount = 0;
+
+                            scorePointContainers[i].SetActive(false);
                         }
 
                         map.Add(tileInfo.Coordinates2D, nodeTile.gameObject.GetComponent<NodeTile>());
@@ -127,6 +135,7 @@ public class MapManager : SimpleSingleton<MapManager>
             mapList.Add(map);
         }
 
+        scorePointContainers[0].SetActive(true);
         currentPathTilemap = tilemapPathLayers[0];
         currentMap = mapList[0];
     }

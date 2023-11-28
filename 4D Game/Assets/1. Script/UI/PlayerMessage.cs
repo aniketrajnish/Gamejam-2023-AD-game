@@ -7,11 +7,13 @@ public class PlayerMessage : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private TextMeshProUGUI scroeText;
+    [SerializeField] private TextMeshProUGUI hintText;
 
     void Start()
     {
         EventCenter.RegisterEvent<OnPlayerAttackMode>(OnPlayerAttackMode);
         EventCenter.RegisterEvent<OnGainScore>(OnGainScore);
+        EventCenter.RegisterEvent<OnNearMachine>(OnNearMachine);
         messageText.color = Color.red;
     }
 
@@ -19,6 +21,7 @@ public class PlayerMessage : MonoBehaviour
     {
         EventCenter.UnRegisterEvent<OnPlayerAttackMode>(OnPlayerAttackMode);
         EventCenter.UnRegisterEvent<OnGainScore>(OnGainScore);
+        EventCenter.UnRegisterEvent<OnNearMachine>(OnNearMachine);
     }
 
     private void OnPlayerAttackMode(OnPlayerAttackMode data)
@@ -45,5 +48,17 @@ public class PlayerMessage : MonoBehaviour
     private void OnGainScore(OnGainScore data)
     {
         scroeText.text = "Score: " + data.Score;
+    }
+
+    private void OnNearMachine(OnNearMachine data)
+    {
+        if(data.IsNear)
+        {
+            hintText.text = "Press [Q] or [E] to use machine";
+        }
+        else
+        {
+            hintText.text = "";
+        }
     }
 }

@@ -83,7 +83,6 @@ public class CreatureController : MonoBehaviour
         switch (data.State)
         {
             case GameState.Play:
-                Init();
                 CanMove = true;
                 break;
             default:

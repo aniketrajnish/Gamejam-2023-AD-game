@@ -25,6 +25,7 @@ public class PlayerBehavior : MonoBehaviour
     private Raymarcher raymarcher;
     private float currentWPos = 0;
     private bool isLastLevel = false;
+    private bool isUsingMachine = false;
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class PlayerBehavior : MonoBehaviour
         {
             CheckAttackMode();
             ChangingDimension();
+            UsingMachine();
         }     
     }
 
@@ -66,6 +68,21 @@ public class PlayerBehavior : MonoBehaviour
         invincibleTimer.gameObject.SetActive(true);
 
         isInit = true;
+    }
+
+    private void UsingMachine()
+    {
+        if (isUsingMachine)
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                EventCenter.PostEvent<OnUsingMachine>(new OnUsingMachine(Time.deltaTime));
+            }
+            else if (Input.GetKey(KeyCode.Q))
+            {
+                EventCenter.PostEvent<OnUsingMachine>(new OnUsingMachine(-Time.deltaTime));
+            }
+        } 
     }
 
     private void CheckAttackMode()
@@ -150,7 +167,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         ItemSetting item = itemController.PickUpItem();
 
-        if (inventory.HasItem(item))
+        if (inventory.HasItem(item) || item == null)
         {
             return;
         }
@@ -175,6 +192,8 @@ public class PlayerBehavior : MonoBehaviour
                 EventCenter.PostEvent<OnGainScore>(new OnGainScore(currentScore));
                 AudioManager.Instance.PlaySound("Score");
                 break;
+            default:
+                break;
         }
 
         Debug.Log("Pick up: " + item.Name);
@@ -188,9 +207,45 @@ public class PlayerBehavior : MonoBehaviour
         Debug.Log("Ouch: " + creatureStat.Health);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (creatureSetting.CreatureType == CreatureType.Player && isInit)
+        {
+            if (other.gameObject.tag == "Item")
+            {
+                ItemController itemController
+                    = other.gameObject.GetComponentInParent<ItemController>();
+
+                if (itemController != null && itemController.gameObject.activeInHierarchy)
+                {
+                    //Debug.Log(itemController.gameObject.name);
+                    ActivateItem(itemController);
+                }
+            }
+
+            if(other.gameObject.tag == "Machine")
+            {
+                isUsingMachine = true;
+                EventCenter.PostEvent<OnNearMachine>(new OnNearMachine(isUsingMachine));
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (creatureSetting.CreatureType == CreatureType.Player && isInit)
+        {
+            if (other.gameObject.tag == "Machine")
+            {
+                isUsingMachine = false;
+                EventCenter.PostEvent<OnNearMachine>(new OnNearMachine(isUsingMachine));
+            }
+        }
+    }
+
     private void OnCollision4D(OnCollision4D data)
     {
-        if(creatureSetting.CreatureType == CreatureType.Player)
+        if(creatureSetting.CreatureType == CreatureType.Player && isInit)
         {
             if (data.collidedObject.tag == "Item")
             {

@@ -17,12 +17,18 @@ public class LevelManager : SimpleSingleton<LevelManager>
     public void Init()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        InitPlayer();
         EventCenter.RegisterEvent<OnDimensionChanging>(OnDimensionChanging);
     }
 
     private void OnDestroy()
     {
         EventCenter.UnRegisterEvent<OnDimensionChanging>(OnDimensionChanging);
+    }
+
+    public void InitPlayer()
+    {
+        player.GetComponent<CreatureController>().Init();
     }
 
     public void ChangeLevel(int index)
