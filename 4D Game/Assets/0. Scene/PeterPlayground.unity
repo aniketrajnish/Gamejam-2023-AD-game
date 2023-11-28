@@ -35784,8 +35784,8 @@ MonoBehaviour:
   enemyList: []
   spawnDelay: 1
   nextWaveDelay: 10
-  spawnEnemyCount: 2
-  maxEnemyCount: 3
+  spawnEnemyCount: 3
+  maxEnemyCount: 6
 --- !u!1001 &1552908261
 PrefabInstance:
   m_ObjectHideFlags: 0
