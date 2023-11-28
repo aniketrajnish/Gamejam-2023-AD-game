@@ -263,6 +263,7 @@ MonoBehaviour:
   rotateSpeed4DModY: 1
   rotateSpeed4DModZ: 1
   rotateSpeed4DMax: 50
+  invincibleTimer: {fileID: 0}
 --- !u!1 &3463894066202079626
 GameObject:
   m_ObjectHideFlags: 0

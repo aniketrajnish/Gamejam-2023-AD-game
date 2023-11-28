@@ -161,11 +161,11 @@ public class PropertiesEditor : Editor
                 break;
         }
 
-        if (!PrefabUtility.IsPartOfPrefabAsset(renderer))
+        /*if (!PrefabUtility.IsPartOfPrefabAsset(renderer))
         {
             EditorUtility.SetDirty(renderer);
             EditorUtility.SetDirty(renderer.dimensions);
-        }
+        }*/
     }
 
     void OnEnable()
