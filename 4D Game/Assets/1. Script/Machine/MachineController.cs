@@ -6,6 +6,7 @@ public class MachineController : MonoBehaviour
 {
     [SerializeField] private RaymarchRenderer machineShape;
     [SerializeField] private List<RaymarchRenderer> controlledShapes;
+    [SerializeField] private GameObject colliderObject;
 
     [SerializeField] private float currentValue = 0;
     [SerializeField] private float maxValue = 90;
@@ -43,10 +44,12 @@ public class MachineController : MonoBehaviour
         if(raymarcher.wPos != machineShape.posW)
         {
             canInteract = false;
+            colliderObject.SetActive(false);
         }
         else
         {
             canInteract = true;
+            colliderObject.SetActive(true);
         }
     }
 

@@ -27,6 +27,9 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnEnemy(int count)
     {
+        if (!gameObject.activeInHierarchy)
+            return;
+
         if (!CheckEnemyCount())
         {
             StartCoroutine(NextWaveRoutine());
@@ -80,9 +83,9 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             var enemy = enemyPool.GetPooledObject().GetComponent<CreatureController>();
-            enemy.Init();
-            enemy.transform.position = transform.position;
             enemyList.Add(enemy);
+            enemy.transform.position = transform.position;
+            enemy.Init();
             enemy.gameObject.SetActive(true);
             yield return new WaitForSeconds(spawnDelay);
         }

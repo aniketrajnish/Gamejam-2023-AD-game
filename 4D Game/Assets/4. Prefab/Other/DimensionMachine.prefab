@@ -222,7 +222,7 @@ Transform:
   m_Children:
   - {fileID: 812522209427688984}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3676569665275624892
 MonoBehaviour:
@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   machineShape: {fileID: 6633022824807185436}
   controlledShapes: []
+  colliderObject: {fileID: 452613594296525837}
   currentValue: 0
   maxValue: 90
   minValue: 0

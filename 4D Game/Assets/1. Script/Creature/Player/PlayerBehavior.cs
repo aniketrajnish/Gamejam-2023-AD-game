@@ -6,6 +6,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int currentScore = 0;
+    [SerializeField] private Animator animator;
     private Inventory inventory;
     private Timer attackTimer;
     private Timer invincibleTimer;
@@ -138,7 +139,7 @@ public class PlayerBehavior : MonoBehaviour
             }
 
             raymarcher.wRot.y = Mathf.Lerp(raymarcher.wRot.y, maxWRot, 0.1f);
-            if (Mathf.Abs(raymarcher.wRot.y - maxWRot) < 4f)
+            if (Mathf.Abs(raymarcher.wRot.y - maxWRot) < 2f)
             {
                 raymarcher.wRot.y = 0;
 
@@ -218,7 +219,7 @@ public class PlayerBehavior : MonoBehaviour
 
                 if (itemController != null && itemController.gameObject.activeInHierarchy)
                 {
-                    //Debug.Log(itemController.gameObject.name);
+                    animator.Play("Eating");
                     ActivateItem(itemController);
                 }
             }
@@ -253,6 +254,7 @@ public class PlayerBehavior : MonoBehaviour
                     = data.collidedObject.GetComponentInParent<ItemController>();
                 if (itemController != null && itemController.gameObject.activeInHierarchy)
                 {
+                    animator.Play("Eating");
                     ActivateItem(itemController);
                 }
             }
@@ -264,9 +266,12 @@ public class PlayerBehavior : MonoBehaviour
                     Hurt();
                 }
                 else if(isAttacking)
-                { 
-                    if(data.collidedObject.activeInHierarchy)
+                {
+                    if (data.collidedObject.activeInHierarchy)
+                    {
+                        animator.Play("Eating");
                         data.collidedObject.GetComponentInParent<EnemyBehavior>().Hurt();
+                    }
                 }
             }
         }
