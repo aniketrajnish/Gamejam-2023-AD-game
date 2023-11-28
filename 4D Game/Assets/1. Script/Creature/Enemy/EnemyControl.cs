@@ -18,6 +18,7 @@ public class EnemyControl : ICreatureControl
     private GameObject targetObject;
     private PathFinder pathFinder;
     private List<NodeTile> path;
+    private int noPathCount = 0;
     private Timer waitTimer;
     private bool isWaiting = false;
     private bool isChangingDimension = false;
@@ -77,7 +78,21 @@ public class EnemyControl : ICreatureControl
         {
             isWaiting = waitTimer.IsRunning();
             currentDirection = Vector3.zero;
-            FindTargetNode();
+
+            if (!isWaiting)
+            {
+                noPathCount++;
+
+                if (noPathCount > 2)
+                {
+                    Wait(0.5f);
+                    noPathCount = 0;
+                }
+                else
+                {
+                    FindTargetNode();
+                }
+            }
         }
 
         Direction = currentDirection;
