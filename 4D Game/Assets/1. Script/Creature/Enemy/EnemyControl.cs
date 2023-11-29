@@ -40,7 +40,6 @@ public class EnemyControl : ICreatureControl
         EventCenter.RegisterEvent<OnDimensionChanging>(OnDimensionChanging);
 
         UpdateCurrentNode();
-        FindTargetNode();
     }
 
     public void ReadInput()
@@ -182,6 +181,8 @@ public class EnemyControl : ICreatureControl
         {
             previousNode.MarkOccupied(currentTransform.gameObject, false);
             currentNode.MarkOccupied(currentTransform.gameObject, false);
+            preTargetNode = null;
+            currentNode = null;
             EventCenter.UnRegisterEvent<OnEnemyDeath>(OnEnemyDeath);
             EventCenter.UnRegisterEvent<OnDimensionChanging>(OnDimensionChanging);
         }

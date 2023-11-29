@@ -15,8 +15,8 @@ public class MapManager : SimpleSingleton<MapManager>
     [SerializeField] private GameObject nodePrefab;
     [SerializeField] private List<GameObject> scroePointPrefabList;
     [SerializeField] private List<GameObject> scorePointContainers;
+    [SerializeField] private List<GameObject> enemyContainers;
     [SerializeField] private GameObject nodeContainer;
-
     [SerializeField] private List<Dictionary<Vector2Int, NodeTile>> mapList;
 
     [SerializeField] private Tilemap currentPathTilemap;
@@ -86,11 +86,17 @@ public class MapManager : SimpleSingleton<MapManager>
 
     public void ChangePathMap(int index)
     {
-        foreach (GameObject scorePoint in scorePointContainers)
+        foreach (GameObject scorePointContainer in scorePointContainers)
         {
-            scorePoint.SetActive(false);
+            scorePointContainer.SetActive(false);
         }
 
+        foreach (GameObject enemyContainer in enemyContainers)
+        {
+            enemyContainer.SetActive(false);
+        }
+
+        enemyContainers[index].SetActive(true);
         scorePointContainers[index].SetActive(true);
         currentMap = mapList[index];
         currentPathTilemap = tilemapPathLayers[index];
@@ -122,8 +128,6 @@ public class MapManager : SimpleSingleton<MapManager>
                             scorePoint.transform.position = tileInfo.WorldPoint;
                             scorePoint.gameObject.name = "ScorePoint W" + i + "-" + index;
                             addPointCount = 0;
-
-                            scorePointContainers[i].SetActive(false);
                         }
 
                         map.Add(tileInfo.Coordinates2D, nodeTile.gameObject.GetComponent<NodeTile>());
@@ -132,9 +136,12 @@ public class MapManager : SimpleSingleton<MapManager>
                     }
                 }
             }
+            scorePointContainers[i].SetActive(false);
+            enemyContainers[i].SetActive(false);
             mapList.Add(map);
         }
 
+        enemyContainers[0].SetActive(true);
         scorePointContainers[0].SetActive(true);
         currentPathTilemap = tilemapPathLayers[0];
         currentMap = mapList[0];

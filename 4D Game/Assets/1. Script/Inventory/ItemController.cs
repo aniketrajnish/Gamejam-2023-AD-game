@@ -68,6 +68,9 @@ public class ItemController : MonoBehaviour
                 raymarchRenderer.rotW.z += rotateSpeed4D * rotateSpeed4DModZ * Time.deltaTime;
                 transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
                 break;
+            case ItemType.Score:
+                transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
+                break;
         }
 
         if(Mathf.Abs(raymarchRenderer.rotW.x) > rotateSpeed4DMax)

@@ -7,7 +7,7 @@ public class LevelManager : SimpleSingleton<LevelManager>
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject levelParent;
-    [SerializeField] private List<GameObject> levelList;
+    [SerializeField] private List<GameObject> levelList; 
     [SerializeField] private List<EnemySpawner> spawnerList;
 
     private int currentLevelIndex = 0;
@@ -68,6 +68,10 @@ public class LevelManager : SimpleSingleton<LevelManager>
             {
                 levelList[0].gameObject.SetActive(true);
             }
+        }
+        else
+        {
+            SpawnEnemies();
         }
     }
 }
