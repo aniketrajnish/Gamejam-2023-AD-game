@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMessage : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI messageText;
-    [SerializeField] private TextMeshProUGUI scroeText;
-    [SerializeField] private TextMeshProUGUI hintText;
+    [SerializeField] Image hintImage;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
     void Start()
     {
@@ -47,18 +48,11 @@ public class PlayerMessage : MonoBehaviour
 
     private void OnGainScore(OnGainScore data)
     {
-        scroeText.text = "Score: " + data.Score;
+        scoreText.text = "Score: " + data.Score;
     }
 
     private void OnNearMachine(OnNearMachine data)
     {
-        if(data.IsNear)
-        {
-            hintText.text = "Press [Q] or [E] to use machine";
-        }
-        else
-        {
-            hintText.text = "";
-        }
+        hintImage.gameObject.SetActive(data.IsNear);
     }
 }

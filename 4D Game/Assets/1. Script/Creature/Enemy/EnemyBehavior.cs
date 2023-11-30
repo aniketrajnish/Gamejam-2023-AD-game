@@ -91,6 +91,7 @@ public class EnemyBehavior : MonoBehaviour
             else 
             {
                 gameObject.SetActive(false);
+                PostEffectsManager.Instance.PlayEnemyDeathParticles(transform);
                 EventCenter.PostEvent<OnEnemyDeath>(new OnEnemyDeath(gameObject));
             }
         }

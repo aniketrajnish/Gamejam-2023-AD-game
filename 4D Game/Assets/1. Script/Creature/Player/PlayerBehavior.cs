@@ -83,6 +83,7 @@ public class PlayerBehavior : MonoBehaviour
             {
                 EventCenter.PostEvent<OnUsingMachine>(new OnUsingMachine(-Time.deltaTime));
             }
+            CameraController.Instance.TriggerShake(.25f, .025f);
         } 
     }
 
@@ -94,11 +95,12 @@ public class PlayerBehavior : MonoBehaviour
             inventory.RemoveItem(currentAttackItem);
             EventCenter.PostEvent<OnPlayerAttackMode>(new OnPlayerAttackMode(currentAttackItem.Value - (int)attackTimer.currentTime));
             AudioManager.Instance.PlaySound("Alarm");
+            PostEffectsManager.Instance.ScaleVignetteUp(.5f);
             //Debug.Log("Attack Finished");
         }
         else if (isAttacking)
         {
-            EventCenter.PostEvent<OnPlayerAttackMode>(new OnPlayerAttackMode(currentAttackItem.Value - (int)attackTimer.currentTime));
+            EventCenter.PostEvent<OnPlayerAttackMode>(new OnPlayerAttackMode(currentAttackItem.Value - (int)attackTimer.currentTime));            
         }
     }
 
@@ -118,7 +120,7 @@ public class PlayerBehavior : MonoBehaviour
             {
                 isLastLevel = false;
             }
-
+            CameraController.Instance.TriggerShake(1f, .1f);
             //LevelManager.Instance.ChangeLevel(1);
             EventCenter.PostEvent<OnDimensionChanging>(new OnDimensionChanging(true, (int)(currentWPos+ wOffset)));
             //Debug.Log("Change dimension");
@@ -181,6 +183,7 @@ public class PlayerBehavior : MonoBehaviour
                 currentAttackItem = item;
                 isAttacking = true;
                 AudioManager.Instance.PlaySound("Attack");
+                PostEffectsManager.Instance.ScaleVignetteDown(.5f);
                 break;
             case ItemType.Dimension:
                 canChangeDimension = true;
@@ -196,7 +199,7 @@ public class PlayerBehavior : MonoBehaviour
             default:
                 break;
         }
-
+        CameraController.Instance.TriggerShake(.4f, .1f);
         Debug.Log("Pick up: " + item.Name);
     }
 
@@ -205,6 +208,8 @@ public class PlayerBehavior : MonoBehaviour
         AudioManager.Instance.PlaySound("Hit");
         creatureStat.ModifyHealth(-1);
         invincibleTimer.StartTimer(1.5f);
+        CameraController.Instance.TriggerShake(.5f, .5f);
+        PostEffectsManager.Instance.ShowBloodEffect(.5f);
         Debug.Log("Ouch: " + creatureStat.Health);
     }
 
@@ -222,6 +227,8 @@ public class PlayerBehavior : MonoBehaviour
                     animator.Play("Eating");
                     ActivateItem(itemController);
                 }
+                CameraController.Instance.TriggerShake(.4f, .035f);
+                PostEffectsManager.Instance.PlayCoinParticles(other.transform);
             }
 
             if(other.gameObject.tag == "Machine")

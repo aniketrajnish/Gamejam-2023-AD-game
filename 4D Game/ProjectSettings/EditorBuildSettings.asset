@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/0. Scene/PeterPlayground.unity
+    path: Assets/0. Scene/Menu/Menu.unity
+    guid: 6177faaea530dcb48845f01a6e7c2f34
+  - enabled: 1
+    path: Assets/0. Scene/Game/PeterPlayground.unity
     guid: b75d0b6be5ac0bc45884ac349285b9c4
   m_configObjects: {}

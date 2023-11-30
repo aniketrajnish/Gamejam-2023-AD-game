@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicList:
   - name: BGM
-    clip: {fileID: 8300000, guid: 6a42b27f7090e1042bee678ba2e8fe55, type: 3}
-    volume: 0.75
+    clip: {fileID: 8300000, guid: ce55496fd5fe924468ead50580bf603a, type: 3}
+    volume: 0.2
   SoundList:
   - name: Dimension
     clip: {fileID: 8300000, guid: ee587f90b38d44347bfce6f3f9fe97e4, type: 3}
     volume: 0.5
   - name: Attack
-    clip: {fileID: 8300000, guid: 565f1168614e22a47b4698c318db4f93, type: 3}
+    clip: {fileID: 8300000, guid: 2822b2a9b69b6d94fa16d80b8d8c3111, type: 3}
     volume: 0.5
   - name: Hit
     clip: {fileID: 8300000, guid: d8ca9af9fbac997448f5a3f4a5027f44, type: 3}
     volume: 0.55
   - name: Score
-    clip: {fileID: 8300000, guid: f1e410044e194a94b9f13b451edf983f, type: 3}
+    clip: {fileID: 8300000, guid: 5d2cf6bc762ffd142a029246c7c60bdb, type: 3}
     volume: 0.5
   - name: Alarm
     clip: {fileID: 8300000, guid: 82fb0d5cd3fd6404d9dc744f2ee42226, type: 3}

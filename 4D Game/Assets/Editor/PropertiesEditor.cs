@@ -37,6 +37,8 @@ public class PropertiesEditor : Editor
                 break;
             case RaymarchRenderer.Shape.Link:
                 renderer.dimensions.linkSeparation = EditorGUILayout.FloatField("Separation", renderer.dimensions.linkSeparation);
+                renderer.dimensions.linkRadius = EditorGUILayout.FloatField("Radius", renderer.dimensions.linkRadius);
+                renderer.dimensions.linkThickness = EditorGUILayout.FloatField("Thickness", renderer.dimensions.linkThickness);
                 break;
             case RaymarchRenderer.Shape.Cone:
                 renderer.dimensions.coneTan = EditorGUILayout.Vector2Field("Tan", renderer.dimensions.coneTan);
@@ -161,11 +163,11 @@ public class PropertiesEditor : Editor
                 break;
         }
 
-        /*if (!PrefabUtility.IsPartOfPrefabAsset(renderer))
+        if (!PrefabUtility.IsPartOfPrefabAsset(renderer))
         {
             EditorUtility.SetDirty(renderer);
             EditorUtility.SetDirty(renderer.dimensions);
-        }*/
+        }
     }
 
     void OnEnable()
