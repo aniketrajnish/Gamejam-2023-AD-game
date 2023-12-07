@@ -45,6 +45,7 @@ public class PersistantSingleton<T> : MonoBehaviour where T : Component
         {
             instance = this as T;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("DontDestroyOnLoad: " + gameObject.name);
             Application.quitting += QuitApp;
         }
         else
@@ -52,6 +53,7 @@ public class PersistantSingleton<T> : MonoBehaviour where T : Component
             //If singleton already exists destroy current instance.
             if (this != instance)
             {
+                Debug.Log("DestroyOnLoad: " + gameObject.name);
                 Destroy(gameObject);
             }
         }
