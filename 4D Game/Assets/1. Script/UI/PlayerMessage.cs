@@ -10,6 +10,7 @@ public class PlayerMessage : MonoBehaviour
     [SerializeField] Image hintImage;
     [SerializeField] Image hintImage_notReady;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI scoreWinText;
 
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject winScreen;
@@ -59,6 +60,7 @@ public class PlayerMessage : MonoBehaviour
     {
         currentScore += data.Delta;
         scoreText.text = "Score: " + currentScore;
+        scoreWinText.text = "Score: " + currentScore;
     }
 
     private void OnNearMachine(OnNearMachine data)
