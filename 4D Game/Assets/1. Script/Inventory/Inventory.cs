@@ -27,4 +27,21 @@ public class Inventory
     {
         return ItemBag.Find(item => item.ID == id);
     }
+
+    public int GetSize()
+    {
+        return ItemBag.Count;
+    }
+
+    public int GetItemCountByID(int id)
+    {
+        int count = 0;
+        foreach (ItemSetting item in ItemBag)
+        {
+            if(item.ID == id)
+                count++;
+        }
+
+        return count;
+    }
 }

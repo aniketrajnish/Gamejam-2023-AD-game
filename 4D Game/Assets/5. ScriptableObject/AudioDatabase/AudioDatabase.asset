@@ -32,3 +32,6 @@ MonoBehaviour:
   - name: Alarm
     clip: {fileID: 8300000, guid: 82fb0d5cd3fd6404d9dc744f2ee42226, type: 3}
     volume: 0.55
+  - name: LevelClear
+    clip: {fileID: 8300000, guid: 65a00c7e5f898f54cb0bc567e8808f64, type: 3}
+    volume: 0.55

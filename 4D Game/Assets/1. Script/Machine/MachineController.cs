@@ -8,12 +8,16 @@ public class MachineController : MonoBehaviour
     [SerializeField] private List<RaymarchRenderer> controlledShapes;
     [SerializeField] private GameObject colliderObject;
 
+    [SerializeField] private int levelIndex = 0;
+
     [SerializeField] private float currentValue = 0;
     [SerializeField] private float maxValue = 90;
     [SerializeField] private float minValue = 0;
     [SerializeField] private float rotateSpeed = 30f;
     [SerializeField] private bool rotateX, rotateY, rotateZ;
+
     [SerializeField] private bool canInteract = true;
+    [SerializeField] private bool isKeyTrigger = false;
 
     [SerializeField] private List<Transform> nodeGroup1Transform;
     [SerializeField] private List<Transform> nodeGroup2Transform;
@@ -24,6 +28,7 @@ public class MachineController : MonoBehaviour
     private void Awake()
     {
         EventCenter.RegisterEvent<OnUsingMachine>(OnUsingMachine);
+        EventCenter.RegisterEvent<OnLevelClear>(OnLevelClear);
     }
 
     private void Start()
@@ -35,6 +40,7 @@ public class MachineController : MonoBehaviour
     private void OnDestroy()
     {
         EventCenter.UnRegisterEvent<OnUsingMachine>(OnUsingMachine);
+        EventCenter.UnRegisterEvent<OnLevelClear>(OnLevelClear);
     }
 
     private void Update()
@@ -45,11 +51,13 @@ public class MachineController : MonoBehaviour
         {
             canInteract = false;
             colliderObject.SetActive(false);
+            machineShape.gameObject.SetActive(false);
         }
-        else
+        else if(!isKeyTrigger)
         {
             canInteract = true;
             colliderObject.SetActive(true);
+            machineShape.gameObject.SetActive(true);
         }
     }
 
@@ -172,5 +180,15 @@ public class MachineController : MonoBehaviour
         CheckNodeGroup();
         CheckGroupStatus();
         RotateShapes();
+    }
+
+    private void OnLevelClear(OnLevelClear data)
+    {
+        if(isKeyTrigger)
+        {
+            canInteract = data.level == levelIndex;
+            colliderObject.SetActive(data.level == levelIndex);
+            machineShape.gameObject.SetActive(true);
+        }
     }
 }

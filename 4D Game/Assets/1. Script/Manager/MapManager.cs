@@ -122,23 +122,24 @@ public class MapManager : SimpleSingleton<MapManager>
                         nodeTile.gameObject.GetComponent<NodeTile>().GridLocation = tileInfo.Coordinates;
                         nodeTile.gameObject.name = "NodeTile W" + i + "-" + index;
 
-                        if(tileInfo.Coordinates2D.x % 5 == 0 && tileInfo.Coordinates2D.y % 5 == 0)
+                        if(i<2 && tileInfo.Coordinates2D.x % 5 == 0 && tileInfo.Coordinates2D.y % 5 == 0)
                         {
                             GameObject scorePoint = Instantiate(scroePointPrefabList[i], scorePointContainers[i].transform);
                             scorePoint.transform.position = tileInfo.WorldPoint;
                             scorePoint.gameObject.name = "ScorePoint W" + i + "-" + index;
-                            addPointCount = 0;
+                            addPointCount++;
                         }
 
                         map.Add(tileInfo.Coordinates2D, nodeTile.gameObject.GetComponent<NodeTile>());
-                        index++;
-                        addPointCount++;
+                        index++;    
                     }
                 }
             }
             scorePointContainers[i].SetActive(false);
             enemyContainers[i].SetActive(false);
             mapList.Add(map);
+
+            GameManager.Instance.SetWinTotalCoins(addPointCount, i+1);
         }
 
         enemyContainers[0].SetActive(true);

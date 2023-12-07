@@ -35,7 +35,7 @@ public class PostEffectsManager : SimpleSingleton<PostEffectsManager>
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.State == GameState.Play)
             TogglePause();
     }
     public void ScaleVignetteUp(float scaleDuration)

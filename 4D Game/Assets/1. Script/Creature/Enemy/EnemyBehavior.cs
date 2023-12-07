@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -82,6 +83,7 @@ public class EnemyBehavior : MonoBehaviour
         {
             //Debug.Log("Hit Enemy " + gameObject.name + ": " + creatureStat.Health);
             AudioManager.Instance.PlaySound("Hit");
+            AudioManager.Instance.PlaySound("Score");
             creatureStat.ModifyHealth(-1);
   
             if (!CheckDeath())
@@ -90,9 +92,15 @@ public class EnemyBehavior : MonoBehaviour
             }  
             else 
             {
+                if (creatureSetting.CreatureType == CreatureType.Boss)
+                {
+                    GameManager.Instance.ChangeState(GameState.Win);
+                }
+
                 gameObject.SetActive(false);
                 PostEffectsManager.Instance.PlayEnemyDeathParticles(transform);
                 EventCenter.PostEvent<OnEnemyDeath>(new OnEnemyDeath(gameObject));
+                EventCenter.PostEvent<OnGainScore>(new OnGainScore(creatureSetting.Value));
             }
         }
     }

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c494ad2fcfb5f0344a898e3458ac6fdf, type: 3}
-  m_Name: Wall-2
+  m_Name: Machine 3
   m_EditorClassIdentifier: 
-  sphereRadius: 0.5
-  torusThickness: {x: 0.4, y: 0.1}
+  sphereRadius: 0.25
+  torusThickness: {x: 1.35, y: 0.24}
   cappedTorusRo: 0.25
   cappedTorusRi: 0.1
   cappedTorusThickness: {x: 0.1, y: 0.1}
-  linkSeparation: 0.13
+  linkSeparation: 0.35
   linkRadius: 0.2
   linkThickness: 0.09
   coneTan: {x: 1, y: 2}
@@ -25,26 +25,26 @@ MonoBehaviour:
   infConeTan: {x: 0.1, y: 0.1}
   planeNormal: {x: 0, y: 0.5, z: 0.5}
   planeDistance: 1
-  hexPrismH: {x: 0.25, y: 0.25}
+  hexPrismH: {x: 0.5, y: 0.25}
   triPrismH: {x: 0.25, y: 0.25}
   capsuleA: {x: 0.25, y: 0.1, z: 0.25}
   capsuleB: {x: 0.1, y: 0.25, z: 0.25}
   capsuleR: 0.25
   infCylC: {x: 0, y: 0.25, z: 0.25}
   boxSize: 0.25
-  roundBoxSize: 1
+  roundBoxSize: 0.3
   roundBoxRoundFactor: 0.1
   roundCylRa: 0.25
   roundCylRb: 0.1
   roundCylH: 0.25
   capConeH: 0.5
-  capConeR1: 0.5
+  capConeR1: 0.2
   capConeR2: 0.2
-  boxFrameSize: {x: 1.45, y: 3, z: 0.5}
+  boxFrameSize: {x: 0.5, y: 0.3, z: 0.2}
   boxFrameCavity: 0.1
   solidAngleC: {x: 0.25, y: 0.25}
   solidAngleRa: 0.5
-  cutSphereR: 1.45
+  cutSphereR: 0.25
   cutSphereH: 0.1
   hollowSphereR: 0.35
   hollowSphereH: 0.05
@@ -52,15 +52,15 @@ MonoBehaviour:
   deathStarRa: 0.5
   deathStarRb: 0.35
   deathStarD: 0.5
-  roundConeR1: 0.1
-  roundConeR2: 0.25
-  roundConeH: 0.4
+  roundConeR1: 0.15
+  roundConeR2: 0.33
+  roundConeH: 0.76
   ellipsoidRadius: {x: 0.18, y: 0.3, z: 0.1}
   rhombusLa: 0.6
   rhombusLb: 0.2
   rhombusH: 0.02
   rhombusRa: 0.02
-  octahedronSize: 0.5
+  octahedronSize: 0.65
   pyramidSize: 0.5
   triangleSideA: {x: 0.3, y: 0.5, z: 0.15}
   triangleSideB: {x: 0.8, y: 0.2, z: 0.1}
@@ -69,13 +69,13 @@ MonoBehaviour:
   quadSideB: {x: 0.8, y: 0.2, z: 0}
   quadSideC: {x: 0.9, y: 0.3, z: 0.5}
   quadSideD: {x: 0.1, y: 0.2, z: 0.5}
-  fractalI: 10
-  fractalS: 1.25
-  fractalO: 2
-  tesseractSize: {x: 2, y: 1.6, z: 0.5, w: 0.25}
-  hyperSphereRadius: 1.5
-  duoCylR1R2: {x: 1, y: 4.5}
+  fractalI: 19.09
+  fractalS: 1.9
+  fractalO: 0.44
+  tesseractSize: {x: 0.25, y: 0.25, z: 0.25, w: 0.25}
+  hyperSphereRadius: 0.6
+  duoCylR1R2: {x: 0.79, y: 1.37}
   vertCapsuleH: 0.5
   vertCapsuleR: 0.5
-  fiveCellA: {x: 1, y: 1, z: 1, w: 1}
-  sixteenCellS: 2
+  fiveCellA: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  sixteenCellS: 0.94

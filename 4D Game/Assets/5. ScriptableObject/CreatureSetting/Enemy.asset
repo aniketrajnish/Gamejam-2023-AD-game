@@ -17,3 +17,4 @@ MonoBehaviour:
     DefaultHealth: 1
     Speed: 3
     TurnSpeed: 3
+    Value: 5

@@ -6,6 +6,8 @@ public class PlayerBehavior : MonoBehaviour
 {
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private int currentScore = 0;
+    [SerializeField] private int currentCoins = 0;
+    [SerializeField] private int currentLevel = 1;
     [SerializeField] private Animator animator;
     private Inventory inventory;
     private Timer attackTimer;
@@ -186,6 +188,8 @@ public class PlayerBehavior : MonoBehaviour
                 PostEffectsManager.Instance.ScaleVignetteDown(.5f);
                 break;
             case ItemType.Dimension:
+                currentLevel = currentLevel >= 3 ? 1 : currentLevel + 1;
+
                 canChangeDimension = true;
                 currentDimensionItem = item;
                 StartChangingDimension();
@@ -193,7 +197,17 @@ public class PlayerBehavior : MonoBehaviour
                 break;
             case ItemType.Score:
                 currentScore += item.Value;
-                EventCenter.PostEvent<OnGainScore>(new OnGainScore(currentScore));
+                currentCoins++;
+
+                int wintCoin = GameManager.Instance.GetWinTotalCoins(currentLevel);
+                if (wintCoin > 0 && currentCoins >= wintCoin)
+                {
+                    EventCenter.PostEvent<OnLevelClear>(new OnLevelClear(currentLevel));
+                    AudioManager.Instance.PlaySound("LevelClear");
+                    currentCoins = 0;
+                }
+
+                EventCenter.PostEvent<OnGainScore>(new OnGainScore(item.Value));
                 AudioManager.Instance.PlaySound("Score");
                 break;
             default:
@@ -211,6 +225,11 @@ public class PlayerBehavior : MonoBehaviour
         CameraController.Instance.TriggerShake(.5f, .5f);
         PostEffectsManager.Instance.ShowBloodEffect(.5f);
         Debug.Log("Ouch: " + creatureStat.Health);
+
+        if(creatureStat.Health <= 0)
+        {
+            GameManager.Instance.ChangeState(GameState.End);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -248,6 +267,22 @@ public class PlayerBehavior : MonoBehaviour
                 isUsingMachine = false;
                 EventCenter.PostEvent<OnNearMachine>(new OnNearMachine(isUsingMachine));
             }
+
+            if (other.gameObject.tag == "Enemy")
+            {
+                if (!isAttacking && invincibleTimer.IsFinished())
+                {
+                    Hurt();
+                }
+                else if (isAttacking)
+                {
+                    if (other.gameObject.activeInHierarchy)
+                    {
+                        animator.Play("Eating");
+                        other.gameObject.GetComponentInParent<EnemyBehavior>().Hurt();
+                    }
+                }
+            }
         }
     }
 
@@ -263,22 +298,6 @@ public class PlayerBehavior : MonoBehaviour
                 {
                     animator.Play("Eating");
                     ActivateItem(itemController);
-                }
-            }
-
-            if (data.collidedObject.tag == "Enemy")
-            {
-                if (!isAttacking && invincibleTimer.IsFinished())
-                {
-                    Hurt();
-                }
-                else if(isAttacking)
-                {
-                    if (data.collidedObject.activeInHierarchy)
-                    {
-                        animator.Play("Eating");
-                        data.collidedObject.GetComponentInParent<EnemyBehavior>().Hurt();
-                    }
                 }
             }
         }

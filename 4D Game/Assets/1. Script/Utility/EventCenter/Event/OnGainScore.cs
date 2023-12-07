@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class OnGainScore : IEventWithData
 { 
-    public int Score;
-    public OnGainScore(int score)
+    public int Delta;
+    public OnGainScore(int delta)
     {
-        this.Score = score;
+        Delta = delta;
     }
 }

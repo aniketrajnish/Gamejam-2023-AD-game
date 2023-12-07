@@ -8,12 +8,15 @@ public enum GameState
     Start,
     Play,
     Pause,
-    End
+    End,
+    Win
 }
 
 public class GameManager : PersistantSingleton<GameManager>
 {
     public GameState State { get; private set; }
+
+    [SerializeField] private List<int> winTotalCoins = new List<int>();
 
     private void Start()
     {
@@ -25,6 +28,25 @@ public class GameManager : PersistantSingleton<GameManager>
     {
         State = state;
         OnStateChange();
+    }
+
+    public void SetWinTotalCoins(int coins, int level)
+    {
+        if (level <= 0)
+            return;
+
+        if (winTotalCoins.Count < level)
+            winTotalCoins.Add(coins);
+        else
+            winTotalCoins[level-1] = coins;
+    }
+
+    public int GetWinTotalCoins(int level)
+    {
+        if (level <= winTotalCoins.Count && level > 0)
+            return winTotalCoins[level-1];
+
+        return -1;
     }
 
     private void OnStateChange() 
@@ -44,6 +66,8 @@ public class GameManager : PersistantSingleton<GameManager>
             case GameState.Pause:
                 break;
             case GameState.End:
+                break;
+            case GameState.Win:
                 break;
             default:
                 break;
