@@ -58,7 +58,7 @@ public class GameManager : PersistantSingleton<GameManager>
             case GameState.Start:
                 MapManager.Instance.Init();
                 LevelManager.Instance.Init();
-                AudioManager.Instance.PlayMusic("BGM");
+                //AudioManager.Instance.PlayMusic("BGM");
                 break;
             case GameState.Play:
                 LevelManager.Instance.SpawnEnemies();

@@ -20,6 +20,7 @@ public class MenuManager : MonoBehaviour
         raymarcher = Camera.main.GetComponent<Raymarcher>(); 
         ResetRandomValues();
         PostEffectsManager.Instance.TransSlideOut();
+        AudioManager.Instance.PlayMusic("BGM");
     }
 
     void Update()
