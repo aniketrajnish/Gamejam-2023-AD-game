@@ -487,7 +487,7 @@ RectTransform:
   m_GameObject: {fileID: 753989871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2499999, y: 1.2499999, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.1200001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 839977350}
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 480}
+  m_ReferenceResolution: {x: 854, y: 480}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -3886,6 +3886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messageText: {fileID: 4331495526088411012}
   hintImage: {fileID: 1663274913}
+  hintImage_notReady: {fileID: 0}
   scoreText: {fileID: 6304254322055801066}
   gameOverScreen: {fileID: 0}
   winScreen: {fileID: 0}
