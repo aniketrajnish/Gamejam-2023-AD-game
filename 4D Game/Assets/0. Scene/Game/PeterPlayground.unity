@@ -54743,7 +54743,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: fb3cdf6a8369a504a869f0f1780b6af1, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -69717,6 +69717,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Quit
       objectReference: {fileID: 0}
+    - target: {fileID: 7202872958852937411, guid: 78059e01dc644ca4dab90b2dbeac9278, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7570679922192957437, guid: 78059e01dc644ca4dab90b2dbeac9278, type: 3}
       propertyPath: hintImage
       value: 
@@ -69725,6 +69729,10 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 28211040}
+    - target: {fileID: 8762186271413043239, guid: 78059e01dc644ca4dab90b2dbeac9278, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1736412747968157089, guid: 78059e01dc644ca4dab90b2dbeac9278, type: 3}
     - {fileID: 6927727819267012521, guid: 78059e01dc644ca4dab90b2dbeac9278, type: 3}
