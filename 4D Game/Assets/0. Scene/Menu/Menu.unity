@@ -1137,6 +1137,7 @@ MonoBehaviour:
   enemyDeathPart: {fileID: 0}
   transitionImage: {fileID: 509939123656108103}
   transitionDuration: 1
+  pauseMenu: {fileID: 0}
 --- !u!1 &1663274911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2936,6 +2937,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 657151933300401893}
   currentScore: 0
+  currentCoins: 0
+  currentLevel: 1
   animator: {fileID: 1030507199541003847}
   playerShadow: {fileID: 2286293373814593755}
   wOffset: 1
@@ -3884,6 +3887,8 @@ MonoBehaviour:
   messageText: {fileID: 4331495526088411012}
   hintImage: {fileID: 1663274913}
   scoreText: {fileID: 6304254322055801066}
+  gameOverScreen: {fileID: 0}
+  winScreen: {fileID: 0}
 --- !u!4 &8904080496614933205
 Transform:
   m_ObjectHideFlags: 0
