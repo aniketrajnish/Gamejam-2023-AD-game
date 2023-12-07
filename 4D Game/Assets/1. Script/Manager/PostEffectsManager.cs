@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Device;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -133,5 +132,8 @@ public class PostEffectsManager : SimpleSingleton<PostEffectsManager>
         Time.timeScale = 1f;
         StartCoroutine(ChangeScene(0));
     }
-   
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
 }
