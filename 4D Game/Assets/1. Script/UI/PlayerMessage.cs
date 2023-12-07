@@ -74,7 +74,7 @@ public class PlayerMessage : MonoBehaviour
                 gameOverScreen.SetActive(true);
                 break;
             case GameState.Win:
-                winScreen.SetActive(false);
+                winScreen.SetActive(true);
                 gameOverScreen.SetActive(false);
                 break;
             default:
