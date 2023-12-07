@@ -69371,6 +69371,10 @@ PrefabInstance:
       propertyPath: scoreText
       value: 
       objectReference: {fileID: 28211040}
+    - target: {fileID: 7570679922192957437, guid: 78059e01dc644ca4dab90b2dbeac9278, type: 3}
+      propertyPath: scoreWinText
+      value: 
+      objectReference: {fileID: 1960146452}
     - target: {fileID: 8762186271413043239, guid: 78059e01dc644ca4dab90b2dbeac9278, type: 3}
       propertyPath: m_PreserveAspect
       value: 1
