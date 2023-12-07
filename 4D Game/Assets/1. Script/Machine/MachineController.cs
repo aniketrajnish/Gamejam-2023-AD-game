@@ -23,6 +23,8 @@ public class MachineController : MonoBehaviour
     [SerializeField] private List<Transform> nodeGroup2Transform;
     [SerializeField] private List<NodeTile> nodeGroup1;
     [SerializeField] private List<NodeTile> nodeGroup2;
+
+    public bool CanInteract { get { return canInteract; } }
     
 
     private void Awake()

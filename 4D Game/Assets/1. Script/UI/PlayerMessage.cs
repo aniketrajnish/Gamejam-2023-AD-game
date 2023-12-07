@@ -8,6 +8,7 @@ public class PlayerMessage : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] Image hintImage;
+    [SerializeField] Image hintImage_notReady;
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [SerializeField] private GameObject gameOverScreen;
@@ -62,7 +63,9 @@ public class PlayerMessage : MonoBehaviour
 
     private void OnNearMachine(OnNearMachine data)
     {
-        hintImage.gameObject.SetActive(data.IsNear);
+        Debug.Log(data.IsNear + "/" + data.IsInteractable);
+        hintImage.gameObject.SetActive(data.IsNear && data.IsInteractable);
+        hintImage_notReady.gameObject.SetActive(data.IsNear && !data.IsInteractable);
     }
 
     private void OnGameStateChange(OnGameStateChange data)

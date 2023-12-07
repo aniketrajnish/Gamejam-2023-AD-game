@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CreatureSettingsSO
   CreatureSetting:
     CreatureType: 3
-    DefaultHealth: 10
+    DefaultHealth: 25
     Speed: 3.5
     TurnSpeed: 3
     Value: 100

@@ -252,8 +252,10 @@ public class PlayerBehavior : MonoBehaviour
 
             if(other.gameObject.tag == "Machine")
             {
+                var machine = other.gameObject.GetComponentInParent<MachineController>();
+
                 isUsingMachine = true;
-                EventCenter.PostEvent<OnNearMachine>(new OnNearMachine(isUsingMachine));
+                EventCenter.PostEvent<OnNearMachine>(new OnNearMachine(isUsingMachine, machine.CanInteract));
             }
         }
     }
@@ -264,8 +266,10 @@ public class PlayerBehavior : MonoBehaviour
         {
             if (other.gameObject.tag == "Machine")
             {
+                var machine = other.gameObject.GetComponentInParent<MachineController>();
+
                 isUsingMachine = false;
-                EventCenter.PostEvent<OnNearMachine>(new OnNearMachine(isUsingMachine));
+                EventCenter.PostEvent<OnNearMachine>(new OnNearMachine(isUsingMachine, machine.CanInteract));
             }
 
             if (other.gameObject.tag == "Enemy")

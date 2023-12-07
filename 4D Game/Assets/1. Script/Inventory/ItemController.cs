@@ -60,16 +60,16 @@ public class ItemController : MonoBehaviour
                 raymarchRenderer.rotW.x += rotateSpeed4D * rotateSpeed4DModX * Time.deltaTime;
                 raymarchRenderer.rotW.y += rotateSpeed4D * rotateSpeed4DModY * Time.deltaTime;
                 raymarchRenderer.rotW.z += rotateSpeed4D * rotateSpeed4DModZ * Time.deltaTime;
-                transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
+                itemShape.transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
                 break;
             case ItemType.Dimension:
                 raymarchRenderer.rotW.x += rotateSpeed4D * rotateSpeed4DModX * Time.deltaTime;
                 //raymarchRenderer.rotW.y += rotateSpeed4D * rotateSpeed4DModY * Time.deltaTime;
                 raymarchRenderer.rotW.z += rotateSpeed4D * rotateSpeed4DModZ * Time.deltaTime;
-                transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
+                itemShape.transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
                 break;
             case ItemType.Score:
-                transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
+                itemShape.transform.Rotate(new Vector3(0, rotateSpeed, 0) * Time.deltaTime);
                 break;
         }
 
