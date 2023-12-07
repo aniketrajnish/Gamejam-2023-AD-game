@@ -52,14 +52,21 @@ public class MachineController : MonoBehaviour
         if(raymarcher.wPos != machineShape.posW)
         {
             canInteract = false;
-            colliderObject.SetActive(false);
             machineShape.gameObject.SetActive(false);
         }
         else if(!isKeyTrigger)
         {
             canInteract = true;
-            colliderObject.SetActive(true);
             machineShape.gameObject.SetActive(true);
+        }
+
+        if (raymarcher.wPos != machineShape.posW)
+        {
+            colliderObject.SetActive(false);
+        }
+        else
+        {
+            colliderObject.SetActive(true);
         }
     }
 
